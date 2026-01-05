@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useColorScheme, useTheme } from '@mui/material/styles';
 
 // project imports
-import { ThemeMode } from 'config';
+import { ThemeMode } from '../themes/config';
 
 /**
  * if you want to use image instead of <svg> uncomment following.

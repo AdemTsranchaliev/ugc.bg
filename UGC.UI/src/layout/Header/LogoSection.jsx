@@ -1,0 +1,17 @@
+import { Link as RouterLink } from 'react-router';
+
+// material-ui
+import Link from '@mui/material/Link';
+
+// project imports
+import Logo from '../../ui-component/Logo';
+
+// ==============================|| MAIN LOGO ||============================== //
+
+export default function LogoSection() {
+  return (
+    <Link component={RouterLink} to={"/"} aria-label="theme-logo">
+      <Logo />
+    </Link>
+  );
+}

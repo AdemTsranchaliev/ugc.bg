@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router";
-import App from "../App";
+// import App from "../App";
 import { F1, F2, F3 } from "../features";
+import { Layout } from "../layout";
 
 export const routes = createBrowserRouter([
   {
-    element: <App />,
+    element: <Layout />,
     children: [
       { path: "/", element: <F1 /> },
       { path: "/asd", element: <F2 /> },

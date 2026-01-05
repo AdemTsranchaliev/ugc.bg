@@ -1,16 +1,12 @@
-import { Outlet } from "react-router";
-import { HorizontalBar } from "./layout/navigation";
 import ThemeCustomization from "./themes/ThemeCustomization";
-import ConfigProvider from "./themes/context/ConfigContext";
+import { RouterProvider } from "react-router";
+import { routes } from "./routes";
 
 const App = () => {
   return (
-    <ConfigProvider>
-      <ThemeCustomization>
-        <HorizontalBar />
-        <Outlet />
-      </ThemeCustomization>
-    </ConfigProvider>
+    <ThemeCustomization>
+      <RouterProvider router={routes} />
+    </ThemeCustomization>
   );
 };
 

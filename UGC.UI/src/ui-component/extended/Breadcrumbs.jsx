@@ -1,29 +1,24 @@
-import PropTypes from 'prop-types';
-import { Activity, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { Activity, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router";
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
-import Box from '@mui/material/Box';
-
-// third party
-import { FormattedMessage } from 'react-intl';
+import { useTheme } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
+import Box from "@mui/material/Box";
 
 // project imports
-import { ThemeDirection } from 'config';
-import navigation from 'menu-items';
-import useConfig from 'hooks/useConfig';
+// import navigation from "menu-items";
 
 // assets
-import { IconChevronRight, IconTallymark1 } from '@tabler/icons-react';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-import HomeIcon from '@mui/icons-material/Home';
-import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import { IconChevronRight, IconTallymark1 } from "@tabler/icons-react";
+import AccountTreeTwoToneIcon from "@mui/icons-material/AccountTreeTwoTone";
+import HomeIcon from "@mui/icons-material/Home";
+import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
 
 // ==============================|| BREADCRUMBS TITLE ||============================== //
 
@@ -31,7 +26,7 @@ function BTitle({ title }) {
   return (
     <Grid>
       <Typography variant="h4" sx={{ fontWeight: 500 }}>
-        <FormattedMessage id={title} />
+        AAAAAA77
       </Typography>
     </Grid>
   );
@@ -55,9 +50,6 @@ export default function Breadcrumbs({
 }) {
   const theme = useTheme();
   const location = useLocation();
-  const {
-    state: { themeDirection }
-  } = useConfig();
 
   const [main, setMain] = useState();
   const [item, setItem] = useState();
@@ -65,45 +57,45 @@ export default function Breadcrumbs({
   const iconSX = {
     marginRight: 6,
     marginTop: -2,
-    width: '1rem',
-    height: '1rem',
-    color: theme.vars.palette.secondary.main
+    width: "1rem",
+    height: "1rem",
+    color: theme.vars.palette.secondary.main,
   };
 
   const linkSX = {
-    display: 'flex',
-    textDecoration: 'none',
-    alignContent: 'center',
-    alignItems: 'center'
+    display: "flex",
+    textDecoration: "none",
+    alignContent: "center",
+    alignItems: "center",
   };
 
   let customLocation = location.pathname;
 
-  useEffect(() => {
-    navigation?.items?.map((menu) => {
-      if (menu.type && menu.type === 'group') {
-        if (menu?.url && menu.url === customLocation) {
-          setMain(menu);
-          setItem(menu);
-        } else {
-          getCollapse(menu);
-        }
-      }
-      return false;
-    });
-  });
+  // useEffect(() => {
+  //   navigation?.items?.map((menu) => {
+  //     if (menu.type && menu.type === "group") {
+  //       if (menu?.url && menu.url === customLocation) {
+  //         setMain(menu);
+  //         setItem(menu);
+  //       } else {
+  //         getCollapse(menu);
+  //       }
+  //     }
+  //     return false;
+  //   });
+  // });
 
   // set active item state
   const getCollapse = (menu) => {
     if (!custom && menu.children) {
       menu.children.filter((collapse) => {
-        if (collapse.type && collapse.type === 'collapse') {
+        if (collapse.type && collapse.type === "collapse") {
           getCollapse(collapse);
           if (collapse.url === customLocation) {
             setMain(collapse);
             setItem(collapse);
           }
-        } else if (collapse.type && collapse.type === 'item') {
+        } else if (collapse.type && collapse.type === "item") {
           if (customLocation === collapse.url) {
             setMain(menu);
             setItem(collapse);
@@ -116,17 +108,21 @@ export default function Breadcrumbs({
 
   // item separator
   const SeparatorIcon = separator;
-  const separatorIcon = separator ? <SeparatorIcon stroke={1.5} size="16px" /> : <IconTallymark1 stroke={1.5} size="16px" />;
+  const separatorIcon = separator ? (
+    <SeparatorIcon stroke={1.5} size="16px" />
+  ) : (
+    <IconTallymark1 stroke={1.5} size="16px" />
+  );
 
   let mainContent;
   let itemContent;
   let breadcrumbContent = <Typography />;
-  let itemTitle = '';
+  let itemTitle = "";
   let CollapseIcon;
   let ItemIcon;
 
   // collapse item
-  if (main && main.type === 'collapse') {
+  if (main && main.type === "collapse") {
     CollapseIcon = main.icon ? main.icon : AccountTreeTwoToneIcon;
     mainContent = (
       <Typography
@@ -134,34 +130,57 @@ export default function Breadcrumbs({
         variant="h6"
         noWrap
         sx={{
-          overflow: 'hidden',
+          overflow: "hidden",
           lineHeight: 1.5,
           mb: -0.625,
-          textOverflow: 'ellipsis',
-          maxWidth: { xs: 102, sm: 'unset' },
-          display: 'inline-block'
+          textOverflow: "ellipsis",
+          maxWidth: { xs: 102, sm: "unset" },
+          display: "inline-block",
         }}
-        color={window.location.pathname === main.url ? 'text.primary' : 'text.secondary'}
+        color={
+          window.location.pathname === main.url
+            ? "text.primary"
+            : "text.secondary"
+        }
       >
-        <Activity mode={icons ? 'visible' : 'hidden'}>
-          <CollapseIcon style={{ ...iconSX, ...(themeDirection === ThemeDirection.RTL && { marginLeft: 6, marginRight: 0 }) }} />
+        <Activity mode={icons ? "visible" : "hidden"}>
+          <CollapseIcon
+            style={{
+              ...iconSX,
+            }}
+          />
         </Activity>
-        <FormattedMessage id={main.title} />
+        Title 22
       </Typography>
     );
   }
 
-  if (!custom && main && main.type === 'collapse' && main.breadcrumbs === true) {
+  if (
+    !custom &&
+    main &&
+    main.type === "collapse" &&
+    main.breadcrumbs === true
+  ) {
     breadcrumbContent = (
-      <Card sx={card === false ? { mb: 3, bgcolor: 'transparent', ...sx } : { mb: 3, bgcolor: 'background.default', ...sx }} {...others}>
+      <Card
+        sx={
+          card === false
+            ? { mb: 3, bgcolor: "transparent", ...sx }
+            : { mb: 3, bgcolor: "background.default", ...sx }
+        }
+        {...others}
+      >
         <Box sx={{ p: 1.25, px: card === false ? 0 : 2 }}>
           <Grid
             container
-            direction={rightAlign ? 'row' : 'column'}
-            sx={{ justifyContent: rightAlign ? 'space-between' : 'flex-start', alignItems: rightAlign ? 'center' : 'flex-start' }}
+            direction={rightAlign ? "row" : "column"}
+            sx={{
+              justifyContent: rightAlign ? "space-between" : "flex-start",
+              alignItems: rightAlign ? "center" : "flex-start",
+            }}
             spacing={1}
           >
-            <Activity mode={title && !titleBottom ? 'visible' : 'hidden'}>
+            <Activity mode={title && !titleBottom ? "visible" : "hidden"}>
               <BTitle title={main.title} />
             </Activity>
             <Grid>
@@ -169,26 +188,39 @@ export default function Breadcrumbs({
                 aria-label="breadcrumb"
                 maxItems={maxItems || 8}
                 separator={separatorIcon}
-                sx={{ '& .MuiBreadcrumbs-separator': { width: 16, ml: 1.25, mr: 1.25 } }}
+                sx={{
+                  "& .MuiBreadcrumbs-separator": {
+                    width: 16,
+                    ml: 1.25,
+                    mr: 1.25,
+                  },
+                }}
               >
-                <Typography component={Link} to="/" variant="h6" sx={{ ...linkSX, color: 'text.secondary' }}>
-                  <Activity mode={icons ? 'visible' : 'hidden'}>
+                <Typography
+                  component={Link}
+                  to="/"
+                  variant="h6"
+                  sx={{ ...linkSX, color: "text.secondary" }}
+                >
+                  <Activity mode={icons ? "visible" : "hidden"}>
                     <HomeTwoToneIcon style={iconSX} />
                   </Activity>
-                  <Activity mode={icon && !icons ? 'visible' : 'hidden'}>
+                  <Activity mode={icon && !icons ? "visible" : "hidden"}>
                     <HomeIcon style={{ ...iconSX, marginRight: 0 }} />
                   </Activity>
-                  {(!icon || icons) && <FormattedMessage id="dashboard" />}
+                  {(!icon || icons) && "Title 22"}
                 </Typography>
                 {mainContent}
               </MuiBreadcrumbs>
             </Grid>
-            <Activity mode={title && titleBottom ? 'visible' : 'hidden'}>
+            <Activity mode={title && titleBottom ? "visible" : "hidden"}>
               <BTitle title={main.title} />
             </Activity>
           </Grid>
         </Box>
-        <Activity mode={card === false && divider !== false ? 'visible' : 'hidden'}>
+        <Activity
+          mode={card === false && divider !== false ? "visible" : "hidden"}
+        >
           <Divider sx={{ mt: 2 }} />
         </Activity>
       </Card>
@@ -196,7 +228,11 @@ export default function Breadcrumbs({
   }
 
   // items
-  if ((item && item.type === 'item') || (item?.type === 'group' && item?.url) || custom) {
+  if (
+    (item && item.type === "item") ||
+    (item?.type === "group" && item?.url) ||
+    custom
+  ) {
     itemTitle = item?.title;
 
     ItemIcon = item?.icon ? item.icon : AccountTreeTwoToneIcon;
@@ -206,19 +242,23 @@ export default function Breadcrumbs({
         noWrap
         sx={{
           ...linkSX,
-          color: 'text.secondary',
-          display: 'inline-block',
-          overflow: 'hidden',
+          color: "text.secondary",
+          display: "inline-block",
+          overflow: "hidden",
           lineHeight: 1.5,
           mb: -0.625,
-          textOverflow: 'ellipsis',
-          maxWidth: { xs: 102, sm: 'unset' }
+          textOverflow: "ellipsis",
+          maxWidth: { xs: 102, sm: "unset" },
         }}
       >
-        <Activity mode={icons ? 'visible' : 'hidden'}>
-          <ItemIcon style={{ ...iconSX, ...(themeDirection === ThemeDirection.RTL && { marginLeft: 6, marginRight: 0 }) }} />
+        <Activity mode={icons ? "visible" : "hidden"}>
+          <ItemIcon
+            style={{
+              ...iconSX,
+            }}
+          />
         </Activity>
-        <FormattedMessage id={itemTitle} />
+        Title 22
       </Typography>
     );
 
@@ -227,16 +267,25 @@ export default function Breadcrumbs({
         aria-label="breadcrumb"
         maxItems={maxItems || 8}
         separator={separatorIcon}
-        sx={{ '& .MuiBreadcrumbs-separator': { width: 16, mx: 0.75 } }}
+        sx={{ "& .MuiBreadcrumbs-separator": { width: 16, mx: 0.75 } }}
       >
-        <Typography component={Link} to="/" variant="h6" sx={{ ...linkSX, color: 'text.secondary' }}>
-          <Activity mode={icons ? 'visible' : 'hidden'}>
-            <HomeTwoToneIcon style={{ ...iconSX, ...(themeDirection === ThemeDirection.RTL && { marginLeft: 6, marginRight: 0 }) }} />
+        <Typography
+          component={Link}
+          to="/"
+          variant="h6"
+          sx={{ ...linkSX, color: "text.secondary" }}
+        >
+          <Activity mode={icons ? "visible" : "hidden"}>
+            <HomeTwoToneIcon
+              style={{
+                ...iconSX,
+              }}
+            />
           </Activity>
-          <Activity mode={icon && !icons ? 'visible' : 'hidden'}>
+          <Activity mode={icon && !icons ? "visible" : "hidden"}>
             <HomeIcon style={{ ...iconSX, marginRight: 0 }} />
           </Activity>
-          {(!icon || icons) && <FormattedMessage id="dashboard" />}
+          {(!icon || icons) && "Title 22"}
         </Typography>
         {mainContent}
         {itemContent}
@@ -249,7 +298,9 @@ export default function Breadcrumbs({
           aria-label="breadcrumb"
           maxItems={maxItems || 8}
           separator={separatorIcon}
-          sx={{ '& .MuiBreadcrumbs-separator': { width: 16, ml: 1.25, mr: 1.25 } }}
+          sx={{
+            "& .MuiBreadcrumbs-separator": { width: 16, ml: 1.25, mr: 1.25 },
+          }}
         >
           {links?.map((link, index) => {
             CollapseIcon = link.icon ? link.icon : AccountTreeTwoToneIcon;
@@ -259,12 +310,12 @@ export default function Breadcrumbs({
                 key={index}
                 {...(link.to && { component: Link, to: link.to })}
                 variant="h6"
-                sx={{ ...linkSX, color: 'text.secondary' }}
+                sx={{ ...linkSX, color: "text.secondary" }}
               >
-                <Activity mode={link.icon ? 'visible' : 'hidden'}>
+                <Activity mode={link.icon ? "visible" : "hidden"}>
                   <CollapseIcon style={iconSX} />
                 </Activity>
-                <FormattedMessage id={link.title} />
+                Title 22
               </Typography>
             );
           })}
@@ -278,12 +329,12 @@ export default function Breadcrumbs({
         <Card
           sx={
             card === false
-              ? { mb: 3, bgcolor: 'transparent', ...sx }
+              ? { mb: 3, bgcolor: "transparent", ...sx }
               : {
                   mb: 3,
-                  bgcolor: 'background.default',
-                  ...theme.applyStyles('dark', { bgcolor: 'dark.main' }),
-                  ...sx
+                  bgcolor: "background.default",
+                  ...theme.applyStyles("dark", { bgcolor: "dark.main" }),
+                  ...sx,
                 }
           }
           {...others}
@@ -291,20 +342,25 @@ export default function Breadcrumbs({
           <Box sx={{ p: 1.25, px: card === false ? 0 : 2 }}>
             <Grid
               container
-              direction={rightAlign ? 'row' : 'column'}
-              sx={{ justifyContent: rightAlign ? 'space-between' : 'flex-start', alignItems: rightAlign ? 'center' : 'flex-start' }}
+              direction={rightAlign ? "row" : "column"}
+              sx={{
+                justifyContent: rightAlign ? "space-between" : "flex-start",
+                alignItems: rightAlign ? "center" : "flex-start",
+              }}
               spacing={1}
             >
-              <Activity mode={title && !titleBottom ? 'visible' : 'hidden'}>
+              <Activity mode={title && !titleBottom ? "visible" : "hidden"}>
                 <BTitle title={custom ? heading : item?.title} />
               </Activity>
               <Grid>{tempContent}</Grid>
-              <Activity mode={title && titleBottom ? 'visible' : 'hidden'}>
+              <Activity mode={title && titleBottom ? "visible" : "hidden"}>
                 <BTitle title={custom ? heading : item?.title} />
               </Activity>
             </Grid>
           </Box>
-          <Activity mode={card === false && divider !== false ? 'visible' : 'hidden'}>
+          <Activity
+            mode={card === false && divider !== false ? "visible" : "hidden"}
+          >
             <Divider sx={{ mt: 2 }} />
           </Activity>
         </Card>
@@ -332,5 +388,5 @@ Breadcrumbs.propTypes = {
   title: PropTypes.bool,
   titleBottom: PropTypes.bool,
   sx: PropTypes.any,
-  others: PropTypes.any
+  others: PropTypes.any,
 };
