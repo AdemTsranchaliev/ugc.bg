@@ -1,7 +1,7 @@
 import { cloneElement, type ReactElement } from "react";
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
+// import { useTheme } from "@mui/material/styles";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import AppBar, { type AppBarProps } from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -14,18 +14,17 @@ import useConfig from "../../themes/context/useConfig";
 type ElevationScrollProps = { children: ReactElement<AppBarProps> };
 
 function ElevationScroll({ children }: ElevationScrollProps) {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
   });
 
+  // theme.shadows[4] = theme.vars.customShadows.z1;
+
   return cloneElement(children, {
     elevation: trigger ? 4 : 0,
-    sx: {
-      boxShadow: trigger ? theme.shadows[4] : "none",
-    },
   });
 }
 
