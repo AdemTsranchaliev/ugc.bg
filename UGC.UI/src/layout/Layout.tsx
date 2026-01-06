@@ -7,14 +7,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 
 // project imports
-// import Footer from "./Footer";
 import { Header } from "./Header";
-// import Sidebar from "./Sidebar";
 import HorizontalBar from "./navigation/HorizontalBar";
-// import Customization from "../Customization";
+// import Footer from "./Footer";
 // import Loader from "../ui-component/Loader";
-import Breadcrumbs from "../ui-component/extended/Breadcrumbs";
-
 import useConfig from "../themes/context/useConfig";
 
 // ==============================|| MAIN LAYOUT ||============================== //
@@ -26,7 +22,7 @@ export default function Layout() {
 
   const isHorizontal = true;
 
-  // if (menuMasterLoading) return <Loader />;
+  // if (true) return <Loader />;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -43,11 +39,10 @@ export default function Layout() {
         </Toolbar>
       </AppBar>
 
-      {/* menu / drawer */}
+      {/* menu */}
       <HorizontalBar />
 
       {/* main content */}
-      {/* <MainContentStyled {...{ borderRadius, open: drawerOpen }}> */}
       <Container
         maxWidth={container ? "lg" : false}
         sx={{
@@ -57,13 +52,9 @@ export default function Layout() {
           flexDirection: "column",
         }}
       >
-        {/* breadcrumb */}
-        <Breadcrumbs />
         <Outlet />
         {/* <Footer /> */}
       </Container>
-      {/* </MainContentStyled> */}
-      {/* <Customization /> */}
     </Box>
   );
 }

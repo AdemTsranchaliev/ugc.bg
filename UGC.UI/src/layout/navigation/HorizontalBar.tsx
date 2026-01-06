@@ -1,9 +1,9 @@
-import { cloneElement, type ReactNode } from "react";
+import { cloneElement, type ReactElement } from "react";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import AppBar from "@mui/material/AppBar";
+import AppBar, { type AppBarProps } from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
@@ -11,25 +11,21 @@ import Box from "@mui/material/Box";
 import { MenuList } from "./MenuList";
 import useConfig from "../../themes/context/useConfig";
 
-type ElevationScrollProps = { children: ReactNode; window: any };
+type ElevationScrollProps = { children: ReactElement<AppBarProps> };
 
-function ElevationScroll({ children, window }: ElevationScrollProps) {
+function ElevationScroll({ children }: ElevationScrollProps) {
   const theme = useTheme();
 
-  /**
-   * Note that you normally won't need to set the window ref as useScrollTrigger will default to window.
-   * This is only being set here because the demo is in an iframe.
-   */
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window,
   });
-
-  theme.shadows[4] = theme.vars.customShadows.z1;
 
   return cloneElement(children, {
     elevation: trigger ? 4 : 0,
+    sx: {
+      boxShadow: trigger ? theme.shadows[4] : "none",
+    },
   });
 }
 
@@ -58,7 +54,7 @@ export const HorizontalBar = () => {
           }),
         })}
       >
-        <Container maxWidth={container ? "lg" : false}>
+        <Container maxWidth={container ? "xl" : false}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <MenuList />
           </Box>

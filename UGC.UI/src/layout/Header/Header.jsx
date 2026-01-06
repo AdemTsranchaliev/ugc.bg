@@ -1,60 +1,62 @@
-import { Activity } from 'react';
+import { Activity } from "react";
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 
 // project imports
-import LogoSection from './LogoSection';
-import SearchSection from './SearchSection';
-import MobileSection from './MobileSection';
-import ProfileSection from './ProfileSection';
-import LocalizationSection from './LocalizationSection';
-import NotificationSection from './NotificationSection';
-
+import LogoSection from "./LogoSection";
+import SearchSection from "./SearchSection";
+import MobileSection from "./MobileSection";
+import ProfileSection from "./ProfileSection";
+import LocalizationSection from "./LocalizationSection";
+import NotificationSection from "./NotificationSection";
 
 // assets
-import { IconMenu2 } from '@tabler/icons-react';
+import { IconMenu2 } from "@tabler/icons-react";
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 export default function Header() {
   const theme = useTheme();
-  const downMD = useMediaQuery(theme.breakpoints.down('md'));
+  const downMD = useMediaQuery(theme.breakpoints.down("md"));
 
   const isHorizontal = true;
 
   return (
     <>
       {/* logo & toggler button */}
-      <Box sx={{ width: downMD ? 'auto' : 228, display: 'flex' }}>
-        <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
+      <Box sx={{ width: downMD ? "auto" : 228, display: "flex" }}>
+        <Box
+          component="span"
+          sx={{ display: { xs: "none", md: "block" }, flexGrow: 1 }}
+        >
           <LogoSection />
         </Box>
-        <Activity mode={!isHorizontal ? 'visible' : 'hidden'}>
+        <Activity mode={!isHorizontal ? "visible" : "hidden"}>
           <Avatar
             variant="rounded"
             sx={{
               ...theme.typography.commonAvatar,
               ...theme.typography.mediumAvatar,
-              overflow: 'hidden',
-              transition: 'all .2s ease-in-out',
+              overflow: "hidden",
+              transition: "all .2s ease-in-out",
               color: theme.vars.palette.secondary.dark,
               background: theme.vars.palette.secondary.light,
-              '&:hover': {
+              "&:hover": {
                 color: theme.vars.palette.secondary.light,
-                background: theme.vars.palette.secondary.dark
+                background: theme.vars.palette.secondary.dark,
               },
-              ...theme.applyStyles('dark', {
+              ...theme.applyStyles("dark", {
                 color: theme.vars.palette.secondary.main,
                 background: theme.vars.palette.dark.main,
-                '&:hover': {
+                "&:hover": {
                   color: theme.vars.palette.secondary.light,
-                  background: theme.vars.palette.secondary.main
-                }
-              })
+                  background: theme.vars.palette.secondary.main,
+                },
+              }),
             }}
           >
             <IconMenu2 stroke={1.5} size="20px" />
@@ -63,7 +65,7 @@ export default function Header() {
       </Box>
 
       {/* header search */}
-      {/* <SearchSection /> */}
+      <SearchSection />
       <Box sx={{ flexGrow: 1 }} />
       <Box sx={{ flexGrow: 1 }} />
 
@@ -73,7 +75,7 @@ export default function Header() {
       </Box> */}
 
       {/* live customization & localization */}
-      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+      <Box sx={{ display: { xs: "none", sm: "block" } }}>
         <LocalizationSection />
       </Box>
 
@@ -89,7 +91,7 @@ export default function Header() {
       <ProfileSection />
 
       {/* mobile header */}
-      <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+      <Box sx={{ display: { xs: "block", sm: "none" } }}>
         <MobileSection />
       </Box>
     </>

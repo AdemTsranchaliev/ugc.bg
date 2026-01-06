@@ -28,8 +28,7 @@ import MainCard from "../../ui-component/cards/MainCard";
 import Transitions from "../../ui-component/extended/Transitions";
 
 // assets
-// import User1 from "assets/images/users/user-round.svg";
-import User1 from "../../../public/assets/images/users/user-round.svg";
+import User1 from "/assets/images/users/user-round.svg";
 
 import {
   IconLogout,

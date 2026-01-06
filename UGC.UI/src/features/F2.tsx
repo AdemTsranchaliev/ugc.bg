@@ -1,7 +1,7 @@
 
 export const F2 = () => {
   return (
-    <div>
+    <div style={{height: '150vh'}}>
       F2
     </div>
   )
