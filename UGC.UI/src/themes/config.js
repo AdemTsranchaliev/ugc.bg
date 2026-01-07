@@ -8,7 +8,7 @@ export let ThemeMode;
   ThemeMode["SYSTEM"] = "system";
 })(ThemeMode || (ThemeMode = {}));
 
-export const DEFAULT_THEME_MODE = ThemeMode.SYSTEM;
+export const DEFAULT_THEME_MODE = ThemeMode.LIGHT;
 
 const config = {
   fontFamily: `'Roboto', sans-serif`,
