@@ -25,13 +25,13 @@ export default function Layout() {
   // if (true) return <Loader />;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       {/* header */}
       <AppBar
-        enableColorOnDark
         position="fixed"
         color="inherit"
         elevation={0}
+        enableColorOnDark
         sx={{ bgcolor: "background.default" }}
       >
         <Toolbar sx={{ p: isHorizontal ? 1.25 : 2 }}>
@@ -44,12 +44,13 @@ export default function Layout() {
 
       {/* main content */}
       <Container
-        maxWidth={container ? "lg" : false}
+        maxWidth={container ? "xl" : false}
         sx={{
           ...(!container && { px: { xs: 0 } }),
           minHeight: "calc(100vh - 128px)",
           display: "flex",
           flexDirection: "column",
+          pt: "150px",
         }}
       >
         <Outlet />
