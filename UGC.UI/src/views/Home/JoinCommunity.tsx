@@ -1,24 +1,21 @@
 import { Box, Button, Typography, Container, Grid, Stack } from "@mui/material";
-import { IconIrregularPolyhedron, IconOctahedron } from "@tabler/icons-react";
 
 // project imports
-import useConfig from "../../themes/context/useConfig";
+// import useConfig from "../../themes/context/useConfig";
 
 export const JoinCommunity: React.FC = () => {
-  const {
-    state: { borderRadius },
-  } = useConfig();
+  // const {
+  //   state: { borderRadius },
+  // } = useConfig();
 
   return (
     <Box
       component="section"
       sx={{
-        py: 8,
-        background:
-          "linear-gradient(135deg, rgba(63,81,181,0.04), rgba(0,188,212,0.02))",
+        pt: 8,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Box sx={{ mb: 4 }}>
           <Typography
             variant="h4"
@@ -33,8 +30,8 @@ export const JoinCommunity: React.FC = () => {
           </Typography>
         </Box>
 
-        <Grid container spacing={3}>
-          <Grid size={{ xs: 12, sm: 6 }}>
+        <Grid container spacing={2}>
+          <Grid size={{ xs: 12, sm: 4 }}>
             <Stack
               spacing={2}
               direction="column"
@@ -43,76 +40,74 @@ export const JoinCommunity: React.FC = () => {
                 alignItems: "start",
                 px: 2,
                 justifyContent: "space-evenly",
-                borderRadius,
-                boxShadow: 8,
-                minHeight: 200,
-                overflow: "hidden",
               }}
             >
               <Box
                 sx={{
-                  position: "absolute",
-                  top: "4%",
-                  right: "-10%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                <IconIrregularPolyhedron size={250} color="gray" />
+                <Box
+                  component="video"
+                  src="https://dynamic.heygen.ai/www/Home%20-%20Page%20-%20Rebrand/avatar_iv.mp4?updatedAt=1757984236000"
+                  autoPlay
+                  loop
+                  muted
+                  sx={{
+                    width: "100%",
+                  }}
+                />
               </Box>
 
-              <Typography variant="h3" sx={{ fontWeight: 500, zIndex: 1 }}>
-                Are you a creator looking to showcase your talents and connect?
-              </Typography>
-
-              <Button
-                variant="outlined"
-                color="primary"
-                size="large"
-                sx={{ px: 4 }}
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent={"space-between"}
+                sx={{
+                  width: "100%",
+                }}
               >
-                Find Businesses
-              </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  sx={{ px: 4 }}
+                >
+                  Discover Businesses
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  size="large"
+                  sx={{ px: 4 }}
+                >
+                  Discover Creators
+                </Button>
+              </Stack>
             </Stack>
           </Grid>
 
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <Stack
-              spacing={2}
-              direction="column"
+          <Grid
+            size={{ xs: 12, sm: 8 }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Box
+              component="video"
+              src="https://dynamic.heygen.ai/www/Home%20-%20Page%20-%20Rebrand/HEYGEN_Orb_home_ios.mp4?updatedAt=1761596026165"
+              autoPlay
+              loop
+              muted
               sx={{
-                position: "relative",
-                alignItems: "start",
-                px: 2,
-                justifyContent: "space-evenly",
-                borderRadius,
-                boxShadow: 8,
-                minHeight: 200,
-                overflow: "hidden",
+                width: "50%",
               }}
-            >
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "4%",
-                  right: "-10%",
-                }}
-              >
-                <IconOctahedron size={250} color="gray" />
-              </Box>
-
-              <Typography variant="h3" sx={{ fontWeight: 500, zIndex: 1 }}>
-                Are you a business seeking creative solutions and
-                collaborations?
-              </Typography>
-
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                sx={{ px: 4 }}
-              >
-                Become Creators
-              </Button>
-            </Stack>
+            />
           </Grid>
         </Grid>
       </Container>
