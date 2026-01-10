@@ -9,9 +9,14 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { SearchSection } from "../../layout/Header";
 
+import useConfig from "../../themes/context/useConfig";
+
 // ==============================|| LANDING COMPONENT ||============================== //
 
 export const Landing = () => {
+  const {
+    state: { borderRadius },
+  } = useConfig();
   // const [searchQuery, setSearchQuery] = useState("");
   const [searchType, setSearchType] = useState<"find" | "browse">("find");
   // const navigate = useNavigate();
@@ -47,7 +52,7 @@ export const Landing = () => {
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        borderRadius: 8,
+        borderRadius,
         boxShadow: 8,
         "&::before": {
           content: '""',
