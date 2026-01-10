@@ -52,17 +52,17 @@ const defaultColor = {
   // ==============================|| DARK THEME VARIANTS ||============================== //
 
   // paper & background
-  darkPaper: '#111936',
-  darkBackground: '#1a223f',
+  darkPaper: '#121212',
+  darkBackground: '#1e1e1e',
 
   // dark 800 & 900
-  darkLevel1: '#29314f',
-  darkLevel2: '#212946',
+  darkLevel1: '#2d2d2d',
+  darkLevel2: '#252525',
 
   // text variants
-  darkTextTitle: '#d7dcec',
-  darkTextPrimary: '#bdc8f0',
-  darkTextSecondary: '#8492c4',
+  darkTextTitle: '#ffffff',
+  darkTextPrimary: '#e0e0e0',
+  darkTextSecondary: '#b0b0b0',
 
   // primary dark
   darkPrimaryLight: '#e3f2fd',

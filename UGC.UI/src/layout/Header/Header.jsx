@@ -13,6 +13,7 @@ import MobileSection from "./MobileSection";
 import ProfileSection from "./ProfileSection";
 import LocalizationSection from "./LocalizationSection";
 import NotificationSection from "./NotificationSection";
+import ThemeSection from "./ThemeSection";
 
 // assets
 import { IconMenu2 } from "@tabler/icons-react";
@@ -78,6 +79,9 @@ export default function Header() {
       <Box sx={{ display: { xs: "none", sm: "block" } }}>
         <LocalizationSection />
       </Box>
+
+      {/* theme toggle */}
+      <ThemeSection />
 
       {/* notification */}
       <NotificationSection />

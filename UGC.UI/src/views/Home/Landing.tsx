@@ -59,10 +59,12 @@ export const Landing = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: `url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop")`,
+          // backgroundImage: `url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop")`,
+          backgroundImage: `url("https://fastly.picsum.photos/id/4/5000/3333.jpg?hmac=ghf06FdmgiD0-G4c9DdNM8RnBIN7BO0-ZGEw47khHP4")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "blur(4px) brightness(0.4)",
+          // filter: "blur(4px) brightness(0.4)",
+          filter: "blur(4px) brightness(0.8)",
           transform: "scale(1.1)",
           zIndex: 0,
         },
@@ -90,7 +92,7 @@ export const Landing = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            maxWidth: { xs: "100%", md: "60%" },
+            width: "100%",
           }}
         >
           {/* Headline */}
@@ -99,22 +101,36 @@ export const Landing = () => {
             component="h1"
             sx={{
               fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem", lg: "3.5rem" },
-              fontWeight: 700,
-              mb: 3,
+              fontWeight: 280,
+              // mb: 3,
               lineHeight: 1.2,
               color: "common.white",
               textAlign: "left",
             }}
           >
-            Connecting businesses in need to creators who deliver
+            Connecting businesses in need
+          </Typography>
+          <Typography
+            variant="h1"
+            component="h1"
+            sx={{
+              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem", lg: "3.5rem" },
+              fontWeight: 280,
+              // mb: 3,
+              lineHeight: 1.2,
+              color: "common.white",
+              textAlign: "left",
+            }}
+          >
+            to creators who deliver
           </Typography>
 
           {/* Search Container */}
           <Box
             sx={{
-              background: "linear-gradient(75deg, #101011 0%, #514747 100%)",
+              // background: "linear-gradient(25deg, #101011 0%, #514747 100%)",
+              // p: 2.5,
               borderRadius: 6,
-              p: 2.5,
               mt: 4,
             }}
           >
@@ -212,7 +228,11 @@ export const Landing = () => {
             >
               <Typography
                 variant="body2"
-                sx={{ color: "grey.500", fontSize: "0.85rem" }}
+                sx={{
+                  // color: "grey.500",
+                  color: "white",
+                  fontSize: "0.85rem",
+                }}
               >
                 Popular searches:
               </Typography>
