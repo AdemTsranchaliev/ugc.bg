@@ -1,24 +1,20 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 // material-ui
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import Stack from "@mui/material/Stack";
-import SearchIcon from "@mui/icons-material/Search";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
+import { SearchSection } from "../../layout/Header";
 
 // ==============================|| LANDING COMPONENT ||============================== //
 
 export const Landing = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
   const [searchType, setSearchType] = useState<"find" | "browse">("find");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSearchTypeChange = (
     _event: React.MouseEvent<HTMLElement>,
@@ -29,29 +25,30 @@ export const Landing = () => {
     }
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      if (searchType === "find") {
-        navigate(
-          `/explore?q=${encodeURIComponent(searchQuery.trim())}&type=creator`
-        );
-      } else {
-        navigate(`/explore?q=${encodeURIComponent(searchQuery.trim())}`);
-      }
-    }
-  };
+  // const handleSearch = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (searchQuery.trim()) {
+  //     if (searchType === "find") {
+  //       navigate(
+  //         `/explore?q=${encodeURIComponent(searchQuery.trim())}&type=creator`
+  //       );
+  //     } else {
+  //       navigate(`/explore?q=${encodeURIComponent(searchQuery.trim())}`);
+  //     }
+  //   }
+  // };
 
   return (
     <Box
       maxWidth="xl"
       sx={{
         position: "relative",
-        minHeight: "calc(100vh - 200px)",
+        minHeight: { xs: 0, md: "calc(100vh - 200px)" },
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
         borderRadius: 8,
+        boxShadow: 8,
         "&::before": {
           content: '""',
           position: "absolute",
@@ -174,44 +171,7 @@ export const Landing = () => {
             </ToggleButtonGroup>
 
             {/* Search Bar */}
-            <Box onSubmit={handleSearch}>
-              <Stack direction="row" spacing={1}>
-                <Paper
-                  component="form"
-                  sx={{
-                    p: "10px 4px",
-                    display: "flex",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <InputBase
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search by role, skills, or keywords"
-                    onChange={() => setSearchQuery("")}
-                    inputProps={{
-                      "aria-label": "search by role, skills, or keywords",
-                    }}
-                  />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                      minWidth: 120,
-                      borderRadius: 2,
-                      backgroundColor: "#232021",
-                      fontWeight: 600,
-                      "&:hover": {
-                        backgroundColor: "#484040",
-                      },
-                    }}
-                    startIcon={<SearchIcon />}
-                  >
-                    Search
-                  </Button>
-                </Paper>
-              </Stack>
-            </Box>
+            <SearchSection />
 
             {/* Popular Searches - Example placeholder section */}
             <Box

@@ -50,7 +50,7 @@ export default function Layout() {
           minHeight: "calc(100vh - 128px)",
           display: "flex",
           flexDirection: "column",
-          pt: "150px",
+          pt: { xs: "70px", md: "150px" },
         }}
       >
         <Outlet />

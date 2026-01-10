@@ -117,71 +117,16 @@ export default function SearchSection() {
 
   return (
     <>
-      <Box sx={{ display: { xs: "block", md: "none" } }}>
-        <>
-          <Box sx={{ ml: 2 }}>
-            <HeaderAvatar>
-              <IconSearch stroke={1.5} size="19.2px" />
-            </HeaderAvatar>
-          </Box>
-          <Popper
-            transition
-            sx={{
-              zIndex: 1100,
-              width: "99%",
-              top: "-55px !important",
-              px: { xs: 1.25, sm: 1.5 },
-            }}
-          >
-            {({ TransitionProps }) => (
-              <>
-                <Transitions
-                  type="zoom"
-                  {...TransitionProps}
-                  sx={{ transformOrigin: "center left" }}
-                >
-                  <Card
-                    sx={{
-                      bgcolor: "background.default",
-                      border: 0,
-                      boxShadow: "none",
-                    }}
-                  >
-                    <Box sx={{ p: 2 }}>
-                      <Grid
-                        container
-                        sx={{
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Grid size="grow">
-                          <MobileSearch value={value} setValue={setValue} />
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Card>
-                </Transitions>
-              </>
-            )}
-          </Popper>
-        </>
-      </Box>
-      <Box sx={{ display: { xs: "none", md: "block" } }}>
+      <Box>
         <OutlinedInput
           id="input-search-header"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Search"
-          startAdornment={
-            <InputAdornment position="start">
-              <IconSearch stroke={1.5} size="16px" />
-            </InputAdornment>
-          }
+          placeholder="search by role, skills, or keywords"
           endAdornment={
             <InputAdornment position="end">
               <HeaderAvatar>
-                <IconAdjustmentsHorizontal stroke={1.5} size="20px" />
+                <IconSearch stroke={1.5} size="20px" />
               </HeaderAvatar>
             </InputAdornment>
           }
@@ -192,7 +137,7 @@ export default function SearchSection() {
               sx: { bgcolor: "transparent", pl: 0.5 },
             },
           }}
-          sx={{ width: { md: 250, lg: 434 }, ml: 2, px: 2 }}
+          sx={{ width: "100%", px: 2 }}
         />
       </Box>
     </>

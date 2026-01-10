@@ -39,7 +39,8 @@ export const HorizontalBar = () => {
     <ElevationScroll>
       <AppBar
         sx={(theme) => ({
-          top: 71,
+          top: 66,
+          display: { xs: "none", md: "block" },
           bgcolor: "background.paper",
           width: "100%",
           height: 62,
