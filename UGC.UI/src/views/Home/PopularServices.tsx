@@ -1,4 +1,5 @@
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 
 // project imports
 import useConfig from "../../themes/context/useConfig";
@@ -85,6 +86,9 @@ export const PopularServices = () => {
                 <Stack
                   direction="column"
                   spacing={2}
+                  component={motion.div}
+                  whileHover={{ y: -6 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
                   sx={{
                     p: 1,
                     borderRadius: `${borderRadius}px`,
@@ -99,11 +103,14 @@ export const PopularServices = () => {
                     {service.name}
                   </Typography>
                   <Box
-                    component="img"
+                    component={motion.img}
                     src={service.imgUrl}
-                    alt={"Service Image"}
+                    alt="Service Image"
+                    whileHover={{ scale: 1.03 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
                     sx={{
                       borderRadius: `${borderRadius}px`,
+                      willChange: "transform",
                     }}
                   />
                 </Stack>

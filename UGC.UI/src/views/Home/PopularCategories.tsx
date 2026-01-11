@@ -7,6 +7,7 @@ import {
   IconDeviceSpeaker,
   IconBrandStackshare,
 } from "@tabler/icons-react";
+import { motion } from "framer-motion";
 
 // project imports
 import useConfig from "../../themes/context/useConfig";
@@ -94,22 +95,23 @@ export const PopularCategories = () => {
             {_popularCategories.map((category, index) => (
               <Grid size={{ xs: 12, md: 1.3 }} key={index}>
                 <Stack
+                  component={motion.div}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.25 }}
                   direction="column"
                   spacing={2}
                   sx={{
+                    position: "relative",
                     height: "100%",
                     p: 1,
                     borderRadius: `${borderRadius}px`,
                     boxShadow: 8,
-                    border: "1px solid white",
-                    "&:hover": {
-                      border: "1px solid gray",
-                      cursor: "pointer",
-                    },
+                    cursor: "pointer",
+                    overflow: "hidden",
                   }}
                 >
                   {category.icon}
-                  <Typography variant="h4" sx={{ pb: 1, fontWeight: 500 }}>
+                  <Typography variant="h4" sx={{ pb: 1 }}>
                     {category.name}
                   </Typography>
                 </Stack>
