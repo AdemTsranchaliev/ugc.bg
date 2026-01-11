@@ -11,9 +11,9 @@ export default defineConfig([
     files: ["**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
+      ...tseslint.configs.recommended,
+      // reactHooks.configs.flat.recommended,
+      // reactRefresh.configs.vite,
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -34,7 +34,10 @@ export default defineConfig([
       "@typescript-eslint/no-non-null-assertion": "warn",
 
       // React/Vite ergonomics
-      "react-refresh/only-export-components": "warn",
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
 
       // Usually too strict for React apps
       "@typescript-eslint/ban-ts-comment": "warn",

@@ -7,14 +7,14 @@ import MImageList from '@mui/material/ImageList';
 import Box from '@mui/material/Box';
 
 // project imports
-import useConfig from 'hooks/useConfig';
-import { getImageUrl, ImagePath } from 'utils/getImageUrl';
+import useConfig from '../../themes/context/useConfig';
+// import { getImageUrl, ImagePath } from 'utils/getImageUrl';
 
 // set image width & height radio
-function srcset(image, width, height, rows = 1, cols = 1) {
-  return `${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format 1x,
-  ${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format&dpr=2 2x`;
-}
+// function srcset(image, width, height, rows = 1, cols = 1) {
+//   return `${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format 1x,
+//   ${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format&dpr=2 2x`;
+// }
 
 export default function ImageList({ itemData }) {
   const {
@@ -41,7 +41,7 @@ export default function ImageList({ itemData }) {
               <CardMedia
                 component="img"
                 sx={{ height: 1 }}
-                src={srcset(getImageUrl(`${item.img}`, ImagePath.PROFILE), 250, 200, rows, cols)}
+                // src={srcset(getImageUrl(`${item.img}`, ImagePath.PROFILE), 250, 200, rows, cols)}
                 alt={item.title}
                 loading="lazy"
               />

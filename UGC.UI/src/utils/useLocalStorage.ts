@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 
 // ==============================|| HOOKS - LOCAL STORAGE ||============================== //
 
-export function useLocalStorage(key, defaultValue) {
+export function useLocalStorage(key: string, defaultValue: any) {
   // Load initial state from localStorage or fallback to default
   const readValue = () => {
     if (typeof window === "undefined") return defaultValue;

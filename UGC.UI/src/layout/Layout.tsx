@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 
 // project imports
 import { Header } from "./Header";
-import HorizontalBar from "./navigation/HorizontalBar";
+import HorizontalBar from "./Navigation/HorizontalBar";
 // import Footer from "./Footer";
 // import Loader from "../ui-component/Loader";
 import useConfig from "../themes/context/useConfig";

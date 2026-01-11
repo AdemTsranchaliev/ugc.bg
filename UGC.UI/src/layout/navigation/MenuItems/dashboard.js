@@ -35,7 +35,7 @@ const dashboard = {
       id: "analytics",
       title: "analytics",
       type: "item",
-      url: "/asd",
+      url: "/explore",
       icon: icons.IconDeviceAnalytics,
       breadcrumbs: false,
     },
