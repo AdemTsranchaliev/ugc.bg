@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/refs */
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 

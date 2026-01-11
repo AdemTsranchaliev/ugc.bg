@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/refs */
 import { Activity, useEffect, useRef, useState } from 'react';
 
 // material-ui

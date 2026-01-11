@@ -4,18 +4,15 @@ import { useState } from "react";
 // material-ui
 import { useTheme } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
-import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import Popper from "@mui/material/Popper";
 import Box from "@mui/material/Box";
 
 // third party
 // import PopupState, { bindPopper, bindToggle } from 'material-ui-popup-state';
 
 // project imports
-import Transitions from "../../ui-component/extended/Transitions";
+// import Transitions from "../../ui-component/extended/Transitions";
 
 // assets
 import {
@@ -75,7 +72,7 @@ function MobileSearch({ value, setValue }) {
       }
       endAdornment={
         <InputAdornment position="end">
-          <HeaderAvatar>
+          <HeaderAvatar ref={undefined}>
             <IconAdjustmentsHorizontal stroke={1.5} size="20px" />
           </HeaderAvatar>
           <Box sx={{ ml: 2 }}>
@@ -125,7 +122,7 @@ export default function SearchSection() {
           placeholder="search by role, skills, or keywords"
           endAdornment={
             <InputAdornment position="end">
-              <HeaderAvatar>
+              <HeaderAvatar ref={undefined}>
                 <IconSearch stroke={1.5} size="20px" />
               </HeaderAvatar>
             </InputAdornment>

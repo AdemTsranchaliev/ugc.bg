@@ -23,8 +23,6 @@ export default function Header() {
   const theme = useTheme();
   const downMD = useMediaQuery(theme.breakpoints.down("md"));
 
-  const isHorizontal = true;
-
   return (
     <>
       {/* logo & toggler button */}

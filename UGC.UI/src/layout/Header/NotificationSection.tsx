@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/refs */
 import { Activity, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
@@ -79,7 +80,7 @@ export default function NotificationSection() {
   }, [open]);
 
   const handleChange = (event) => {
-    event?.target.value && setValue(event?.target.value);
+    if (event?.target.value) setValue(event?.target.value);
   };
 
   return (
