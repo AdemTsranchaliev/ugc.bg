@@ -86,7 +86,7 @@ export const PopularCategories = () => {
             >
               Popular Categories
             </Typography>
-            <Button variant="text" sx={{ ml: "auto" }}>
+            <Button variant="contained" sx={{ ml: "auto" }}>
               Explore All Categories
             </Button>
           </Stack>

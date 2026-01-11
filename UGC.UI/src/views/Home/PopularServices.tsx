@@ -75,7 +75,7 @@ export const PopularServices = () => {
             >
               Popular Services
             </Typography>
-            <Button variant="text" sx={{ ml: "auto" }}>
+            <Button variant="contained" sx={{ ml: "auto" }}>
               Explore All Services
             </Button>
           </Stack>
