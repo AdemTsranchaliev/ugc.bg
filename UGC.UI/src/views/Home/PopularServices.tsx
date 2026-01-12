@@ -1,8 +1,10 @@
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
 // project imports
 import useConfig from "../../themes/context/useConfig";
+import { Link } from "react-router";
+import { IconArrowNarrowRight } from "@tabler/icons-react";
 
 const _popularServices = [
   {
@@ -65,19 +67,35 @@ export const PopularServices = () => {
             justifyContent="space-between"
           >
             <Typography
-              variant="h4"
-              component="h2"
+              variant="h1"
               sx={{
-                fontSize: "40px",
                 fontWeight: 500,
                 mb: 1,
               }}
             >
-              Popular Services
+              Popular
+              <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
+                Services
+              </Box>
             </Typography>
-            <Button variant="contained" sx={{ ml: "auto" }}>
-              Explore All Services
-            </Button>
+            <Stack
+              direction="row"
+              justifyContent={"space-evenly"}
+              alignItems="center"
+              component={Link}
+              to="#"
+              sx={{
+                fontSize: 20,
+                textDecoration: "none",
+                color: "#000",
+                "&:hover": {
+                  color: "#5b84fa",
+                },
+              }}
+            >
+              Explore All
+              <IconArrowNarrowRight size={40} stroke={1} />
+            </Stack>
           </Stack>
 
           <Grid container spacing={2}>

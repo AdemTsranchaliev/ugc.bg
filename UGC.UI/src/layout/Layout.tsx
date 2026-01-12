@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 // project imports
 import { Header } from "./Header";
 import HorizontalBar from "./Navigation/HorizontalBar";
-// import Footer from "./Footer";
+import { Footer } from "./Footer";
 // import Loader from "../ui-component/Loader";
 import useConfig from "../themes/context/useConfig";
 
@@ -54,7 +54,7 @@ export default function Layout() {
         }}
       >
         <Outlet />
-        {/* <Footer /> */}
+        <Footer />
       </Container>
     </Box>
   );
