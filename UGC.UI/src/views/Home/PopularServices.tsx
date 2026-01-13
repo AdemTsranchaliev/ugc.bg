@@ -73,9 +73,9 @@ export const PopularServices = () => {
                 mb: 1,
               }}
             >
-              Popular
+              Популярни
               <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-                Services
+                Услуги
               </Box>
             </Typography>
             <Stack
@@ -93,7 +93,7 @@ export const PopularServices = () => {
                 },
               }}
             >
-              Explore All
+              Виж още
               <IconArrowNarrowRight size={40} stroke={1} />
             </Stack>
           </Stack>

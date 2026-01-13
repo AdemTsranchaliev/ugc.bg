@@ -119,7 +119,7 @@ export default function SearchSection() {
           id="input-search-header"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="search by role, skills, or keywords"
+          placeholder="търси по роля, умения, ключови думи"
           endAdornment={
             <InputAdornment position="end">
               <HeaderAvatar ref={undefined}>

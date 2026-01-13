@@ -76,9 +76,9 @@ export const PopularCategories = () => {
                 mb: 1,
               }}
             >
-              Popular
+              Популярни
               <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-                Categories
+                Категории
               </Box>
             </Typography>
             <Stack
@@ -96,7 +96,7 @@ export const PopularCategories = () => {
                 },
               }}
             >
-              Explore All
+              Виж още
               <IconArrowNarrowRight size={40} stroke={1} />
             </Stack>
           </Stack>

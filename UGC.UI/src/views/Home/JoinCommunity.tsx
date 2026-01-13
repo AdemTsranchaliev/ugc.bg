@@ -1,13 +1,6 @@
 import { Box, Button, Typography, Container, Grid, Stack } from "@mui/material";
 
-// project imports
-// import useConfig from "../../themes/context/useConfig";
-
 export const JoinCommunity: React.FC = () => {
-  // const {
-  //   state: { borderRadius },
-  // } = useConfig();
-
   return (
     <Box
       component="section"
@@ -18,15 +11,16 @@ export const JoinCommunity: React.FC = () => {
       <Container maxWidth="xl">
         <Box sx={{ mb: 4 }}>
           <Typography
-            variant="h4"
-            component="h2"
+            variant="h1"
             sx={{
-              fontSize: "40px",
               fontWeight: 500,
               mb: 1,
             }}
           >
-            Join the Community
+            Присъединете се към
+            <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
+              Общността
+            </Box>
           </Typography>
         </Box>
 
@@ -75,7 +69,7 @@ export const JoinCommunity: React.FC = () => {
                   size="large"
                   sx={{ px: 4 }}
                 >
-                  Discover Businesses
+                  Открийте Бизнеси
                 </Button>
 
                 <Button
@@ -84,7 +78,7 @@ export const JoinCommunity: React.FC = () => {
                   size="large"
                   sx={{ px: 4 }}
                 >
-                  Discover Creators
+                  Открийте Създатели
                 </Button>
               </Stack>
             </Stack>
