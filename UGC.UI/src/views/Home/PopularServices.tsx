@@ -75,7 +75,7 @@ export const PopularServices = () => {
             >
               Популярни
               <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-                Услуги
+                Обяви
               </Box>
             </Typography>
             <Stack
