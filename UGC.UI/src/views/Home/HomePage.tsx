@@ -3,7 +3,6 @@ import JoinCommunity from "./JoinCommunity";
 import PopularServices from "./PopularServices";
 import PopularCategories from "./PopularCategories";
 import PeopleSection from "./PeopleSection";
-import UnderConstruction from "./UnderConstruction";
 import HowWorksSection from "./HowWorksSection";
 
 export const HomePage = () => {
@@ -15,7 +14,6 @@ export const HomePage = () => {
       <HowWorksSection />
       <PeopleSection />
       <JoinCommunity />
-      <UnderConstruction />
     </>
   );
 };

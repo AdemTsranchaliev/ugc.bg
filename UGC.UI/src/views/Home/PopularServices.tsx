@@ -1,10 +1,19 @@
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { Link } from "react-router";
 import { motion } from "framer-motion";
+import {
+  Box,
+  CardMedia,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { IconArrowNarrowRight } from "@tabler/icons-react";
+import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 
 // project imports
 import useConfig from "../../themes/context/useConfig";
-import { Link } from "react-router";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
+import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
 
 const _popularServices = [
   {
@@ -57,7 +66,20 @@ export const PopularServices = () => {
   } = useConfig();
 
   return (
-    <Box component="section" sx={{ pt: 8 }}>
+    <Box component="section" sx={{ pt: 8, position: "relative" }}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "20%",
+          left: "42%",
+          width: "160px",
+          height: "50px",
+          zIndex: -1,
+          opacity: "0.3",
+        }}
+      >
+        <CardMedia component="img" image={SquareDotted} alt="Layer" />
+      </Box>
       <Container maxWidth="xl">
         <Stack direction="column" spacing={2}>
           <Stack
@@ -103,7 +125,7 @@ export const PopularServices = () => {
               <Grid size={{ xs: 12, md: 2 }} key={index}>
                 <Stack
                   direction="column"
-                  spacing={2}
+                  spacing={1}
                   component={motion.div}
                   whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 300, damping: 22 }}
@@ -117,7 +139,7 @@ export const PopularServices = () => {
                     },
                   }}
                 >
-                  <Typography variant="h4" sx={{ color: "#fff", pb: 1 }}>
+                  <Typography variant="h4" sx={{ color: "#fff" }}>
                     {service.name}
                   </Typography>
                   <Box
@@ -128,7 +150,7 @@ export const PopularServices = () => {
                     transition={{ duration: 0.25, ease: "easeOut" }}
                     sx={{
                       borderRadius: `${borderRadius}px`,
-                      willChange: "transform",
+                      width: "100%",
                     }}
                   />
                 </Stack>

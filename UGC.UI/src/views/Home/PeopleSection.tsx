@@ -9,6 +9,8 @@ import Box from "@mui/material/Box";
 // project imports
 import { cards } from "./CardData";
 import PeopleCard from "./PeopleCard";
+import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
+import { CardMedia } from "@mui/material";
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
@@ -30,7 +32,20 @@ export const PeopleSection = () => {
   }
 
   return (
-    <Box component="section" sx={{ pt: 8 }}>
+    <Box component="section" sx={{ pt: 8, position: "relative" }}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "15%",
+          left: "70%",
+          width: "200px",
+          height: "50px",
+          zIndex: -1,
+          opacity: "0.3",
+        }}
+      >
+        <CardMedia component="img" image={SquareDotted} alt="Layer" />
+      </Box>
       <Container maxWidth="xl">
         <Grid container spacing={7.5} sx={{ justifyContent: "center" }}>
           <Grid sx={{ textAlign: "center" }} size={12}>

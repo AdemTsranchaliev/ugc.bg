@@ -1,4 +1,11 @@
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  CardMedia,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router";
 import {
   IconBasketCode,
@@ -9,6 +16,8 @@ import {
   IconBrandStackshare,
   IconArrowNarrowRight,
 } from "@tabler/icons-react";
+
+import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
 
 const _popularCategories = [
   {
@@ -60,7 +69,20 @@ const _popularCategories = [
 
 export const PopularCategories = () => {
   return (
-    <Box component="section" sx={{ pt: 8 }}>
+    <Box component="section" sx={{ pt: 8, position: "relative" }}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "13%",
+          left: "19%",
+          width: "120px",
+          height: "50px",
+          zIndex: -1,
+          opacity: "0.3",
+        }}
+      >
+        <CardMedia component="img" image={SquareDotted} alt="Layer" />
+      </Box>
       <Container maxWidth="xl">
         <Stack direction="column" spacing={2}>
           <Stack

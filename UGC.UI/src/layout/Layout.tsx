@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import { Header } from "./Header";
 import HorizontalBar from "./Navigation/HorizontalBar";
 import { Footer } from "./Footer";
-// import Loader from "../ui-component/Loader";
 import useConfig from "../themes/context/useConfig";
 
 // ==============================|| MAIN LAYOUT ||============================== //
@@ -19,10 +18,6 @@ export default function Layout() {
   const {
     state: { container },
   } = useConfig();
-
-  const isHorizontal = true;
-
-  // if (true) return <Loader />;
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -34,7 +29,7 @@ export default function Layout() {
         enableColorOnDark
         sx={{ bgcolor: "background.default" }}
       >
-        <Toolbar sx={{ p: isHorizontal ? 1.25 : 2 }}>
+        <Toolbar sx={{ p: 1.25 }}>
           <Header />
         </Toolbar>
       </AppBar>
