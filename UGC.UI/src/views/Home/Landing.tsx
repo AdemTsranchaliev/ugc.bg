@@ -6,8 +6,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { SearchSection } from "../../layout/Header";
+import { Button, Stack } from "@mui/material";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
+import { SearchSection } from "../../layout/Header";
 import useConfig from "../../themes/context/useConfig";
 
 // ==============================|| LANDING COMPONENT ||============================== //
@@ -157,7 +159,8 @@ export const Landing = () => {
             <SearchSection />
 
             {/* Popular Searches - Example placeholder section */}
-            <Box
+            <Stack
+              direction="row"
               sx={{
                 mt: 3,
                 pt: 3,
@@ -169,52 +172,31 @@ export const Landing = () => {
                 flexWrap: "wrap",
               }}
             >
-              <Typography
-                variant="body2"
-                sx={{
-                  color: "white",
-                  fontSize: "0.85rem",
-                }}
-              >
-                Популярни търсения:
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: 3,
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                {[
-                  "UGC",
-                  "Instagram",
-                  "Facebook",
-                  "TikTok",
-                  "Shorts",
-                  "YouTube",
-                ].map((search) => (
-                  <Typography
-                    key={search}
-                    variant="body2"
-                    sx={{
-                      color: "grey.300",
-                      fontSize: "0.9rem",
-                      fontWeight: 500,
-                      opacity: 0.8,
-                      cursor: "pointer",
-                      transition: "color 0.2s",
-                      "&:hover": {
-                        color: "common.white",
-                        textDecoration: "underline",
-                      },
-                    }}
-                  >
-                    {search}
-                  </Typography>
-                ))}
-              </Box>
-            </Box>
+              {[
+                "UGC",
+                "Instagram",
+                "Facebook",
+                "TikTok",
+                "Shorts",
+                "YouTube",
+              ].map((item, index) => (
+                <Button
+                  key={index}
+                  variant="outlined"
+                  endIcon={<ArrowRightAltIcon />}
+                  sx={(theme) => ({
+                    color: theme.palette.common.white,
+                    borderColor: theme.palette.common.white,
+                    "&:hover": {
+                      borderColor: theme.palette.common.white,
+                      backgroundColor: theme.palette.action.hover,
+                    },
+                  })}
+                >
+                  {item}
+                </Button>
+              ))}
+            </Stack>
           </Box>
         </Box>
       </Container>

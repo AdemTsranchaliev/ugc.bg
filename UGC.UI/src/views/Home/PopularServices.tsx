@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 
 // project imports
 import useConfig from "../../themes/context/useConfig";
