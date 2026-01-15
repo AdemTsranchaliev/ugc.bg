@@ -10,7 +10,7 @@ import useConfig from "../../themes/context/useConfig";
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
 
 // Sample data for random services
-const randomServices = [
+const creatorsServices = [
   {
     id: 1,
     name: "Blake Star",
@@ -67,7 +67,7 @@ const randomServices = [
   },
 ];
 
-export const RandomServices = () => {
+export const CreatorsServices = () => {
   const {
     state: { borderRadius },
   } = useConfig();
@@ -75,12 +75,13 @@ export const RandomServices = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 2000,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2000,
     pauseOnHover: true,
+    cssEase: "linear",
     variableWidth: true,
     responsive: [
       {
@@ -155,7 +156,7 @@ export const RandomServices = () => {
             }}
           >
             <Slider {...settings}>
-              {randomServices.map((service) => (
+              {creatorsServices.map((service) => (
                 <Box key={service.id} sx={{ px: 1.5 }}>
                   <Box
                     sx={{
@@ -277,4 +278,4 @@ export const RandomServices = () => {
   );
 };
 
-export default RandomServices;
+export default CreatorsServices;

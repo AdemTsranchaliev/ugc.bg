@@ -4,7 +4,7 @@ import PopularServices from "./PopularServices";
 import PopularCategories from "./PopularCategories";
 import PeopleSection from "./PeopleSection";
 import HowWorksSection from "./HowWorksSection";
-import RandomServices from "./RandomServices";
+import CreatorsServices from "./CreatorsServices";
 
 export const HomePage = () => {
   return (
@@ -12,7 +12,7 @@ export const HomePage = () => {
       <Landing />
       <PopularCategories />
       <PopularServices />
-      <RandomServices />
+      <CreatorsServices />
       <HowWorksSection />
       <PeopleSection />
       <JoinCommunity />
