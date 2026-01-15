@@ -5,4 +5,5 @@ export { default as PopularServices } from "./PopularServices";
 export { default as PopularCategories } from "./PopularCategories";
 export { default as PeopleSection } from "./PeopleSection";
 export { default as HowWorksSection } from "./HowWorksSection";
+export { default as RandomServices } from "./RandomServices";
 export { default as UnderConstruction } from "./UnderConstruction";
