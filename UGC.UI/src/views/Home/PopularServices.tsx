@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { motion } from "framer-motion";
 import {
   Box,
   CardMedia,
@@ -13,49 +12,84 @@ import { IconArrowNarrowRight } from "@tabler/icons-react";
 // project imports
 import useConfig from "../../themes/context/useConfig";
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
+import { ProductCard } from "../../ui-component/cards/ProductCard";
 
 const _popularServices = [
   {
     id: 1,
-    name: "Web Design",
-    description: "Professional web design services",
-    imgUrl:
-      "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_2.0/v1/attachments/generic_asset/asset/798403f5b92b1b5af997acc704a3d21c-1702465156494/video-editing.png",
+    title: "Design & Redesign",
+    serviceName: "WIX",
+    serviceType: "Website",
+    sellerName: "Abir",
+    sellerLevel: "Level 2",
+    sellerDescription:
+      "I will do wix website design, wix website redesign or wix studio website...",
+    rating: 4.9,
+    reviewCount: 212,
+    price: 77,
+    bgColor: "#FFD700", // Yellow
+    buttonText: "INBOX NOW",
+    buttonColor: "#5b84fa", // Blue
+    personImage:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop",
+    heartColor: "#fff",
   },
   {
     id: 2,
-    name: "Content Writing",
-    description: "Engaging content creation",
-    imgUrl:
-      "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_2.0/v1/attachments/generic_asset/asset/6dab2e43183c2c233eb78f62f9975d7e-1762279009299/book_publishing.png",
+    title: "Design/Redesign",
+    serviceName: "WIX",
+    serviceType: "WEBSITE",
+    sellerName: "Rizvi Ahmed",
+    sellerLevel: "Top Rated",
+    sellerDescription:
+      "I will be wix expert, wix developer for wix design, wix website or wix online...",
+    rating: 4.9,
+    reviewCount: 86,
+    price: 82,
+    bgColor: "#FF6B35", // Orange
+    buttonText: "DM For Expert Guidance",
+    buttonColor: "#6c757d", // Grey
+    personImage:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop",
+    heartColor: "#8B4513", // Brown
   },
   {
     id: 3,
-    name: "Video Editing",
-    description: "High-quality video editing",
-    imgUrl:
-      "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_2.0/v1/attachments/generic_asset/asset/798403f5b92b1b5af997acc704a3d21c-1702465156476/software-development.png",
+    title: "Design & Development",
+    serviceName: "REACT",
+    serviceType: "Application",
+    sellerName: "Sarah Johnson",
+    sellerLevel: "Level 1",
+    sellerDescription:
+      "I will create modern react applications with best practices and clean code...",
+    rating: 4.8,
+    reviewCount: 145,
+    price: 95,
+    bgColor: "#4ECDC4", // Teal
+    buttonText: "INBOX NOW",
+    buttonColor: "#5b84fa",
+    personImage:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop",
+    heartColor: "#fff",
   },
   {
     id: 4,
-    name: "Web Design",
-    description: "Professional web design services",
-    imgUrl:
-      "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_2.0/v1/attachments/generic_asset/asset/798403f5b92b1b5af997acc704a3d21c-1702465156494/video-editing.png",
-  },
-  {
-    id: 5,
-    name: "Content Writing",
-    description: "Engaging content creation",
-    imgUrl:
-      "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_2.0/v1/attachments/generic_asset/asset/6dab2e43183c2c233eb78f62f9975d7e-1762279009299/book_publishing.png",
-  },
-  {
-    id: 6,
-    name: "Video Editing",
-    description: "High-quality video editing",
-    imgUrl:
-      "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_2.0/v1/attachments/generic_asset/asset/798403f5b92b1b5af997acc704a3d21c-1702465156476/software-development.png",
+    title: "Content Creation",
+    serviceName: "BLOG",
+    serviceType: "Writing",
+    sellerName: "Michael Chen",
+    sellerLevel: "Top Rated",
+    sellerDescription:
+      "I will write engaging blog posts and articles for your website or business...",
+    rating: 4.7,
+    reviewCount: 98,
+    price: 65,
+    bgColor: "#FFB6C1", // Pink
+    buttonText: "DM For Expert Guidance",
+    buttonColor: "#6c757d",
+    personImage:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop",
+    heartColor: "#8B4513",
   },
 ];
 
@@ -121,38 +155,16 @@ export const PopularServices = () => {
 
           <Grid container spacing={2}>
             {_popularServices.map((service, index) => (
-              <Grid size={{ xs: 12, md: 2 }} key={index}>
-                <Stack
-                  direction="column"
-                  spacing={1}
-                  component={motion.div}
-                  whileHover={{ y: -6 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  sx={{
-                    p: 1,
-                    borderRadius: `${borderRadius}px`,
-                    backgroundColor: "#5c7d66",
-                    boxShadow: 8,
-                    "&:hover": {
-                      cursor: "pointer",
-                    },
-                  }}
-                >
-                  <Typography variant="h4" sx={{ color: "#fff" }}>
-                    {service.name}
-                  </Typography>
-                  <Box
-                    component={motion.img}
-                    src={service.imgUrl}
-                    alt="Service Image"
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    sx={{
-                      borderRadius: `${borderRadius}px`,
-                      width: "100%",
-                    }}
-                  />
-                </Stack>
+              <Grid size={{ xs: 12, md: 3 }} key={index}>
+                <ProductCard
+                  id={service.id}
+                  name={service.title}
+                  image={service.personImage}
+                  description={service.sellerDescription}
+                  offerPrice={service.price}
+                  salePrice={service.price}
+                  rating={service.rating}
+                />
               </Grid>
             ))}
           </Grid>
