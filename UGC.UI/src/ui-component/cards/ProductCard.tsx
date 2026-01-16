@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 // material-ui
 import { alpha, Avatar, Box, Chip, IconButton, useTheme } from "@mui/material";
-import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
@@ -149,14 +148,13 @@ export const ProductCard = ({
         <MainCard
           content={false}
           boxShadow
-          sx={{
+          sx={(theme) => ({
             borderRadius: `${borderRadius}px`,
-            background:
-              "linear-gradient(20deg, #2e3228 0%,rgb(88, 87, 70) 100%)",
+            background: `linear-gradient(20deg, ${theme.palette.dark.main} 0%, ${theme.palette.dark.dark} 100%)`,
             "&:hover": {
               boxShadow: borderRadius,
             },
-          }}
+          })}
         >
           {Array.isArray(image) ? (
             <Box sx={{ position: "relative" }}>
@@ -267,29 +265,6 @@ export const ProductCard = ({
           <CardContent
             sx={{
               p: 2,
-              position: "relative",
-              "&::before": {
-                content: '""',
-                position: "absolute",
-                top: "-6px",
-                left: 0,
-                right: 0,
-                height: "50px",
-                // Use a noisy/messy mask for a messy blur instead of a linear gradient
-                background: `
-                  radial-gradient(circle at 30% 30%, rgba(46,50,40,0.94) 0%, rgba(46,50,40,0.50) 50%, transparent 85%),
-                  radial-gradient(circle at 70% 70%, rgba(46,50,40,0.8) 0%, rgba(46,50,40,0.2) 50%, transparent 90%),
-                  radial-gradient(circle at 55% 20%, rgba(46,50,40,0.7) 0%, transparent 65%),
-                  repeating-linear-gradient(120deg, rgba(46,50,40,0.2) 0px, rgba(46,50,40,0.08) 10px, transparent 21px)
-                `,
-                backdropFilter: "blur(14px)",
-                WebkitBackdropFilter: "blur(14px)",
-                pointerEvents: "none",
-                zIndex: 1,
-                // jagged, organic edge on the bottom
-                clipPath:
-                  "polygon(0% 0%, 100% 0%, 100% 75%, 85% 95%, 70% 90%, 55% 98%, 40% 92%, 20% 100%, 0% 93%)",
-              },
             }}
           >
             <Grid
@@ -356,7 +331,7 @@ export const ProductCard = ({
                       >
                         <IconStarFilled
                           size={16}
-                          style={{ color: "#FFD700" }}
+                          style={{ color: "#FFD700", marginRight: 2 }}
                         />
                         {rating} ({reviewCount})
                       </Stack>
@@ -371,7 +346,10 @@ export const ProductCard = ({
                       >
                         <IconBriefcase2
                           size={16}
-                          style={{ color: theme.palette.common.white }}
+                          style={{
+                            color: theme.palette.common.white,
+                            marginRight: 2,
+                          }}
                         />
                         {finishedProjects}
                       </Stack>
@@ -431,7 +409,7 @@ export const ProductCard = ({
                   ))}
                 </Slider>
               </Grid>
-              <Grid size={12}>
+              {/* <Grid size={12}>
                 <Button
                   variant="contained"
                   fullWidth
@@ -447,7 +425,7 @@ export const ProductCard = ({
                 >
                   Към профила
                 </Button>
-              </Grid>
+              </Grid> */}
             </Grid>
           </CardContent>
         </MainCard>
