@@ -169,7 +169,7 @@ export const PopularServices = () => {
       <Container maxWidth="xl">
         <Stack direction="column" spacing={2}>
           <Stack
-            direction="row"
+            direction={{ xs: "column", md: "row" }}
             spacing={2}
             alignItems="center"
             justifyContent="space-between"

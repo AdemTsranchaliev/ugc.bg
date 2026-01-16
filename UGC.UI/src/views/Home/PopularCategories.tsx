@@ -86,7 +86,7 @@ export const PopularCategories = () => {
       <Container maxWidth="xl">
         <Stack direction="column" spacing={2}>
           <Stack
-            direction="row"
+            direction={{ xs: "column", md: "row" }}
             spacing={2}
             alignItems="center"
             justifyContent="space-between"
@@ -125,7 +125,7 @@ export const PopularCategories = () => {
 
           <Grid container spacing={2} sx={{ justifyContent: "center" }}>
             {_popularCategories.map((category, index) => (
-              <Grid size={{ xs: 12, md: 1.3 }} key={index}>
+              <Grid size={{ xs: 6, md: 1.3 }} key={index}>
                 <Stack
                   direction="column"
                   spacing={2}

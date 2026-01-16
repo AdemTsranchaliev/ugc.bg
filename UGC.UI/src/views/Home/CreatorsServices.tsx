@@ -82,7 +82,6 @@ export const CreatorsServices = () => {
     autoplaySpeed: 2000,
     pauseOnHover: true,
     cssEase: "linear",
-    variableWidth: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -114,7 +113,7 @@ export const CreatorsServices = () => {
         sx={{
           position: "absolute",
           top: "15%",
-          left: "70%",
+          left: { xs: "0%", md: "70%" },
           width: "200px",
           height: "50px",
           zIndex: -1,
@@ -145,16 +144,7 @@ export const CreatorsServices = () => {
             </Typography>
           </Stack>
 
-          <Box
-            sx={{
-              "& .slick-slide": {
-                px: 1.5,
-              },
-              "& .slick-list": {
-                mx: -1.5,
-              },
-            }}
-          >
+          <Box sx={{ width: "100%" }}>
             <Slider {...settings}>
               {creatorsServices.map((service) => (
                 <Box key={service.id} sx={{ px: 1.5 }}>
@@ -195,7 +185,7 @@ export const CreatorsServices = () => {
                     {/* Portrait Image Section */}
                     <Box
                       sx={{
-                        width: 290,
+                        width: "100%",
                         height: 400,
                         backgroundColor: service.bgColor,
                         position: "relative",

@@ -37,7 +37,7 @@ export const PeopleSection = () => {
         sx={{
           position: "absolute",
           top: "15%",
-          left: "70%",
+          left: { xs: "0%", md: "70%" },
           width: "200px",
           height: "50px",
           zIndex: -1,
