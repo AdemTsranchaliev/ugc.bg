@@ -10,9 +10,7 @@ import Box from "@mui/material/Box";
 import LogoSection from "./LogoSection";
 import MobileSection from "./MobileSection";
 import ProfileSection from "./ProfileSection";
-import LocalizationSection from "./LocalizationSection";
 import NotificationSection from "./NotificationSection";
-import ThemeSection from "./ThemeSection";
 
 // assets
 import { IconMenu2 } from "@tabler/icons-react";
@@ -66,19 +64,6 @@ export default function Header() {
 
       {/* header search */}
       <Box sx={{ flexGrow: 1 }} />
-
-      {/* mega-menu */}
-      {/* <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-        <MegaMenuSection />
-      </Box> */}
-
-      {/* live customization & localization */}
-      <Box sx={{ display: { xs: "none", sm: "block" } }}>
-        <LocalizationSection />
-      </Box>
-
-      {/* theme toggle */}
-      <ThemeSection />
 
       {/* notification */}
       <NotificationSection />
