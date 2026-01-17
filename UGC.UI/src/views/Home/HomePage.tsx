@@ -7,14 +7,19 @@ import HowWorksSection from "./HowWorksSection";
 import CreatorsServices from "./CreatorsServices";
 import TalentCard1 from "./TalentCard1";
 import TalentCard2 from "./TalentCard2";
+import { Stack } from "@mui/material";
 
 export const HomePage = () => {
   return (
     <>
       <Landing />
       <PopularCategories />
-      <TalentCard1 />
-      <TalentCard2 />
+
+      <Stack direction="row" spacing={2}>
+        <TalentCard1 />
+        <TalentCard2 />
+      </Stack>
+
       <PopularServices />
       <CreatorsServices />
       <HowWorksSection />
