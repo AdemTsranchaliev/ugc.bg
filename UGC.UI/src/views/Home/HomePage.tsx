@@ -23,7 +23,7 @@ export const HomePage = () => {
         <TalentCard3 />
       </Stack>
 
-      <PopularServices />
+      {/* <PopularServices /> */}
       <CreatorsServices />
       <HowWorksSection />
       <PeopleSection />
