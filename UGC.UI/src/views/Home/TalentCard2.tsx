@@ -23,23 +23,21 @@ export type TalentCard2Props = {
   experienceText?: string;
   finishedProjectsText?: string;
   description?: string;
-  tag1?: string;
-  tag2?: string;
   imageUrl?: string;
   avatarUrl?: string;
   onFavoriteClick?: () => void;
 };
 
 export const TalentCard2 = ({
-  name = "Мария Гарсия",
-  title = "Уеб разработчик",
-  rate = "45/ч.",
-  ratingValue = 4.8,
-  ratingCountText = "(190)",
-  experienceText = "12 г. опит",
-  finishedProjectsText = "120 проекта",
-  description = "Изграждане на отзивчиви, високоефективни уебсайтове\nи уеб приложения с React и Node.js.",
-  imageUrl = "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+  name,
+  title,
+  rate,
+  ratingValue,
+  ratingCountText,
+  experienceText,
+  finishedProjectsText,
+  description,
+  imageUrl,
   onFavoriteClick,
 }: TalentCard2Props) => {
   const CARD_HEIGHT = 440;
@@ -182,7 +180,7 @@ export const TalentCard2 = ({
                   component="span"
                   sx={{ color: "rgba(255, 255, 255, 0.7)" }}
                 >
-                  {ratingCountText}
+                  ({ratingCountText})
                 </Box>
               </Typography>
             </Stack>
@@ -210,7 +208,7 @@ export const TalentCard2 = ({
                   letterSpacing: 0.2,
                 }}
               >
-                {rate}
+                {rate}/ч.
               </Typography>
             </Stack>
           </Stack>
@@ -231,7 +229,7 @@ export const TalentCard2 = ({
                   fontWeight: 700,
                 }}
               >
-                {experienceText}
+                {experienceText} г. опит
               </Typography>
             </Stack>
 
@@ -247,7 +245,7 @@ export const TalentCard2 = ({
                   fontWeight: 700,
                 }}
               >
-                {finishedProjectsText}
+                {finishedProjectsText} проекта
               </Typography>
             </Stack>
           </Stack>
@@ -255,10 +253,17 @@ export const TalentCard2 = ({
           {/* Description */}
           <Typography
             sx={{
+              mt: 1.4,
               color: "rgba(255, 255, 255, 0.9)",
               fontSize: 13,
               lineHeight: 1.35,
               textWrap: "pretty",
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              maxHeight: 'calc(1.35em * 3)', // Ensures visually limited to 3 lines
             }}
           >
             {description}

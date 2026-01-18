@@ -22,22 +22,20 @@ export type TalentCard3Props = {
   experienceText?: string;
   finishedProjectsText?: string;
   description?: string;
-  tag1?: string;
-  tag2?: string;
   imageUrl?: string;
   avatarUrl?: string;
   onFavoriteClick?: () => void;
 };
 
 export const TalentCard3 = ({
-  name = "Мария Гарсия",
-  title = "Графичен дизайнер",
-  rate = "845/ч.",
-  ratingValue = 4.4,
-  ratingCountText = "(190 ревюта)",
-  finishedProjectsText = "538 проекта",
-  description = "Изграждане на отзивчиви, високоефективни уебсайтове\nи уеб приложения с React и Node.js.",
-  imageUrl = "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+  name,
+  title,
+  rate,
+  ratingValue,
+  ratingCountText,
+  finishedProjectsText,
+  description,
+  imageUrl,
   avatarUrl,
   onFavoriteClick,
 }: TalentCard3Props) => {
@@ -143,7 +141,7 @@ export const TalentCard3 = ({
             >
               {ratingValue.toFixed(1)}{" "}
               <Box component="span" sx={{ color: "rgba(47, 52, 58, 0.6)" }}>
-                {ratingCountText}
+                ({ratingCountText} ревюта)
               </Box>
             </Typography>
           </Stack>
@@ -168,7 +166,7 @@ export const TalentCard3 = ({
                   letterSpacing: 0.2,
                 }}
               >
-                {rate}
+                {rate}/ч.
               </Typography>
             </Stack>
 
@@ -181,7 +179,7 @@ export const TalentCard3 = ({
                   fontWeight: 700,
                 }}
               >
-                {finishedProjectsText}
+                {finishedProjectsText} проекта
               </Typography>
             </Stack>
           </Stack>
@@ -196,6 +194,12 @@ export const TalentCard3 = ({
             fontSize: 13,
             lineHeight: 1.35,
             textWrap: "pretty",
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxHeight: 'calc(1.35em * 3)', // Ensures visually limited to 3 lines
           }}
         >
           {description}
