@@ -1,39 +1,29 @@
 import { cloneElement, type ReactElement } from "react";
 
 // material-ui
-// import { useTheme } from "@mui/material/styles";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import AppBar, { type AppBarProps } from "@mui/material/AppBar";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
 // project imports
 import { MenuList } from "./MenuList";
-import useConfig from "../../themes/context/useConfig";
 
 type ElevationScrollProps = { children: ReactElement<AppBarProps> };
 
 function ElevationScroll({ children }: ElevationScrollProps) {
-  // const theme = useTheme();
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
   });
 
-  // theme.shadows[4] = theme.vars.customShadows.z1;
-
   return cloneElement(children, {
     elevation: trigger ? 4 : 0,
   });
 }
 
-// ==============================|| HORIZONTAL MENU LIST ||============================== //
 
 export const HorizontalBar = () => {
-  const {
-    state: { container },
-  } = useConfig();
 
   return (
     <ElevationScroll>
@@ -54,11 +44,9 @@ export const HorizontalBar = () => {
           }),
         })}
       >
-        <Container maxWidth={container ? "xl" : false}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <MenuList />
-          </Box>
-        </Container>
+        <Box sx={{ display: "flex", alignItems: "center", px: 2 }}>
+          <MenuList />
+        </Box>
       </AppBar>
     </ElevationScroll>
   );

@@ -16,7 +16,7 @@ const config = {
   outlinedFilled: true,
   presetColor: "default",
   i18n: "en",
-  container: true,
+  container: "xl",
 };
 
 export default config;

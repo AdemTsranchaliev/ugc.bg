@@ -39,7 +39,7 @@ export default function Layout() {
 
       {/* main content */}
       <Container
-        maxWidth={container ? "xl" : false}
+        maxWidth={container}
         sx={{
           ...(!container && { px: { xs: 0 } }),
           minHeight: "calc(100vh - 128px)",

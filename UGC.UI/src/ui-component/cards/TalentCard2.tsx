@@ -12,7 +12,7 @@ import {
   IconSquareRoundedCheckFilled,
   IconBriefcase2Filled,
 } from "@tabler/icons-react";
-import Avatar from "../../ui-component/extended/Avatar";
+import Avatar from "../extended/Avatar";
 
 export type TalentCard2Props = {
   name?: string;

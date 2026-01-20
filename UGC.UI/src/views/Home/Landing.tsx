@@ -69,9 +69,8 @@ export const Landing = () => {
       <Container
         maxWidth="lg"
         sx={{
-          position: "relative",
           zIndex: 2,
-          py: { xs: 6, md: 8 },
+          py: { xs: 6, md: 8 }
         }}
       >
         <Box

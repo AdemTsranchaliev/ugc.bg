@@ -5,9 +5,9 @@ import PopularCategories from "./PopularCategories";
 import PeopleSection from "./PeopleSection";
 import HowWorksSection from "./HowWorksSection";
 import CreatorsServices from "./CreatorsServices";
-import TalentCard1 from "./TalentCard1";
-import TalentCard2 from "./TalentCard2";
-import TalentCard3 from "./TalentCard3";
+import TalentCard1 from "../../ui-component/cards/TalentCard1";
+import TalentCard2 from "../../ui-component/cards/TalentCard2";
+import TalentCard3 from "../../ui-component/cards/TalentCard3";
 
 // Data for TalentCard1
 const _popularServices1 = [

@@ -1,7 +1,6 @@
 import {
   Box,
   CardMedia,
-  Container,
   Grid,
   Stack,
   Typography,
@@ -83,83 +82,81 @@ export const PopularCategories = () => {
       >
         <CardMedia component="img" image={SquareDotted} alt="Layer" />
       </Box>
-      <Container maxWidth="xl">
-        <Stack direction="column" spacing={2}>
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            spacing={2}
-            alignItems="center"
-            justifyContent="space-between"
+      <Stack direction="column" spacing={2}>
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={2}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: 500,
+              mb: 1,
+            }}
           >
-            <Typography
-              variant="h1"
-              sx={{
-                fontWeight: 500,
-                mb: 1,
-              }}
-            >
-              Популярни
-              <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-                Категории
-              </Box>
-            </Typography>
-            <Stack
-              direction="row"
-              justifyContent={"space-evenly"}
-              alignItems="center"
-              component={Link}
-              to="#"
-              sx={{
-                fontSize: 20,
-                textDecoration: "none",
-                color: "#000",
-                "&:hover": {
-                  color: "#5b84fa",
-                },
-              }}
-            >
-              Виж още
-              <IconArrowNarrowRight size={40} stroke={1} />
-            </Stack>
+            Популярни
+            <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
+              Категории
+            </Box>
+          </Typography>
+          <Stack
+            direction="row"
+            justifyContent={"space-evenly"}
+            alignItems="center"
+            component={Link}
+            to="#"
+            sx={{
+              fontSize: 20,
+              textDecoration: "none",
+              color: "#000",
+              "&:hover": {
+                color: "#5b84fa",
+              },
+            }}
+          >
+            Виж още
+            <IconArrowNarrowRight size={40} stroke={1} />
           </Stack>
-
-          <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-            {_popularCategories.map((category, index) => (
-              <Grid size={{ xs: 6, md: 1.3 }} key={index}>
-                <Stack
-                  direction="column"
-                  spacing={2}
-                  sx={{
-                    position: "relative",
-                    height: "100%",
-                    textAlign: "center",
-                    p: 1,
-                    cursor: "pointer",
-                    borderBottom: "2px solid #fff",
-                    "&:hover": {
-                      backgroundColor: "#e9f4fe",
-                      borderBottom: "2px solid #5b84fa",
-                    },
-                    "& .icon-scale": {
-                      transition: "transform 0.25s cubic-bezier(.4,2,.6,1.0)",
-                    },
-                    "&:hover .icon-scale": {
-                      transform: "scale(1.1)",
-                    },
-                  }}
-                >
-                  <Stack direction="row" justifyContent="center">
-                    <span className="icon-scale">{category.icon}</span>
-                  </Stack>
-                  <Typography variant="h5" sx={{ pb: 1 }}>
-                    {category.name}
-                  </Typography>
-                </Stack>
-              </Grid>
-            ))}
-          </Grid>
         </Stack>
-      </Container>
+
+        <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+          {_popularCategories.map((category, index) => (
+            <Grid size={{ xs: 6, md: 1.3 }} key={index}>
+              <Stack
+                direction="column"
+                spacing={2}
+                sx={{
+                  position: "relative",
+                  height: "100%",
+                  textAlign: "center",
+                  p: 1,
+                  cursor: "pointer",
+                  borderBottom: "2px solid #fff",
+                  "&:hover": {
+                    backgroundColor: "#e9f4fe",
+                    borderBottom: "2px solid #5b84fa",
+                  },
+                  "& .icon-scale": {
+                    transition: "transform 0.25s cubic-bezier(.4,2,.6,1.0)",
+                  },
+                  "&:hover .icon-scale": {
+                    transform: "scale(1.1)",
+                  },
+                }}
+              >
+                <Stack direction="row" justifyContent="center">
+                  <span className="icon-scale">{category.icon}</span>
+                </Stack>
+                <Typography variant="h5" sx={{ pb: 1 }}>
+                  {category.name}
+                </Typography>
+              </Stack>
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
     </Box>
   );
 };

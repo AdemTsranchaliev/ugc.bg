@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import {
   Box,
   CardMedia,
-  Container,
   Grid,
   Stack,
   Typography,
@@ -51,66 +50,64 @@ export const PopularServices = ({
       >
         <CardMedia component="img" image={SquareDotted} alt="Layer" />
       </Box>
-      <Container maxWidth="xl">
-        <Stack direction="column" spacing={2}>
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            spacing={2}
-            alignItems="center"
-            justifyContent="space-between"
+      <Stack direction="column" spacing={2}>
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={2}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: 500,
+              mb: 1,
+            }}
           >
-            <Typography
-              variant="h1"
-              sx={{
-                fontWeight: 500,
-                mb: 1,
-              }}
-            >
-              Популярни
-              <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-                Обяви
-              </Box>
-            </Typography>
-            <Stack
-              direction="row"
-              justifyContent={"space-evenly"}
-              alignItems="center"
-              component={Link}
-              to="#"
-              sx={{
-                fontSize: 20,
-                textDecoration: "none",
-                color: "#000",
-                "&:hover": {
-                  color: "#5b84fa",
-                },
-              }}
-            >
-              Виж още
-              <IconArrowNarrowRight size={40} stroke={1} />
-            </Stack>
+            Популярни
+            <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
+              Обяви
+            </Box>
+          </Typography>
+          <Stack
+            direction="row"
+            justifyContent={"space-evenly"}
+            alignItems="center"
+            component={Link}
+            to="#"
+            sx={{
+              fontSize: 20,
+              textDecoration: "none",
+              color: "#000",
+              "&:hover": {
+                color: "#5b84fa",
+              },
+            }}
+          >
+            Виж още
+            <IconArrowNarrowRight size={40} stroke={1} />
           </Stack>
-
-          <Grid container spacing={2}>
-            {_popularServices.length > 0 && _popularServices.map((service: any, index: number) => (
-              <Grid size={{ xs: 12, md: 3 }} key={index}>
-                <TalentCard
-                  name={service.sellerName}
-                  title={service.serviceType}
-                  rate={service.price.toString()}
-                  ratingValue={service.rating}
-                  ratingCountText={service.reviewCount.toString()}
-                  experienceText={service.finishedProjects.toString()}
-                  finishedProjectsText={service.finishedProjects.toString()}
-                  description={service.sellerDescription}
-                  imageUrl={service.personImages[0]}
-                  avatarUrl={service.personImages[0]}
-                />
-              </Grid>
-            ))}
-          </Grid>
         </Stack>
-      </Container>
+
+        <Grid container spacing={2}>
+          {_popularServices.length > 0 && _popularServices.map((service: any, index: number) => (
+            <Grid size={{ xs: 12, md: 3 }} key={index}>
+              <TalentCard
+                name={service.sellerName}
+                title={service.serviceType}
+                rate={service.price.toString()}
+                ratingValue={service.rating}
+                ratingCountText={service.reviewCount.toString()}
+                experienceText={service.finishedProjects.toString()}
+                finishedProjectsText={service.finishedProjects.toString()}
+                description={service.sellerDescription}
+                imageUrl={service.personImages[0]}
+                avatarUrl={service.personImages[0]}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
     </Box>
   );
 };
