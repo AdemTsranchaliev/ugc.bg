@@ -33,7 +33,7 @@ export const JoinCommunity: React.FC = () => {
 
       <Grid container spacing={2} justifyContent="space-between">
         <Grid size={{ xs: 12, md: 6 }}>
-          <Stack direction="row" alignItems="center" spacing={4}>
+          <Stack direction={{ xs: "column", md: "row" }} alignItems="center" spacing={4}>
             {/* Business Card */}
             <Card
               sx={{
@@ -190,7 +190,7 @@ export const JoinCommunity: React.FC = () => {
           size={{ xs: 12, md: 4 }}
           sx={{
             display: "flex",
-            justifyContent: "end",
+            justifyContent: { xs: "center", md: "end" },
             height: "100%",
             width: "100%",
             margin: "auto",

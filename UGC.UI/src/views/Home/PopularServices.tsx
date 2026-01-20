@@ -85,10 +85,13 @@ export const PopularServices = ({
             <IconArrowNarrowRight size={40} stroke={1} />
           </Stack>
         </Stack>
-
-        <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={2}
+          justifyContent={{ xs: "center", md: "space-between" }}
+        >
           {_popularServices.length > 0 && _popularServices.map((service: any, index: number) => (
-            <Grid size={{ xs: 12, md: 3 }} key={index}>
+            <Grid size={{ sm: 12, md: 3 }} key={index}>
               <TalentCard
                 name={service.sellerName}
                 title={service.serviceType}
