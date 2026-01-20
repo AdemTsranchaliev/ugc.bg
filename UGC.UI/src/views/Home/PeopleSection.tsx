@@ -4,17 +4,21 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 // project imports
 import { cards } from "./CardData";
 import PeopleCard from "./PeopleCard";
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
-import { CardMedia } from "@mui/material";
+import DecorativeImage from "../../ui-components/DecorativeImage";
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 export const PeopleSection = () => {
+  const theme = useTheme();
+  const downSM = useMediaQuery(theme.breakpoints.down("sm"));
   let cardResult = <></>;
+
   if (cards && cards.length > 0) {
     cardResult = cards.map((card, index) => (
       <Grid key={index}>
@@ -31,20 +35,17 @@ export const PeopleSection = () => {
   }
 
   return (
-    <Box component="section" sx={{ pt: 8, position: "relative" }}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "15%",
-          left: { xs: "0%", md: "70%" },
-          width: "200px",
-          height: "50px",
-          zIndex: -1,
-          opacity: "0.3",
-        }}
-      >
-        <CardMedia component="img" image={SquareDotted} alt="Layer" />
-      </Box>
+    <Box sx={{ pt: 8, position: "relative" }}>
+      <DecorativeImage
+        image={SquareDotted}
+        top="15%"
+        left={downSM ? "0%" : "70%"}
+        width="200px"
+        height="50px"
+        zIndex={-1}
+        opacity="0.3"
+        alt="Layer"
+      />
       <Grid container spacing={7.5} sx={{ justifyContent: "center" }}>
         <Grid sx={{ textAlign: "center" }} size={12}>
           <Stack
@@ -76,7 +77,7 @@ export const PeopleSection = () => {
           </Stack>
         </Grid>
       </Grid>
-    </Box>
+    </Box >
   );
 };
 

@@ -1,6 +1,5 @@
 import {
   Box,
-  CardMedia,
   Grid,
   Stack,
   Typography,
@@ -17,6 +16,7 @@ import {
 } from "@tabler/icons-react";
 
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
+import { DecorativeImage } from "../../ui-components/DecorativeImage";
 
 const _popularCategories = [
   {
@@ -68,20 +68,17 @@ const _popularCategories = [
 
 export const PopularCategories = () => {
   return (
-    <Box component="section" sx={{ pt: 8, position: "relative" }}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "13%",
-          left: "19%",
-          width: "120px",
-          height: "50px",
-          zIndex: -1,
-          opacity: "0.3",
-        }}
-      >
-        <CardMedia component="img" image={SquareDotted} alt="Layer" />
-      </Box>
+    <Box sx={{ pt: 8, position: "relative" }}>
+      <DecorativeImage
+        image={SquareDotted}
+        top="13%"
+        left="19%"
+        width="120px"
+        height="50px"
+        zIndex={-1}
+        opacity="0.3"
+        alt="Layer"
+      />
       <Stack direction="column" spacing={2}>
         <Stack
           direction={{ xs: "column", md: "row" }}

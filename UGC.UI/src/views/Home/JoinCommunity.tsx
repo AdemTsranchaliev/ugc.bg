@@ -4,7 +4,6 @@ import { IconBuildingSkyscraper, IconPalette } from "@tabler/icons-react";
 export const JoinCommunity: React.FC = () => {
   return (
     <Box
-      component="section"
       sx={{
         pt: 8,
       }}

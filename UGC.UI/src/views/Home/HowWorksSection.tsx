@@ -31,7 +31,6 @@ export const HowWorksSection = () => {
 
   return (
     <Box
-      component="section"
       sx={{
         mt: 8,
         pt: 2,

@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import {
   Box,
-  CardMedia,
   Grid,
   Stack,
   Typography,
@@ -11,6 +10,7 @@ import type { ComponentType } from "react";
 
 // project imports
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
+import { DecorativeImage } from "../../ui-components/DecorativeImage";
 
 type TalentCardProps = {
   name: string;
@@ -36,20 +36,17 @@ export const PopularServices = ({
   _popularServices
 }: PopularServicesProps) => {
   return (
-    <Box component="section" sx={{ pt: 8, position: "relative" }}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "20%",
-          left: "42%",
-          width: "160px",
-          height: "50px",
-          zIndex: -1,
-          opacity: "0.3",
-        }}
-      >
-        <CardMedia component="img" image={SquareDotted} alt="Layer" />
-      </Box>
+    <Box sx={{ pt: 8, position: "relative" }}>
+      <DecorativeImage
+        image={SquareDotted}
+        top="20%"
+        left="42%"
+        width="160px"
+        height="50px"
+        zIndex={-1}
+        opacity="0.3"
+        alt="Layer"
+      />
       <Stack direction="column" spacing={2}>
         <Stack
           direction={{ xs: "column", md: "row" }}

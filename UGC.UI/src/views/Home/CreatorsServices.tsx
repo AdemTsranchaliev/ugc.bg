@@ -1,4 +1,4 @@
-import { Box, CardMedia, Stack, Typography } from "@mui/material";
+import { Box, CardMedia, Stack, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Star } from "@mui/icons-material";
 import { IconArrowUpRight } from "@tabler/icons-react";
 
@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import useConfig from "../../themes/context/useConfig";
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
+import { DecorativeImage } from "../../ui-components/DecorativeImage";
 
 // Sample data for random services
 const creatorsServices = [
@@ -68,6 +69,8 @@ const creatorsServices = [
 ];
 
 export const CreatorsServices = () => {
+  const theme = useTheme();
+  const downSM = useMediaQuery(theme.breakpoints.down("sm"));
   const {
     state: { borderRadius },
   } = useConfig();
@@ -108,20 +111,17 @@ export const CreatorsServices = () => {
   };
 
   return (
-    <Box component="section" sx={{ pt: 8, pb: 4, position: "relative" }}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "15%",
-          left: { xs: "0%", md: "70%" },
-          width: "200px",
-          height: "50px",
-          zIndex: -1,
-          opacity: "0.3",
-        }}
-      >
-        <CardMedia component="img" image={SquareDotted} alt="Layer" />
-      </Box>
+    <Box sx={{ pt: 8, pb: 4, position: "relative" }}>
+      <DecorativeImage
+        image={SquareDotted}
+        top="15%"
+        left={downSM ? "0%" : "70%"}
+        width="200px"
+        height="50px"
+        zIndex={-1}
+        opacity="0.3"
+        alt="Layer"
+      />
       <Stack direction="column" spacing={4}>
         <Stack
           direction="row"
