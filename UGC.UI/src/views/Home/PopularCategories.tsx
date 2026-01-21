@@ -4,7 +4,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router";
 import {
   IconBasketCode,
   IconAd2,
@@ -12,11 +11,11 @@ import {
   IconVideoMinus,
   IconDeviceSpeaker,
   IconBrandStackshare,
-  IconArrowNarrowRight,
 } from "@tabler/icons-react";
 
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
-import { DecorativeImage } from "../../ui-components/DecorativeImage";
+import { DecorativeImage } from "../../ui-component/DecorativeImage";
+import { SectionTitle } from "../../ui-component/SectionTitle";
 
 const _popularCategories = [
   {
@@ -80,43 +79,11 @@ export const PopularCategories = () => {
         alt="Layer"
       />
       <Stack direction="column" spacing={2}>
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          spacing={2}
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Typography
-            variant="h1"
-            sx={{
-              fontWeight: 500,
-              mb: 1,
-            }}
-          >
-            Популярни
-            <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-              Категории
-            </Box>
-          </Typography>
-          <Stack
-            direction="row"
-            justifyContent={"space-evenly"}
-            alignItems="center"
-            component={Link}
-            to="#"
-            sx={{
-              fontSize: 20,
-              textDecoration: "none",
-              color: "#000",
-              "&:hover": {
-                color: "#5b84fa",
-              },
-            }}
-          >
-            Виж още
-            <IconArrowNarrowRight size={40} stroke={1} />
-          </Stack>
-        </Stack>
+        <SectionTitle
+          title="Популярни"
+          highlightedTitle="Категории"
+          hasLink={true}
+        />
 
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           {_popularCategories.map((category, index) => (

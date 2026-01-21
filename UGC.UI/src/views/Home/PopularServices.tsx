@@ -1,16 +1,14 @@
-import { Link } from "react-router";
 import {
   Box,
   Grid,
   Stack,
-  Typography,
 } from "@mui/material";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
 import type { ComponentType } from "react";
 
 // project imports
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
-import { DecorativeImage } from "../../ui-components/DecorativeImage";
+import { DecorativeImage } from "../../ui-component/DecorativeImage";
+import SectionTitle from "../../ui-component/SectionTitle";
 
 type TalentCardProps = {
   name: string;
@@ -48,43 +46,11 @@ export const PopularServices = ({
         alt="Layer"
       />
       <Stack direction="column" spacing={2}>
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          spacing={2}
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Typography
-            variant="h1"
-            sx={{
-              fontWeight: 500,
-              mb: 1,
-            }}
-          >
-            Популярни
-            <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-              Обяви
-            </Box>
-          </Typography>
-          <Stack
-            direction="row"
-            justifyContent={"space-evenly"}
-            alignItems="center"
-            component={Link}
-            to="#"
-            sx={{
-              fontSize: 20,
-              textDecoration: "none",
-              color: "#000",
-              "&:hover": {
-                color: "#5b84fa",
-              },
-            }}
-          >
-            Виж още
-            <IconArrowNarrowRight size={40} stroke={1} />
-          </Stack>
-        </Stack>
+        <SectionTitle
+          title="Популярни"
+          highlightedTitle="Обяви"
+          hasLink={true}
+        />
         <Grid
           container
           spacing={2}

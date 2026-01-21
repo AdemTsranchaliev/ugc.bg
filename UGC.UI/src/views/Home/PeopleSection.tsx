@@ -2,7 +2,6 @@
 import { Masonry } from "@mui/lab";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useMediaQuery, useTheme } from "@mui/material";
 
@@ -10,7 +9,8 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import { cards } from "./CardData";
 import PeopleCard from "./PeopleCard";
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
-import DecorativeImage from "../../ui-components/DecorativeImage";
+import DecorativeImage from "../../ui-component/DecorativeImage";
+import SectionTitle from "../../ui-component/SectionTitle";
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
@@ -48,25 +48,10 @@ export const PeopleSection = () => {
       />
       <Grid container spacing={7.5} sx={{ justifyContent: "center" }}>
         <Grid sx={{ textAlign: "center" }} size={12}>
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Typography
-              variant="h1"
-              sx={{
-                fontWeight: 500,
-                mb: 1,
-              }}
-            >
-              Kакво казват
-              <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-                Нашите Kлиенти
-              </Box>
-            </Typography>
-          </Stack>
+          <SectionTitle
+            title="Kакво казват"
+            highlightedTitle="Нашите Kлиенти"
+          />
         </Grid>
 
         <Grid size={12}>

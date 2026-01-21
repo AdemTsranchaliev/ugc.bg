@@ -8,7 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import useConfig from "../../themes/context/useConfig";
 import SquareDotted from "/assets/images/landing/dotted-square-grid.svg";
-import { DecorativeImage } from "../../ui-components/DecorativeImage";
+import { DecorativeImage } from "../../ui-component/DecorativeImage";
+import SectionTitle from "../../ui-component/SectionTitle";
 
 // Sample data for random services
 const creatorsServices = [
@@ -123,25 +124,10 @@ export const CreatorsServices = () => {
         alt="Layer"
       />
       <Stack direction="column" spacing={4}>
-        <Stack
-          direction="row"
-          spacing={2}
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Typography
-            variant="h1"
-            sx={{
-              fontWeight: 500,
-              mb: 1,
-            }}
-          >
-            Създатели с най-висок
-            <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-              Рейтинг
-            </Box>
-          </Typography>
-        </Stack>
+        <SectionTitle
+          title="Създатели с най-висок"
+          highlightedTitle="Рейтинг"
+        />
 
         <Box sx={{ width: "100%" }}>
           <Slider {...settings}>

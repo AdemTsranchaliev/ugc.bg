@@ -1,5 +1,6 @@
 import { Box, Button, Typography, Grid, Card, Stack } from "@mui/material";
 import { IconBuildingSkyscraper, IconPalette } from "@tabler/icons-react";
+import SectionTitle from "../../ui-component/SectionTitle";
 
 export const JoinCommunity: React.FC = () => {
   return (
@@ -9,26 +10,11 @@ export const JoinCommunity: React.FC = () => {
       }}
     >
       <Box sx={{ mb: 4 }}>
-        <Typography
-          variant="h1"
-          sx={{
-            fontWeight: 500,
-          }}
-        >
-          Присъединете се към
-          <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-            Общността
-          </Box>
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            fontSize: 16,
-            color: "rgba(47, 52, 58, 0.6)"
-          }}
-        >
-          Разгледайте възможностите, подходящи за вас.
-        </Typography>
+        <SectionTitle
+          title="Присъединете се към"
+          highlightedTitle="Общността"
+          subtitle="Разгледайте възможностите, подходящи за вас."
+        />
       </Box>
 
       <Grid container spacing={2} justifyContent="space-between">

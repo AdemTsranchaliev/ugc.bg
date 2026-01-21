@@ -12,6 +12,7 @@ import LayerLeft from "/assets/images/landing/customization-left.png";
 import LayerRight from "/assets/images/landing/customization-right.png";
 
 import useConfig from "../../themes/context/useConfig";
+import SectionTitle from "../../ui-component/SectionTitle";
 
 // ==============================|| LANDING - CUSTOMIZE ||============================== //
 
@@ -38,19 +39,14 @@ export const HowWorksSection = () => {
         borderRadius: borderRadius,
       }}
     >
-      <Typography
-        variant="h1"
-        sx={{
-          fontWeight: 500,
-          mb: 1,
+      <SectionTitle
+        title="Как работи"
+        highlightedTitle="Платформата"
+        hasLink={true}
+        styles={{
           px: 2,
         }}
-      >
-        Как работи
-        <Box component="span" sx={{ ml: 1, color: "#5b84fa" }}>
-          Платформата
-        </Box>
-      </Typography>
+      />
 
       <Grid
         container
