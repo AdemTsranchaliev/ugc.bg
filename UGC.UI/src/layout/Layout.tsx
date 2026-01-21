@@ -1,14 +1,11 @@
 import { Outlet } from "react-router";
 
 // material-ui
-import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
-import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 
 // project imports
 import { Header } from "./Header";
-import HorizontalBar from "./Navigation/HorizontalBar";
 import { Footer } from "./Footer";
 import useConfig from "../themes/context/useConfig";
 
@@ -21,23 +18,10 @@ export default function Layout() {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      {/* header */}
-      <AppBar
-        position="fixed"
-        color="inherit"
-        elevation={0}
-        enableColorOnDark
-        sx={{ bgcolor: "background.default" }}
-      >
-        <Toolbar sx={{ p: 1.25 }}>
-          <Header />
-        </Toolbar>
-      </AppBar>
+      {/* Header */}
+      <Header />
 
-      {/* menu */}
-      <HorizontalBar />
-
-      {/* main content */}
+      {/* Main Content */}
       <Container
         maxWidth={container}
         sx={{

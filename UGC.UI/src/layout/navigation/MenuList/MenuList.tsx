@@ -1,59 +1,23 @@
-import { Activity, memo, useLayoutEffect, useState } from "react";
+import { memo, useState } from "react";
 
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 
 // project imports
 import NavItem from "./NavItem";
 import NavGroup from "./NavGroup";
 import menuItem from "../MenuItems";
 
-// import { Menu } from "../menu-items/widget";
 import { HORIZONTAL_MAX_ITEM } from "../../../themes/config";
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
 
 function MenuList() {
-  const downMD = useMediaQuery((theme) => theme.breakpoints.down("md"));
-
-  // const { menuLoading } = useGetMenu();
-  const menuLoading = false;
-  // const { menuMaster } = useGetMenuMaster();
-
-  // const drawerOpen = menuMaster.isDashboardDrawerOpened;
-  const drawerOpen = false;
-
-  const isHorizontal = true;
-
   const [selectedID, setSelectedID] = useState("");
-  const [menuItems, setMenuItems] = useState({ items: [] });
-
-  // let widgetMenu = Menu();
-
-  useLayoutEffect(() => {
-    const isFound = menuItem.items.some((element) => {
-      if (element.id === "group-widget") {
-        return true;
-      }
-      return false;
-    });
-    if (menuLoading) {
-      // menuItem.items.splice(1, 0, widgetMenu);
-      setMenuItems({ items: [...menuItem.items] });
-      // } else if (!menuLoading && widgetMenu?.id !== undefined && !isFound) {
-      //   menuItem.items.splice(1, 1, widgetMenu);
-      //   setMenuItems({ items: [...menuItem.items] });
-    } else {
-      setMenuItems({ items: [...menuItem.items] });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [menuLoading]);
+  const [menuItems, setMenuItems] = useState({ items: [...menuItem.items] });
 
   // last menu-item to show in horizontal menu bar
-  const lastItem = isHorizontal ? HORIZONTAL_MAX_ITEM : null;
+  const lastItem = HORIZONTAL_MAX_ITEM;
 
   let lastItemIndex = menuItems.items.length - 1;
   let remItems = [];
@@ -76,7 +40,7 @@ function MenuList() {
 
   const navItems = menuItems.items
     .slice(0, lastItemIndex + 1)
-    .map((item, index) => {
+    .map((item) => {
       switch (item.type) {
         case "group":
           if (item.url && item.id !== lastItemId) {
@@ -88,11 +52,6 @@ function MenuList() {
                   isParents
                   setSelectedID={() => setSelectedID("")}
                 />
-                <Activity
-                  mode={!isHorizontal && index !== 0 ? "visible" : "hidden"}
-                >
-                  <Divider sx={{ py: 0.5 }} />
-                </Activity>
               </List>
             );
           }
@@ -122,11 +81,7 @@ function MenuList() {
       }
     });
 
-  return !isHorizontal ? (
-    <Box {...(drawerOpen && { sx: { mt: 1.5 } })}>{navItems}</Box>
-  ) : (
-    <>{navItems}</>
-  );
+  return <>{navItems}</>;
 }
 
 export default memo(MenuList);
