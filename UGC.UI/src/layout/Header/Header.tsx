@@ -1,6 +1,8 @@
-import { Activity } from "react";
+import { Activity, cloneElement, type ReactElement } from "react";
 
 // material-ui
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import AppBar, { type AppBarProps } from "@mui/material/AppBar";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Avatar from "@mui/material/Avatar";
@@ -15,90 +17,103 @@ import { MenuList } from "../Navigation/MenuList";
 
 // assets
 import { IconMenu2 } from "@tabler/icons-react";
-import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { Stack } from "@mui/material";
 
-// ==============================|| MAIN NAVBAR / HEADER ||============================== //
+
+type ElevationScrollProps = { children: ReactElement<AppBarProps> };
+
+const ElevationScroll = ({ children }: ElevationScrollProps) => {
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+  });
+
+  return cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+};
 
 export default function Header() {
   const theme = useTheme();
   const downMD = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <AppBar
-      position="fixed"
-      color="inherit"
-      elevation={0}
-      enableColorOnDark
-      sx={{ bgcolor: "background.default" }}
-    >
-      <Toolbar sx={{ p: 1.25 }}>
-        {/* Logo & Toggler button */}
-        <Box sx={{ display: "flex" }}>
-          <Box>
-            <Box
-              component="span"
-              sx={{ display: { xs: "none", md: "block" }, flexGrow: 1 }}
-            >
-              <LogoSection />
-            </Box>
+    <ElevationScroll>
+      <AppBar
+        position="fixed"
+        color="inherit"
+        elevation={0}
+        enableColorOnDark
+        sx={{ bgcolor: "background.default" }}
+      >
+        <Toolbar sx={{ p: 1.25 }}>
+          {/* Logo & Toggler button */}
+          <Box sx={{ display: "flex" }}>
+            <Box>
+              <Box
+                component="span"
+                sx={{ display: { xs: "none", md: "block" }, flexGrow: 1 }}
+              >
+                <LogoSection />
+              </Box>
 
-            {/* Mobile Menu */}
-            <Activity mode={downMD ? "visible" : "hidden"}>
-              <Avatar
-                variant="rounded"
-                sx={{
-                  ...theme.typography.commonAvatar,
-                  ...theme.typography.mediumAvatar,
-                  overflow: "hidden",
-                  transition: "all .2s ease-in-out",
-                  color: theme.vars.palette.secondary.dark,
-                  background: theme.vars.palette.secondary.light,
-                  "&:hover": {
-                    color: theme.vars.palette.secondary.light,
-                    background: theme.vars.palette.secondary.dark,
-                  },
-                  ...theme.applyStyles("dark", {
-                    color: theme.vars.palette.secondary.main,
-                    background: theme.vars.palette.dark.main,
+              {/* Mobile Menu */}
+              <Activity mode={downMD ? "visible" : "hidden"}>
+                <Avatar
+                  variant="rounded"
+                  sx={{
+                    ...theme.typography.commonAvatar,
+                    ...theme.typography.mediumAvatar,
+                    overflow: "hidden",
+                    transition: "all .2s ease-in-out",
+                    color: theme.vars.palette.secondary.dark,
+                    background: theme.vars.palette.secondary.light,
                     "&:hover": {
                       color: theme.vars.palette.secondary.light,
-                      background: theme.vars.palette.secondary.main,
+                      background: theme.vars.palette.secondary.dark,
                     },
-                  }),
-                }}
-              >
-                <IconMenu2 stroke={1.5} size="20px" />
-              </Avatar>
-            </Activity>
+                    ...theme.applyStyles("dark", {
+                      color: theme.vars.palette.secondary.main,
+                      background: theme.vars.palette.dark.main,
+                      "&:hover": {
+                        color: theme.vars.palette.secondary.light,
+                        background: theme.vars.palette.secondary.main,
+                      },
+                    }),
+                  }}
+                >
+                  <IconMenu2 stroke={1.5} size="20px" />
+                </Avatar>
+              </Activity>
+            </Box>
           </Box>
-        </Box>
 
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
-          <Stack
-            direction="row"
-            sx={{ mx: 2 }}
-          >
-            {/* Horizontal Menu */}
-            <MenuList />
-          </Stack>
-        </Box>
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <Stack
+              direction="row"
+              sx={{ mx: 2 }}
+            >
+              {/* Horizontal Menu */}
+              <MenuList />
+            </Stack>
+          </Box>
 
-        {/* Spacer */}
-        <Box sx={{ flexGrow: 1 }} />
+          {/* Spacer */}
+          <Box sx={{ flexGrow: 1 }} />
 
-        {/* Notification */}
-        <NotificationSection />
+          {/* Notification */}
+          <NotificationSection />
 
-        {/* Profile */}
-        <ProfileSection />
+          {/* Profile */}
+          <ProfileSection />
 
-        {/* Mobile quick menu */}
-        <Box sx={{ display: { xs: "block", sm: "none" } }}>
-          <MobileSection />
-        </Box>
-      </Toolbar>
-    </AppBar >
+          {/* Mobile quick menu */}
+          <Box sx={{ display: { xs: "block", sm: "none" } }}>
+            <MobileSection />
+          </Box>
+        </Toolbar>
+      </AppBar >
+    </ElevationScroll>
   );
 }
