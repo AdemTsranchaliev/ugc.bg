@@ -5,7 +5,7 @@ import {
   Button,
   Card,
   CardContent,
-  Collapse,
+  CardMedia,
   Container,
   Stack,
   Typography,
@@ -15,19 +15,18 @@ import {
   ErrorOutline as ErrorOutlineIcon,
   Refresh as RefreshIcon,
   Home as HomeIcon,
-  ExpandMore as ExpandMoreIcon,
-  ExpandLess as ExpandLessIcon,
-  BugReport as BugReportIcon,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
-import { useState } from "react";
+
+// assets
+import imageBackground from '/assets/images/maintenance/img-error-bg.svg';
+import imageOrbitals from '/assets/images/maintenance/error-orbital.png';
+import imageCore from '/assets/images/maintenance/error-core.png';
 
 export const AppErrorBoundary = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const routeError = useRouteError();
-
-  const [showDetails, setShowDetails] = useState(false);
 
   // Normalize error
   let error: Error | null = null;
@@ -42,11 +41,64 @@ export const AppErrorBoundary = () => {
 
   const handleGoHome = () => {
     navigate("/");
+    window.location.reload();
   };
 
   const handleReload = () => {
     window.location.reload();
   };
+
+  return (
+    <Stack sx={{ gap: 2, alignItems: 'center', justifyContent: 'center', mt: 10 }}>
+      <Box sx={{ maxWidth: { xs: 350, sm: 580, md: 720 }, margin: '0 auto', position: 'relative' }}>
+        <CardMedia component="img" image={imageBackground} sx={{ width: '100%' }} />
+        <motion.div
+          style={{ position: 'absolute', top: 0, left: '20%', width: '90%' }}
+          animate={{ y: [-20, 20, -20] }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
+        >
+          <CardMedia component="img" image={imageCore} sx={{ width: '70%' }} />
+        </motion.div>
+        <motion.div
+          style={{ position: 'absolute', top: 0, left: '20%', width: '90%' }}
+          animate={{ y: [-20, 20, -20] }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
+        >
+          <CardMedia component="img" image={imageOrbitals} sx={{ width: '70%' }} />
+        </motion.div>
+      </Box>
+      <Stack sx={{ justifyContent: 'center', alignItems: 'center', p: 1.5, gap: 2 }}>
+        {/* Description */}
+        <Typography variant="h1">Опааа, нещо се обърка?</Typography>
+        {/* Actions */}
+        <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+          <Button
+            variant="contained"
+            startIcon={<RefreshIcon />}
+            onClick={handleReload}
+          >
+            Презареди страница
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<HomeIcon />}
+            onClick={handleGoHome}
+          >
+            Начало
+          </Button>
+        </Stack>
+      </Stack>
+    </Stack>
+  );
 
   return (
     <Container maxWidth="md" sx={{ py: 8 }}>
@@ -104,43 +156,27 @@ export const AppErrorBoundary = () => {
               {/* Details */}
               {error && (
                 <Box sx={{ width: "100%", mt: 2 }}>
-                  <Button
-                    startIcon={<BugReportIcon />}
-                    endIcon={showDetails ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                    onClick={() => setShowDetails((v) => !v)}
-                    variant="outlined"
-                    color="inherit"
+                  <Typography
+                    variant="subtitle2"
+                    color="error"
+                    fontWeight="bold"
                   >
-                    {showDetails ? "Hide" : "Show"} Error Details
-                  </Button>
+                    Съобщение за грешка
+                  </Typography>
 
-                  <Collapse in={showDetails}>
-                    <Card variant="outlined" sx={{ mt: 2 }}>
-                      <CardContent>
-                        <Typography
-                          variant="subtitle2"
-                          color="error"
-                          fontWeight="bold"
-                        >
-                          Error Message
-                        </Typography>
-
-                        <Typography
-                          component="pre"
-                          sx={{
-                            fontFamily: "monospace",
-                            bgcolor: "action.hover",
-                            p: 2,
-                            borderRadius: 1,
-                            mt: 1,
-                            whiteSpace: "pre-wrap",
-                          }}
-                        >
-                          {error.message}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Collapse>
+                  <Typography
+                    component="pre"
+                    sx={{
+                      fontFamily: "monospace",
+                      bgcolor: "action.hover",
+                      p: 2,
+                      borderRadius: 1,
+                      mt: 1,
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {error.message}
+                  </Typography>
                 </Box>
               )}
 
@@ -151,7 +187,7 @@ export const AppErrorBoundary = () => {
                   startIcon={<RefreshIcon />}
                   onClick={handleReload}
                 >
-                  Reload Page
+                  Презареди страница
                 </Button>
 
                 <Button
@@ -159,7 +195,7 @@ export const AppErrorBoundary = () => {
                   startIcon={<HomeIcon />}
                   onClick={handleGoHome}
                 >
-                  Go Home
+                  Начало
                 </Button>
               </Stack>
             </Stack>
