@@ -4,6 +4,7 @@ import { Layout } from "../layout";
 import { AppErrorBoundary } from "../views/ErrorBoundary";
 import { HomePage } from "../views/Home";
 import { AuthPage, ForgotPasswordPage } from "../views/Auth";
+import { PublicProfilePage } from "../views/Profile";
 import { Explore } from "../views/Explore";
 import { NotFound } from "../views/Maintenance";
 
@@ -16,6 +17,7 @@ export const routes = createBrowserRouter([
       { path: "/explore", element: <Explore /> },
       { path: "/auth", element: <AuthPage /> },
       { path: "/forgot-password", element: <ForgotPasswordPage /> },
+      { path: "/@:handle", element: <PublicProfilePage /> },
 
       // { path: "*", element: <UnderConstruction /> },
       // { path: "*", element: <ServerError /> },
