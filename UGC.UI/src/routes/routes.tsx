@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router";
 import { Layout } from "../layout";
 import { AppErrorBoundary } from "../views/ErrorBoundary";
 import { HomePage } from "../views/Home";
+import { AuthPage } from "../views/Auth";
 import { Explore } from "../views/Explore";
 import { ComingSoon, NotFound, ServerError, UnderConstruction } from "../views/Maintenance";
 
@@ -13,6 +14,7 @@ export const routes = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/explore", element: <Explore /> },
+      { path: "/auth", element: <AuthPage /> },
 
       // { path: "*", element: <UnderConstruction /> },
       // { path: "*", element: <ServerError /> },

@@ -1,5 +1,19 @@
 # React + TypeScript + Vite
 
+## Getting started
+
+```sh
+nvm install 20
+nvm use 20
+
+# fix npm cache ownership (required once)
+sudo chown -R 501:20 "/Users/adem_tsranchaliev/.npm"
+
+# then install and run
+npm install
+npm run dev
+```
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
