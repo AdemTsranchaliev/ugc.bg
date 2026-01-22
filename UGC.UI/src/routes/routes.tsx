@@ -3,9 +3,9 @@ import { createBrowserRouter } from "react-router";
 import { Layout } from "../layout";
 import { AppErrorBoundary } from "../views/ErrorBoundary";
 import { HomePage } from "../views/Home";
-import { AuthPage } from "../views/Auth";
+import { AuthPage, ForgotPasswordPage } from "../views/Auth";
 import { Explore } from "../views/Explore";
-import { ComingSoon, NotFound, ServerError, UnderConstruction } from "../views/Maintenance";
+import { NotFound } from "../views/Maintenance";
 
 export const routes = createBrowserRouter([
   {
@@ -15,6 +15,7 @@ export const routes = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/explore", element: <Explore /> },
       { path: "/auth", element: <AuthPage /> },
+      { path: "/forgot-password", element: <ForgotPasswordPage /> },
 
       // { path: "*", element: <UnderConstruction /> },
       // { path: "*", element: <ServerError /> },

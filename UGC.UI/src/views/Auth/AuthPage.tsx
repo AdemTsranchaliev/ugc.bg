@@ -67,9 +67,11 @@ const socialButtonStyles = {
   },
 };
 
+type ProfileType = "creator" | "buyer" | "business";
+
 export default function AuthPage() {
   const [tabValue, setTabValue] = useState(0);
-  const [profileType, setProfileType] = useState<"creator" | "buyer" | "business">("creator");
+  const [profileType, setProfileType] = useState<ProfileType>("creator");
   const socialProviders = useMemo(
     () => [
       { key: "google", label: "Продължи с Google", icon: <Google /> },
@@ -78,7 +80,7 @@ export default function AuthPage() {
     ],
     []
   );
-  const profileOptions = useMemo(
+  const profileOptions = useMemo<Array<{ value: ProfileType; label: string; description: string }>>(
     () => [
       { value: "creator", label: "Създател", description: "Създавам съдържание и търся брандове." },
       { value: "buyer", label: "Търси създатели", description: "Търся UGC създатели за кампании." },
@@ -145,7 +147,7 @@ export default function AuthPage() {
                   <TextField label="Парола" type="password" placeholder="••••••••" fullWidth />
                   <Stack direction="row" spacing={1} alignItems="center" justifyContent="space-between">
                     <FormControlLabel control={<Checkbox />} label="Запомни ме" />
-                    <Link href="#" underline="hover" color="text.secondary">
+                    <Link href="/forgot-password" underline="hover" color="text.secondary">
                       Забравена парола?
                     </Link>
                   </Stack>
