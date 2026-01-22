@@ -22,9 +22,6 @@ import imageText from '/assets/images/maintenance/img-error-text.svg';
 import imagePurple from '/assets/images/maintenance/img-error-purple.svg';
 
 export const NotFound = () => {
-
-    throw new Error('Test error');
-
     return (
         <Stack sx={{ gap: 2, alignItems: 'center', justifyContent: 'center' }}>
             <Box sx={{ maxWidth: { xs: 350, sm: 580, md: 720 }, margin: '0 auto', position: 'relative' }}>
