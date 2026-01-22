@@ -23,7 +23,7 @@ import imagePurple from '/assets/images/maintenance/img-error-purple.svg';
 
 export const NotFound = () => {
 
-    // throw new Error('Test error');
+    throw new Error('Test error');
 
     return (
         <Stack sx={{ gap: 2, alignItems: 'center', justifyContent: 'center' }}>
