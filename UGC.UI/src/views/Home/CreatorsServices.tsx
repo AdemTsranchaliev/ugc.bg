@@ -112,7 +112,7 @@ export const CreatorsServices = () => {
   };
 
   return (
-    <Box sx={{ pt: 8, pb: 4, position: "relative" }}>
+    <Box sx={{ pt: 8, pb: 4, position: "relative", width: "100%", overflow: "hidden" }}>
       <DecorativeImage
         image={SquareDotted}
         top="15%"
@@ -129,10 +129,10 @@ export const CreatorsServices = () => {
           highlightedTitle="Рейтинг"
         />
 
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%", overflow: "hidden" }}>
           <Slider {...settings}>
             {creatorsServices.map((service) => (
-              <Box key={service.id} sx={{ px: 1.5 }}>
+              <Box key={service.id} sx={{ px: 1.5, boxSizing: "border-box" }}>
                 <Box
                   sx={{
                     position: "relative",
