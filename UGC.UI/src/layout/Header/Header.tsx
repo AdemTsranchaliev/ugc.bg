@@ -92,6 +92,7 @@ export default function Header() {
           <Box sx={{ display: { xs: "none", md: "block" } }}>
             <Stack
               direction="row"
+              alignItems="center"
               sx={{ mx: 2 }}
             >
               {/* Horizontal Menu */}

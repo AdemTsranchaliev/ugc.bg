@@ -22,11 +22,6 @@ export const routes = createBrowserRouter([
       { path: "/creator/dashboard", element: <CreatorDashboardPage /> },
       { path: "/creator/settings", element: <CreatorSettingsPage /> },
       { path: "/@:handle", element: <PublicProfilePage /> },
-
-      // { path: "*", element: <UnderConstruction /> },
-      // { path: "*", element: <ServerError /> },
-      // { path: "*", element: <ComingSoon /> },
-
       { path: "*", element: <NotFound /> },
     ],
   },

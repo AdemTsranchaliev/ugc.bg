@@ -229,7 +229,7 @@ export default function NavGroup({
                     marginTop: 1.25,
                   }}
                 >
-                  Title here
+                  {currentItem.title}
                   {currentItem.caption && (
                     <Typography
                       gutterBottom
@@ -291,7 +291,7 @@ export default function NavGroup({
                   variant={isSelected ? "h5" : "body1"}
                   sx={{ color: "inherit" }}
                 >
-                  {currentItem.id === lastItemId ? "asd" : "Title here"}
+                  {currentItem.id === lastItemId ? "asd" : currentItem.title}
                 </Typography>
               }
             />

@@ -18,8 +18,6 @@ import Typography from "@mui/material/Typography";
 import useConfig from "../../../themes/context/useConfig";
 import { withAlpha } from "../../../utils/colorUtils";
 
-// third party
-
 // assets
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
@@ -38,8 +36,6 @@ export default function NavItem({
     state: { borderRadius },
   } = useConfig();
 
-  // const { menuMaster } = useGetMenuMaster();
-  // const drawerOpen = menuMaster.isDashboardDrawerOpened;
   const drawerOpen = false;
 
   const isHorizontal = true;
@@ -129,17 +125,17 @@ export default function NavItem({
                 color: isSelected ? "secondary.main" : "text.primary",
                 ...(!drawerOpen &&
                   level === 1 && {
-                    borderRadius: `${borderRadius}px`,
-                    width: 46,
-                    height: 46,
-                    alignItems: "center",
-                    justifyContent: "center",
+                  borderRadius: `${borderRadius}px`,
+                  width: 46,
+                  height: 46,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  "&:hover": { bgcolor: "secondary.light" },
+                  ...(isSelected && {
+                    bgcolor: "secondary.light",
                     "&:hover": { bgcolor: "secondary.light" },
-                    ...(isSelected && {
-                      bgcolor: "secondary.light",
-                      "&:hover": { bgcolor: "secondary.light" },
-                    }),
                   }),
+                }),
 
                 // dark overrides
                 ...theme.applyStyles("dark", {
@@ -148,25 +144,25 @@ export default function NavItem({
 
                   ...(!drawerOpen &&
                     level === 1 && {
+                    "&:hover": {
+                      bgcolor: withAlpha(
+                        theme.vars.palette.secondary.main,
+                        0.25
+                      ),
+                    },
+                    ...(isSelected && {
+                      bgcolor: withAlpha(
+                        theme.vars.palette.secondary.main,
+                        0.25
+                      ),
                       "&:hover": {
                         bgcolor: withAlpha(
                           theme.vars.palette.secondary.main,
-                          0.25
+                          0.3
                         ),
                       },
-                      ...(isSelected && {
-                        bgcolor: withAlpha(
-                          theme.vars.palette.secondary.main,
-                          0.25
-                        ),
-                        "&:hover": {
-                          bgcolor: withAlpha(
-                            theme.vars.palette.secondary.main,
-                            0.3
-                          ),
-                        },
-                      }),
                     }),
+                  }),
                 }),
               }}
             >
@@ -175,7 +171,7 @@ export default function NavItem({
           </ButtonBase>
 
           {(drawerOpen || (!drawerOpen && level !== 1)) && (
-            <Tooltip title={"Title here"} disableHoverListener={!hoverStatus}>
+            <Tooltip title={item.title} disableHoverListener={!hoverStatus}>
               <ListItemText
                 primary={
                   <Typography
@@ -190,7 +186,7 @@ export default function NavItem({
                       color: "inherit",
                     }}
                   >
-                    Title here
+                    {item.title}
                   </Typography>
                 }
                 secondary={
@@ -265,7 +261,7 @@ export default function NavItem({
                 variant={isSelected ? "h5" : "body1"}
                 sx={{ color: "inherit" }}
               >
-                Title here
+                {item.title}
               </Typography>
             }
             secondary={

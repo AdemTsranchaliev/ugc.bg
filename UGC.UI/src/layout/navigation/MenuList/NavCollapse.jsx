@@ -286,7 +286,7 @@ export default function NavCollapse({ menu, level, parentId }) {
               </ListItemIcon>
             </Activity>
             {(drawerOpen || (!drawerOpen && level !== 1)) && (
-              <Tooltip title="Title here" disableHoverListener={!hoverStatus}>
+              <Tooltip title={menu.title} disableHoverListener={!hoverStatus}>
                 <ListItemText
                   primary={
                     <Typography

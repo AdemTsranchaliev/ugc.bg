@@ -19,51 +19,10 @@ const icons = {
 
 const dashboard = {
   id: "dashboard",
-  title: "dashboard",
+  title: "Начало",
   icon: icons.IconDashboard,
   type: "group",
-  children: [
-    {
-      id: "default",
-      title: "default",
-      type: "item",
-      url: "/",
-      icon: icons.IconDashboard,
-      breadcrumbs: false,
-    },
-    {
-      id: "analytics",
-      title: "analytics",
-      type: "item",
-      url: "/explore",
-      icon: icons.IconDeviceAnalytics,
-      breadcrumbs: false,
-    },
-    {
-      id: "invoice1",
-      title: "invoice",
-      icon: icons.IconFileInvoice,
-      type: "item",
-      url: "/dashboard/invoice",
-      breadcrumbs: false,
-    },
-    {
-      id: "crm1",
-      title: "crm",
-      icon: icons.IconLifebuoy,
-      type: "item",
-      url: "/dashboard/crm",
-      breadcrumbs: false,
-    },
-    {
-      id: "blog1",
-      title: "blog",
-      icon: icons.IconArticle,
-      type: "item",
-      url: "/dashboard/blog",
-      breadcrumbs: false,
-    },
-  ],
+  url: '/sample-page',
 };
 
 export default dashboard;

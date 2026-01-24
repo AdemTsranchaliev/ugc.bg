@@ -17,10 +17,10 @@ const menuItem = {
     forms,
     elements,
     samplePage,
-    pages,
-    utilities,
-    support,
-    other,
+    // pages,
+    // utilities,
+    // support,
+    // other,
   ],
 };
 
