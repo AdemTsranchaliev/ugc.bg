@@ -33,8 +33,8 @@ export default function Layout() {
         }}
       >
         <Outlet />
-        <Footer />
       </Container>
+      <Footer />
     </Box>
   );
 }

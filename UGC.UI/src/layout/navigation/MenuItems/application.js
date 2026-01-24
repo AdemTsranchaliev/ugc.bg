@@ -37,7 +37,7 @@ const application = {
   title: 'Открийте',
   icon: icons.IconApps,
   type: 'group',
-  url: '/sample-page',
+  url: '/explore',
 };
 
 export default application;

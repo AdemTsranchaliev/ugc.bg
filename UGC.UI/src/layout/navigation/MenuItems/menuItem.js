@@ -8,8 +8,6 @@ import utilities from "./utilities";
 import support from "./support";
 import other from "./other";
 
-// ==============================|| MENU ITEMS ||============================== //
-
 const menuItem = {
   items: [
     dashboard,

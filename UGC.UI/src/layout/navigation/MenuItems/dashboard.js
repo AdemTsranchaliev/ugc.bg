@@ -22,7 +22,7 @@ const dashboard = {
   title: "Начало",
   icon: icons.IconDashboard,
   type: "group",
-  url: '/sample-page',
+  url: '/',
 };
 
 export default dashboard;
