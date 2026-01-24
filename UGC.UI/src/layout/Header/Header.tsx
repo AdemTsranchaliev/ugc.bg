@@ -13,6 +13,7 @@ import LogoSection from "./LogoSection";
 import MobileSection from "./MobileSection";
 import ProfileSection from "./ProfileSection";
 import NotificationSection from "./NotificationSection";
+import SearchSection from "./SearchSection";
 import { MenuList } from "../Navigation/MenuList";
 
 // assets
@@ -30,7 +31,7 @@ const ElevationScroll = ({ children }: ElevationScrollProps) => {
   });
 
   return cloneElement(children, {
-    elevation: trigger ? 4 : 0,
+    // elevation: trigger ? 4 : 0,
   });
 };
 
@@ -41,11 +42,12 @@ export default function Header() {
   return (
     <ElevationScroll>
       <AppBar
-        position="fixed"
+        // position="fixed"
+        position="relative"
         color="inherit"
         elevation={0}
         enableColorOnDark
-        sx={{ bgcolor: "background.default" }}
+        sx={{ bgcolor: "background.default", borderBottom: '1px solid', borderColor: 'divider' }}
       >
         <Toolbar sx={{ p: 1.25 }}>
           {/* Logo & Toggler button */}
@@ -102,6 +104,11 @@ export default function Header() {
 
           {/* Spacer */}
           <Box sx={{ flexGrow: 1 }} />
+
+          {/* Search */}
+          <Box sx={{ display: { xs: "none", md: "block" }, width: 300 }}>
+            <SearchSection />
+          </Box>
 
           {/* Notification */}
           <NotificationSection />

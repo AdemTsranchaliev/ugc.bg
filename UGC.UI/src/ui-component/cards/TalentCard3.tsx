@@ -45,7 +45,7 @@ export const TalentCard3 = ({
     <Card
       elevation={4}
       sx={{
-        width: 320,
+        width: "100%",
         borderRadius: "20px",
         overflow: "hidden",
         position: "relative",

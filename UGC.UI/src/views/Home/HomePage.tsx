@@ -8,6 +8,7 @@ import CreatorsServices from "./CreatorsServices";
 import TalentCard1 from "../../ui-component/cards/TalentCard1";
 import TalentCard2 from "../../ui-component/cards/TalentCard2";
 import TalentCard3 from "../../ui-component/cards/TalentCard3";
+import { StyledPage } from "../../ui-component/StyledPage";
 
 // Data for TalentCard1
 const _popularServices1 = [
@@ -388,15 +389,17 @@ const _popularServices3 = [
 export const HomePage = () => {
   return (
     <>
-      <Landing />
-      <PopularCategories />
-      <PopularServices TalentCard={TalentCard1} _popularServices={_popularServices1} />
-      <PopularServices TalentCard={TalentCard2} _popularServices={_popularServices2} />
-      <PopularServices TalentCard={TalentCard3} _popularServices={_popularServices3} />
-      <CreatorsServices />
-      <HowWorksSection />
-      <PeopleSection />
-      <JoinCommunity />
+      <StyledPage>
+        <Landing />
+        <PopularCategories />
+        <PopularServices TalentCard={TalentCard1} _popularServices={_popularServices1} />
+        <PopularServices TalentCard={TalentCard2} _popularServices={_popularServices2} />
+        <PopularServices TalentCard={TalentCard3} _popularServices={_popularServices3} />
+        <CreatorsServices />
+        <HowWorksSection />
+        <PeopleSection />
+        <JoinCommunity />
+      </StyledPage>
     </>
   );
 };
