@@ -20,6 +20,7 @@ import Divider from "@mui/material/Divider";
 // icons
 import HomeIcon from "@mui/icons-material/Home";
 import SwapVertIcon from '@mui/icons-material/SwapVert';
+import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 
 // project imports
 import { TalentCard1 } from "../../ui-component/cards/TalentCard1";
@@ -425,48 +426,89 @@ export const Explore = () => {
     <StyledPage>
       <Box ref={containerRef}>
         <Stack spacing={3}>
-          {/* Breadcrumbs */}
-          <Breadcrumbs
-            aria-label="breadcrumb"
-            separator="›"
+          <Stack
+            direction="column"
+            gap={2}
             sx={{
-              "& .MuiBreadcrumbs-separator": {
-                mx: 1,
-              },
+              p: 2,
+              background:
+                "linear-gradient(17deg, #789DC2 -36%, rgba(255, 255, 255, 0.95) 49%, rgba(255, 255, 255, 1) 100%)",
+              color: "#000",
+              borderRadius: `${borderRadius}px`,
             }}
           >
-            <MuiLink
-              component={Link}
-              to="/"
-              underline="hover"
-              color="text.secondary"
+            {/* Breadcrumbs */}
+            <Breadcrumbs
+              aria-label="breadcrumb"
+              separator={<span style={{ color: "#000" }}>›</span>}
               sx={{
-                display: "flex",
-                alignItems: "center",
-                textDecoration: "none",
-                "&:hover": {
-                  color: "primary.main",
+                "& .MuiBreadcrumbs-separator": {
+                  mx: 1,
                 },
               }}
             >
-              <HomeIcon sx={{ mr: 0.5, fontSize: 20 }} />
-              Начало
-            </MuiLink>
-            <Typography color="text.primary" sx={{ display: "flex", alignItems: "center" }}>
-              Разглеждане
-            </Typography>
-          </Breadcrumbs>
+              <MuiLink
+                component={Link}
+                to="/"
+                underline="hover"
+                color="inherit"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  color: "#000",
+                  "&:hover": {
+                    color: "primary.main !important",
+                  },
+                }}
+              >
+                <HomeIcon sx={{ mr: 0.5, fontSize: 20, color: "#000" }} />
+                Начало
+              </MuiLink>
+              <Typography color="inherit" sx={{ display: "flex", alignItems: "center", color: "#000" }}>
+                Разглеждане
+              </Typography>
+            </Breadcrumbs>
 
-          {/* Header */}
-          <Typography variant="h1">
-            AI UGC обяви
-          </Typography>
-
-          {/* First Row: Results Count and Sort By */}
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography variant="body1" color="text.secondary">
-              {filteredListings.length.toLocaleString("bg-BG")} {filteredListings.length === 1 ? "обява" : "обяви"}
+            {/* Header */}
+            <Typography variant="h1" sx={{ color: "#000", fontWeight: 500 }}>
+              AI UGC обяви
             </Typography>
+
+            {/* Results count */}
+            <Typography variant="body1" sx={{ color: "text.secondary" }}>
+              {filteredListings.length.toLocaleString("bg-BG")} {filteredListings.length === 1 ? "намерена обява" : "намерени обяви"}
+            </Typography>
+          </Stack>
+
+          <Divider />
+
+          {/* Spacer to prevent layout shift when filters become sticky */}
+          {isFiltersSticky && <Box sx={{ height: filtersHeight }} />}
+
+          {/* Filters */}
+          <Stack
+            ref={filtersRef}
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            sx={{
+              ...(isFiltersSticky && {
+                position: "fixed",
+                top: "-6%",
+                left: "50%",
+                transform: "translateX(-50%)",
+                zIndex: 1000,
+                backgroundColor: "background.paper",
+                padding: 2,
+                boxShadow: 2,
+                borderBottom: 1,
+                borderColor: "divider",
+                width: "100%",
+                maxWidth: "100%",
+              }),
+            }}
+          >
             <FormControl size="small" sx={{ minWidth: 200 }}>
               <InputLabel>Сортирай</InputLabel>
               <Select
@@ -490,36 +532,7 @@ export const Explore = () => {
                 <MenuItem value="newest">Най-нови</MenuItem>
               </Select>
             </FormControl>
-          </Box>
 
-          <Divider />
-
-          {/* Spacer to prevent layout shift when filters become sticky */}
-          {isFiltersSticky && <Box sx={{ height: filtersHeight }} />}
-
-          {/* Second Row: Filters */}
-          <Stack
-            ref={filtersRef}
-            direction="row"
-            spacing={1}
-            sx={{
-              ...(isFiltersSticky && {
-                position: "fixed",
-                top: "-6%",
-                left: "50%",
-                transform: "translateX(-50%)",
-                zIndex: 1000,
-                backgroundColor: "background.paper",
-                padding: 2,
-                boxShadow: 2,
-                borderBottom: 1,
-                borderColor: "divider",
-                width: "100%",
-                maxWidth: "100%",
-              }),
-            }}
-          >
-            {/* Primary Filters - Always Visible */}
             <FormControl size="small" sx={{ minWidth: 150 }}>
               <InputLabel>Категория</InputLabel>
               <Select
@@ -613,6 +626,29 @@ export const Explore = () => {
                 <MenuItem value="ai">AI</MenuItem>
               </Select>
             </FormControl>
+
+            {/* Spacer to push the button to the right */}
+            <Box sx={{ flexGrow: 1 }} />
+
+            {/* Reset Filters Button */}
+            <Button
+              variant="contained"
+              color="info"
+              disableElevation
+              startIcon={<RotateLeftIcon />}
+              sx={{ minWidth: 44 }}
+              onClick={() => {
+                setSortBy("popular");
+                setSelectedCategory("Всички");
+                setPriceFilter("all");
+                setBudget("");
+                setPromotions("all");
+                setRatingFilter(0);
+                setContentType(null);
+              }}
+            >
+              Нулирай филтрите
+            </Button>
           </Stack>
 
           {/* Listings Grid */}
