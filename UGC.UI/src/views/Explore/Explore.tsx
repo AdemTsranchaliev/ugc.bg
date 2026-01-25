@@ -27,6 +27,7 @@ import { TalentCard1 } from "../../ui-component/cards/TalentCard1";
 import useConfig from "../../themes/context/useConfig";
 import { StyledPage } from "../../ui-component/StyledPage";
 import { InputAdornment, OutlinedInput, TextField } from "@mui/material";
+import { SearchSection } from "../../layout/Header";
 
 // Mock data for listings
 const mockListings = [
@@ -472,7 +473,7 @@ export const Explore = () => {
 
             {/* Header */}
             <Typography variant="h1" sx={{ color: "#000", fontWeight: 500 }}>
-              AI UGC обяви
+              AI UGC
             </Typography>
 
             {/* Results count */}
@@ -481,174 +482,194 @@ export const Explore = () => {
             </Typography>
           </Stack>
 
-          <Divider />
 
-          {/* Spacer to prevent layout shift when filters become sticky */}
-          {isFiltersSticky && <Box sx={{ height: filtersHeight }} />}
-
-          {/* Filters */}
           <Stack
-            ref={filtersRef}
-            direction="row"
-            spacing={1}
-            alignItems="center"
+            direction="column"
+            spacing={2}
             sx={{
-              ...(isFiltersSticky && {
-                position: "fixed",
-                top: "-6%",
-                left: "50%",
-                transform: "translateX(-50%)",
-                zIndex: 1000,
-                backgroundColor: "background.paper",
-                padding: 2,
-                boxShadow: 2,
-                borderBottom: 1,
-                borderColor: "divider",
-                width: "100%",
-                maxWidth: "100%",
-              }),
+              width: "100%",
+              backgroundColor: "#fafbfc",
+              p: 2,
+              borderRadius: `${borderRadius}px`,
+              boxShadow: "0 18px 44px rgba(0,0,0,0.16)",
             }}
           >
-            <FormControl size="small" sx={{ minWidth: 200 }}>
-              <InputLabel>Сортирай</InputLabel>
-              <Select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                input={
-                  <OutlinedInput
-                    label="Сортирай"
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <SwapVertIcon />
-                      </InputAdornment>
-                    }
-                  />
-                }
-              >
-                <MenuItem value="popular">Популярно</MenuItem>
-                <MenuItem value="price-low">Цена: Ниска към Висока</MenuItem>
-                <MenuItem value="price-high">Цена: Висока към Ниска</MenuItem>
-                <MenuItem value="rating">Най-висок рейтинг</MenuItem>
-                <MenuItem value="newest">Най-нови</MenuItem>
-              </Select>
-            </FormControl>
+            {/* Search */}
+            <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
+              <Box sx={{ width: "100%" }}>
+                <SearchSection />
+              </Box>
+            </Stack>
 
-            <FormControl size="small" sx={{ minWidth: 150 }}>
-              <InputLabel>Категория</InputLabel>
-              <Select
-                value={selectedCategory}
-                label="Категория"
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                {categories.map((cat) => (
-                  <MenuItem key={cat} value={cat}>
-                    {cat}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            {/* <Divider /> */}
 
-            <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>Цена</InputLabel>
-              <Select
-                value={priceFilter}
-                label="Цена"
-                onChange={(e) => setPriceFilter(e.target.value)}
-              >
-                <MenuItem value="all">Всички</MenuItem>
-                <MenuItem value="0-50">0 - 50 лв.</MenuItem>
-                <MenuItem value="50-100">50 - 100 лв.</MenuItem>
-                <MenuItem value="100-150">100 - 150 лв.</MenuItem>
-                <MenuItem value="150+">Над 150 лв.</MenuItem>
-              </Select>
-            </FormControl>
+            {/* Spacer to prevent layout shift when filters become sticky */}
+            {isFiltersSticky && <Box sx={{ height: filtersHeight }} />}
 
-            <TextField
-              size="small"
-              label="Бюджет"
-              type="number"
-              value={budget}
-              onChange={(e) => {
-                const value = e.target.value;
-                // Only allow numbers
-                if (value === "" || /^\d+$/.test(value)) {
-                  setBudget(value);
-                }
-              }}
-              placeholder="Въведете бюджет"
-              sx={{ minWidth: 140 }}
-              InputProps={{
-                endAdornment: <InputAdornment position="end">€</InputAdornment>,
-              }}
-              inputProps={{
-                min: 0,
-                step: 1,
-              }}
-            />
-
-            <FormControl size="small" sx={{ minWidth: 140 }}>
-              <InputLabel>Промоции</InputLabel>
-              <Select
-                value={promotions}
-                label="Промоции"
-                onChange={(e) => setPromotions(e.target.value)}
-              >
-                <MenuItem value="all">Всички</MenuItem>
-                <MenuItem value="yes">С промоции</MenuItem>
-                <MenuItem value="no">Без промоции</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>Рейтинг</InputLabel>
-              <Select
-                value={ratingFilter > 0 ? ratingFilter.toString() : "all"}
-                label="Рейтинг"
-                onChange={(e) => setRatingFilter(e.target.value === "all" ? 0 : parseFloat(e.target.value))}
-              >
-                <MenuItem value="all">Всички</MenuItem>
-                <MenuItem value="4.5">4.5+</MenuItem>
-                <MenuItem value="4.0">4.0+</MenuItem>
-                <MenuItem value="3.5">3.5+</MenuItem>
-                <MenuItem value="3.0">3.0+</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>Тип</InputLabel>
-              <Select
-                value={contentType || "all"}
-                label="Тип"
-                onChange={(e) => setContentType(e.target.value === "all" ? null : e.target.value)}
-              >
-                <MenuItem value="all">Всички</MenuItem>
-                <MenuItem value="real">Реално</MenuItem>
-                <MenuItem value="ai">AI</MenuItem>
-              </Select>
-            </FormControl>
-
-            {/* Spacer to push the button to the right */}
-            <Box sx={{ flexGrow: 1 }} />
-
-            {/* Reset Filters Button */}
-            <Button
-              variant="contained"
-              color="info"
-              disableElevation
-              startIcon={<RotateLeftIcon />}
-              sx={{ minWidth: 44 }}
-              onClick={() => {
-                setSortBy("popular");
-                setSelectedCategory("Всички");
-                setPriceFilter("all");
-                setBudget("");
-                setPromotions("all");
-                setRatingFilter(0);
-                setContentType(null);
+            {/* Filters */}
+            <Stack
+              ref={filtersRef}
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              sx={{
+                ...(isFiltersSticky && {
+                  position: "fixed",
+                  top: "-6%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  zIndex: 1000,
+                  backgroundColor: "background.paper",
+                  padding: 2,
+                  boxShadow: 2,
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  width: "100%",
+                  maxWidth: "100%",
+                }),
               }}
             >
-              Нулирай филтрите
-            </Button>
+              <FormControl size="small" sx={{ minWidth: 200 }}>
+                <InputLabel>Сортирай</InputLabel>
+                <Select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  input={
+                    <OutlinedInput
+                      label="Сортирай"
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <SwapVertIcon />
+                        </InputAdornment>
+                      }
+                    />
+                  }
+                >
+                  <MenuItem value="popular">Популярно</MenuItem>
+                  <MenuItem value="price-low">Цена: Ниска към Висока</MenuItem>
+                  <MenuItem value="price-high">Цена: Висока към Ниска</MenuItem>
+                  <MenuItem value="rating">Най-висок рейтинг</MenuItem>
+                  <MenuItem value="newest">Най-нови</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ minWidth: 150 }}>
+                <InputLabel>Категория</InputLabel>
+                <Select
+                  value={selectedCategory}
+                  label="Категория"
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  {categories.map((cat) => (
+                    <MenuItem key={cat} value={cat}>
+                      {cat}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ minWidth: 120 }}>
+                <InputLabel>Цена</InputLabel>
+                <Select
+                  value={priceFilter}
+                  label="Цена"
+                  onChange={(e) => setPriceFilter(e.target.value)}
+                >
+                  <MenuItem value="all">Всички</MenuItem>
+                  <MenuItem value="0-50">0 - 50 лв.</MenuItem>
+                  <MenuItem value="50-100">50 - 100 лв.</MenuItem>
+                  <MenuItem value="100-150">100 - 150 лв.</MenuItem>
+                  <MenuItem value="150+">Над 150 лв.</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                size="small"
+                label="Бюджет"
+                type="number"
+                value={budget}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Only allow numbers
+                  if (value === "" || /^\d+$/.test(value)) {
+                    setBudget(value);
+                  }
+                }}
+                placeholder="Въведете бюджет"
+                sx={{ minWidth: 140 }}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end">€</InputAdornment>,
+                }}
+                inputProps={{
+                  min: 0,
+                  step: 1,
+                }}
+              />
+
+              <FormControl size="small" sx={{ minWidth: 140 }}>
+                <InputLabel>Промоции</InputLabel>
+                <Select
+                  value={promotions}
+                  label="Промоции"
+                  onChange={(e) => setPromotions(e.target.value)}
+                >
+                  <MenuItem value="all">Всички</MenuItem>
+                  <MenuItem value="yes">С промоции</MenuItem>
+                  <MenuItem value="no">Без промоции</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ minWidth: 120 }}>
+                <InputLabel>Рейтинг</InputLabel>
+                <Select
+                  value={ratingFilter > 0 ? ratingFilter.toString() : "all"}
+                  label="Рейтинг"
+                  onChange={(e) => setRatingFilter(e.target.value === "all" ? 0 : parseFloat(e.target.value))}
+                >
+                  <MenuItem value="all">Всички</MenuItem>
+                  <MenuItem value="4.5">4.5+</MenuItem>
+                  <MenuItem value="4.0">4.0+</MenuItem>
+                  <MenuItem value="3.5">3.5+</MenuItem>
+                  <MenuItem value="3.0">3.0+</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ minWidth: 120 }}>
+                <InputLabel>Тип</InputLabel>
+                <Select
+                  value={contentType || "all"}
+                  label="Тип"
+                  onChange={(e) => setContentType(e.target.value === "all" ? null : e.target.value)}
+                >
+                  <MenuItem value="all">Всички</MenuItem>
+                  <MenuItem value="real">Реално</MenuItem>
+                  <MenuItem value="ai">AI</MenuItem>
+                </Select>
+              </FormControl>
+
+              {/* Spacer to push the button to the right */}
+              <Box sx={{ flexGrow: 1 }} />
+
+              {/* Reset Filters Button */}
+              <Button
+                variant="contained"
+                color="info"
+                disableElevation
+                startIcon={<RotateLeftIcon />}
+                sx={{ minWidth: 44 }}
+                onClick={() => {
+                  setSortBy("popular");
+                  setSelectedCategory("Всички");
+                  setPriceFilter("all");
+                  setBudget("");
+                  setPromotions("all");
+                  setRatingFilter(0);
+                  setContentType(null);
+                }}
+              >
+                Нулирай филтрите
+              </Button>
+            </Stack>
           </Stack>
 
           {/* Listings Grid */}
