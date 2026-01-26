@@ -1,24 +1,14 @@
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { useSearchParams, Link } from "react-router";
-
 // material-ui
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import Paper from "@mui/material/Paper";
-import Pagination from "@mui/material/Pagination";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import MuiLink from "@mui/material/Link";
-import Divider from "@mui/material/Divider";
 
 // icons
-import HomeIcon from "@mui/icons-material/Home";
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 
@@ -26,7 +16,7 @@ import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { TalentCard1 } from "../../ui-component/cards/TalentCard1";
 import useConfig from "../../themes/context/useConfig";
 import { StyledPage } from "../../ui-component/StyledPage";
-import { InputAdornment, OutlinedInput, TextField } from "@mui/material";
+import { InputAdornment, OutlinedInput, Pagination, TextField } from "@mui/material";
 import { SearchSection } from "../../layout/Header";
 
 // Mock data for listings
@@ -215,526 +205,219 @@ const categories = [
 ];
 
 export const Explore = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const {
     state: { borderRadius },
   } = useConfig();
 
-  // State management
-  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
-  const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "Всички");
-  const [priceRange, setPriceRange] = useState<number[]>([
-    parseInt(searchParams.get("minPrice") || "0"),
-    parseInt(searchParams.get("maxPrice") || "200"),
-  ]);
-  const [ratingFilter, setRatingFilter] = useState<number>(parseFloat(searchParams.get("rating") || "0"));
-  const [contentType, setContentType] = useState<string | null>(searchParams.get("type") || null);
-  const [sortBy, setSortBy] = useState<string>(searchParams.get("sort") || "popular");
-  const itemsPerPage = 12;
-  const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
-
-  // Additional filter states
-  const [priceFilter, setPriceFilter] = useState<string>(searchParams.get("price") || "all");
-  const [budget, setBudget] = useState<string>(searchParams.get("budget") || "");
-  const [promotions, setPromotions] = useState<string>(searchParams.get("promotions") || "all");
-
-  // Sticky filters state
-  const filtersRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const filtersOriginalTopRef = useRef<number>(0);
-  const [isFiltersSticky, setIsFiltersSticky] = useState(false);
-  const [filtersHeight, setFiltersHeight] = useState(0);
-
-  // Filter listings based on search and filters
-  const filteredListings = useMemo(() => {
-    let filtered = mockListings.filter((listing) => {
-      // Search filter
-      if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        const matchesSearch =
-          listing.description.toLowerCase().includes(query) ||
-          listing.userFullname.toLowerCase().includes(query) ||
-          listing.capabilities.some((cap) => cap.toLowerCase().includes(query));
-        if (!matchesSearch) return false;
-      }
-
-      // Category filter
-      if (selectedCategory !== "Всички" && listing.category !== selectedCategory) {
-        return false;
-      }
-
-      // Price filter
-      if (listing.offerPrice < priceRange[0] || listing.offerPrice > priceRange[1]) {
-        return false;
-      }
-
-      // Rating filter
-      if (listing.rating < ratingFilter) {
-        return false;
-      }
-
-      // AI/Real filter
-      if (contentType === "ai" && !listing.isAI) return false;
-      if (contentType === "real" && listing.isAI) return false;
-
-      return true;
-    });
-
-    // Apply sorting
-    const sorted = [...filtered];
-    switch (sortBy) {
-      case "price-low":
-        sorted.sort((a, b) => a.offerPrice - b.offerPrice);
-        break;
-      case "price-high":
-        sorted.sort((a, b) => b.offerPrice - a.offerPrice);
-        break;
-      case "rating":
-        sorted.sort((a, b) => b.rating - a.rating);
-        break;
-      case "newest":
-        sorted.sort((a, b) => b.id - a.id);
-        break;
-      case "popular":
-      default:
-        sorted.sort((a, b) => b.reviewCount - a.reviewCount);
-        break;
-    }
-
-    return sorted;
-  }, [searchQuery, selectedCategory, priceRange, ratingFilter, contentType, sortBy]);
-
-  // Calculate pagination
-  const totalPages = Math.ceil(filteredListings.length / itemsPerPage);
-  const currentPage = Math.min(page, Math.max(1, totalPages || 1));
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const displayedListings = filteredListings.slice(startIndex, endIndex);
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    if (page > 1) {
-      setPage(1);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery, selectedCategory, priceRange, ratingFilter, contentType]);
-
-  // Ensure page doesn't exceed total pages
-  useEffect(() => {
-    if (totalPages > 0 && page > totalPages) {
-      setPage(1);
-    }
-  }, [page, totalPages]);
-
-  // Update URL params when filters change
-  useEffect(() => {
-    const params = new URLSearchParams();
-    if (searchQuery) params.set("q", searchQuery);
-    if (selectedCategory !== "Всички") params.set("category", selectedCategory);
-    if (priceRange[0] > 0) params.set("minPrice", priceRange[0].toString());
-    if (priceRange[1] < 200) params.set("maxPrice", priceRange[1].toString());
-    if (ratingFilter > 0) params.set("rating", ratingFilter.toString());
-    if (contentType) params.set("type", contentType);
-    if (sortBy !== "popular") params.set("sort", sortBy);
-    if (priceFilter !== "all") params.set("price", priceFilter);
-    if (budget) params.set("budget", budget);
-    if (promotions !== "all") params.set("promotions", promotions);
-    if (page > 1) params.set("page", page.toString());
-
-    setSearchParams(params, { replace: true });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery, selectedCategory, priceRange, ratingFilter, contentType, sortBy, priceFilter, budget, promotions, page]);
-
-  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleClearFilters = () => {
-    setSearchQuery("");
-    setSelectedCategory("Всички");
-    setPriceRange([0, 200]);
-    setRatingFilter(0);
-    setContentType(null);
-    setPriceFilter("all");
-    setBudget("");
-    setPromotions("all");
-    setPage(1);
-  };
-
-  const activeFiltersCount =
-    (searchQuery ? 1 : 0) +
-    (selectedCategory !== "Всички" ? 1 : 0) +
-    (priceRange[0] > 0 || priceRange[1] < 200 ? 1 : 0) +
-    (ratingFilter > 0 ? 1 : 0) +
-    (contentType ? 1 : 0);
-
-  // Track filters height, container width, and original position
-  useEffect(() => {
-    if (filtersRef.current && !isFiltersSticky) {
-      const height = filtersRef.current.offsetHeight;
-      setFiltersHeight(height);
-      // Store the original position relative to the document
-      filtersOriginalTopRef.current = filtersRef.current.getBoundingClientRect().top + window.scrollY;
-    }
-
-
-    const handleResize = () => {
-      if (filtersRef.current && !isFiltersSticky) {
-        setFiltersHeight(filtersRef.current.offsetHeight);
-        filtersOriginalTopRef.current = filtersRef.current.getBoundingClientRect().top + window.scrollY;
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [selectedCategory, priceFilter, budget, promotions, ratingFilter, contentType, isFiltersSticky]);
-
-  // Handle scroll to make filters sticky
-  const handleScroll = useCallback(() => {
-    const scrollY = window.scrollY || window.pageYOffset;
-
-    if (!isFiltersSticky) {
-      // When scrolling down and the filters section reaches the top of the viewport
-      if (scrollY >= filtersOriginalTopRef.current) {
-        setIsFiltersSticky(true);
-      }
-    } else {
-      // When scrolling back up, check if we've scrolled above the original position
-      if (scrollY < filtersOriginalTopRef.current) {
-        setIsFiltersSticky(false);
-      }
-    }
-  }, [isFiltersSticky]);
-
-  // Calculate original position on mount
-  useEffect(() => {
-    if (filtersRef.current) {
-      filtersOriginalTopRef.current = filtersRef.current.getBoundingClientRect().top + window.scrollY;
-    }
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    // Check initial position
-    handleScroll();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [handleScroll]);
-
   return (
     <StyledPage>
-      <Box ref={containerRef}>
-        <Stack spacing={3}>
+      {/* Search */}
+      <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" sx={{ mb: 4 }}>
+        <Box sx={{ width: "80%" }}>
+          <SearchSection />
+        </Box>
+      </Stack>
+
+      <Stack spacing={3}>
+        {/* Header */}
+        <Typography variant="h1" sx={{ px: 2, color: "#000", fontWeight: 500 }}>
+          AI UGC
+        </Typography>
+
+        {/* Filter Section */}
+        <Stack
+          direction="column"
+          spacing={2}
+          sx={{
+            width: "100%",
+            backgroundColor: "#fafbfc",
+            p: 2,
+            borderRadius: `${borderRadius}px`,
+            boxShadow: "0 18px 44px rgba(0,0,0,0.16)",
+          }}
+        >
+          {/* Filters */}
           <Stack
-            direction="column"
-            gap={2}
-            sx={{
-              p: 2,
-              background:
-                "linear-gradient(17deg, #789DC2 -36%, rgba(255, 255, 255, 0.95) 49%, rgba(255, 255, 255, 1) 100%)",
-              color: "#000",
-              borderRadius: `${borderRadius}px`,
-            }}
+            direction="row"
+            spacing={1}
+            alignItems="center"
           >
-            {/* Breadcrumbs */}
-            <Breadcrumbs
-              aria-label="breadcrumb"
-              separator={<span style={{ color: "#000" }}>›</span>}
-              sx={{
-                "& .MuiBreadcrumbs-separator": {
-                  mx: 1,
-                },
-              }}
-            >
-              <MuiLink
-                component={Link}
-                to="/"
-                underline="hover"
-                color="inherit"
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  textDecoration: "none",
-                  color: "#000",
-                  "&:hover": {
-                    color: "primary.main !important",
-                  },
-                }}
+            <FormControl size="small" sx={{ minWidth: 200 }}>
+              <InputLabel>Сортирай</InputLabel>
+              <Select
+                value="popular"
+                input={
+                  <OutlinedInput
+                    label="Сортирай"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <SwapVertIcon />
+                      </InputAdornment>
+                    }
+                  />
+                }
+                disabled
               >
-                <HomeIcon sx={{ mr: 0.5, fontSize: 20, color: "#000" }} />
-                Начало
-              </MuiLink>
-              <Typography color="inherit" sx={{ display: "flex", alignItems: "center", color: "#000" }}>
-                Разглеждане
-              </Typography>
-            </Breadcrumbs>
+                <MenuItem value="popular">Популярно</MenuItem>
+                <MenuItem value="price-low">Цена: Ниска към Висока</MenuItem>
+                <MenuItem value="price-high">Цена: Висока към Ниска</MenuItem>
+                <MenuItem value="rating">Най-висок рейтинг</MenuItem>
+                <MenuItem value="newest">Най-нови</MenuItem>
+              </Select>
+            </FormControl>
 
-            {/* Header */}
-            <Typography variant="h1" sx={{ color: "#000", fontWeight: 500 }}>
-              AI UGC
-            </Typography>
-
-            {/* Results count */}
-            <Typography variant="body1" sx={{ color: "text.secondary" }}>
-              {filteredListings.length.toLocaleString("bg-BG")} {filteredListings.length === 1 ? "намерена обява" : "намерени обяви"}
-            </Typography>
-          </Stack>
-
-
-          <Stack
-            direction="column"
-            spacing={2}
-            sx={{
-              width: "100%",
-              backgroundColor: "#fafbfc",
-              p: 2,
-              borderRadius: `${borderRadius}px`,
-              boxShadow: "0 18px 44px rgba(0,0,0,0.16)",
-            }}
-          >
-            {/* Search */}
-            <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
-              <Box sx={{ width: "100%" }}>
-                <SearchSection />
-              </Box>
-            </Stack>
-
-            {/* <Divider /> */}
-
-            {/* Spacer to prevent layout shift when filters become sticky */}
-            {isFiltersSticky && <Box sx={{ height: filtersHeight }} />}
-
-            {/* Filters */}
-            <Stack
-              ref={filtersRef}
-              direction="row"
-              spacing={1}
-              alignItems="center"
-              sx={{
-                ...(isFiltersSticky && {
-                  position: "fixed",
-                  top: "-6%",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  zIndex: 1000,
-                  backgroundColor: "background.paper",
-                  padding: 2,
-                  boxShadow: 2,
-                  borderBottom: 1,
-                  borderColor: "divider",
-                  width: "100%",
-                  maxWidth: "100%",
-                }),
-              }}
-            >
-              <FormControl size="small" sx={{ minWidth: 200 }}>
-                <InputLabel>Сортирай</InputLabel>
-                <Select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  input={
-                    <OutlinedInput
-                      label="Сортирай"
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <SwapVertIcon />
-                        </InputAdornment>
-                      }
-                    />
-                  }
-                >
-                  <MenuItem value="popular">Популярно</MenuItem>
-                  <MenuItem value="price-low">Цена: Ниска към Висока</MenuItem>
-                  <MenuItem value="price-high">Цена: Висока към Ниска</MenuItem>
-                  <MenuItem value="rating">Най-висок рейтинг</MenuItem>
-                  <MenuItem value="newest">Най-нови</MenuItem>
-                </Select>
-              </FormControl>
-
-              <FormControl size="small" sx={{ minWidth: 150 }}>
-                <InputLabel>Категория</InputLabel>
-                <Select
-                  value={selectedCategory}
-                  label="Категория"
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                  {categories.map((cat) => (
-                    <MenuItem key={cat} value={cat}>
-                      {cat}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-
-              <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>Цена</InputLabel>
-                <Select
-                  value={priceFilter}
-                  label="Цена"
-                  onChange={(e) => setPriceFilter(e.target.value)}
-                >
-                  <MenuItem value="all">Всички</MenuItem>
-                  <MenuItem value="0-50">0 - 50 лв.</MenuItem>
-                  <MenuItem value="50-100">50 - 100 лв.</MenuItem>
-                  <MenuItem value="100-150">100 - 150 лв.</MenuItem>
-                  <MenuItem value="150+">Над 150 лв.</MenuItem>
-                </Select>
-              </FormControl>
-
-              <TextField
-                size="small"
-                label="Бюджет"
-                type="number"
-                value={budget}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  // Only allow numbers
-                  if (value === "" || /^\d+$/.test(value)) {
-                    setBudget(value);
-                  }
-                }}
-                placeholder="Въведете бюджет"
-                sx={{ minWidth: 140 }}
-                InputProps={{
-                  endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                }}
-                inputProps={{
-                  min: 0,
-                  step: 1,
-                }}
-              />
-
-              <FormControl size="small" sx={{ minWidth: 140 }}>
-                <InputLabel>Промоции</InputLabel>
-                <Select
-                  value={promotions}
-                  label="Промоции"
-                  onChange={(e) => setPromotions(e.target.value)}
-                >
-                  <MenuItem value="all">Всички</MenuItem>
-                  <MenuItem value="yes">С промоции</MenuItem>
-                  <MenuItem value="no">Без промоции</MenuItem>
-                </Select>
-              </FormControl>
-
-              <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>Рейтинг</InputLabel>
-                <Select
-                  value={ratingFilter > 0 ? ratingFilter.toString() : "all"}
-                  label="Рейтинг"
-                  onChange={(e) => setRatingFilter(e.target.value === "all" ? 0 : parseFloat(e.target.value))}
-                >
-                  <MenuItem value="all">Всички</MenuItem>
-                  <MenuItem value="4.5">4.5+</MenuItem>
-                  <MenuItem value="4.0">4.0+</MenuItem>
-                  <MenuItem value="3.5">3.5+</MenuItem>
-                  <MenuItem value="3.0">3.0+</MenuItem>
-                </Select>
-              </FormControl>
-
-              <FormControl size="small" sx={{ minWidth: 120 }}>
-                <InputLabel>Тип</InputLabel>
-                <Select
-                  value={contentType || "all"}
-                  label="Тип"
-                  onChange={(e) => setContentType(e.target.value === "all" ? null : e.target.value)}
-                >
-                  <MenuItem value="all">Всички</MenuItem>
-                  <MenuItem value="real">Реално</MenuItem>
-                  <MenuItem value="ai">AI</MenuItem>
-                </Select>
-              </FormControl>
-
-              {/* Spacer to push the button to the right */}
-              <Box sx={{ flexGrow: 1 }} />
-
-              {/* Reset Filters Button */}
-              <Button
-                variant="contained"
-                color="info"
-                disableElevation
-                startIcon={<RotateLeftIcon />}
-                sx={{ minWidth: 44 }}
-                onClick={() => {
-                  setSortBy("popular");
-                  setSelectedCategory("Всички");
-                  setPriceFilter("all");
-                  setBudget("");
-                  setPromotions("all");
-                  setRatingFilter(0);
-                  setContentType(null);
-                }}
+            <FormControl size="small" sx={{ minWidth: 150 }}>
+              <InputLabel>Категория</InputLabel>
+              <Select
+                value="Всички"
+                label="Категория"
+                disabled
               >
-                Нулирай филтрите
-              </Button>
-            </Stack>
-          </Stack>
-
-          {/* Listings Grid */}
-          {displayedListings.length > 0 ? (
-            <>
-              <Grid container spacing={2} justifyContent="space-between">
-                {displayedListings.map((listing) => (
-                  <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={listing.id}>
-                    <TalentCard1
-                      name={listing.userFullname}
-                      title={listing.category}
-                      rate={listing.offerPrice.toString()}
-                      ratingValue={listing.rating}
-                      ratingCountText={listing.reviewCount.toString()}
-                      experienceText={Math.max(1, Math.floor(listing.finishedProjects / 10)).toString()}
-                      finishedProjectsText={listing.finishedProjects.toString()}
-                      description={listing.description}
-                      imageUrl={listing.image}
-                      avatarUrl={listing.userPicture || listing.image}
-                    />
-                  </Grid>
+                {categories.map((cat) => (
+                  <MenuItem key={cat} value={cat}>
+                    {cat}
+                  </MenuItem>
                 ))}
-              </Grid>
+              </Select>
+            </FormControl>
 
-              {/* Pagination */}
-              <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-                <Pagination
-                  count={totalPages}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                  color="primary"
-                  size="large"
-                  showFirstButton
-                  showLastButton
-                />
-              </Box>
-            </>
-          ) : (
-            // No Results Message
-            <Paper
-              elevation={0}
+            <FormControl size="small" sx={{ minWidth: 120 }}>
+              <InputLabel>Цена</InputLabel>
+              <Select
+                value="all"
+                label="Цена"
+                disabled
+              >
+                <MenuItem value="all">Всички</MenuItem>
+                <MenuItem value="0-50">0 - 50 лв.</MenuItem>
+                <MenuItem value="50-100">50 - 100 лв.</MenuItem>
+                <MenuItem value="100-150">100 - 150 лв.</MenuItem>
+                <MenuItem value="150+">Над 150 лв.</MenuItem>
+              </Select>
+            </FormControl>
+
+            <TextField
+              size="small"
+              label="Бюджет"
+              type="number"
+              value=""
+              placeholder="Въведете бюджет"
+              sx={{ minWidth: 140 }}
+              disabled
+              InputProps={{
+                endAdornment: <InputAdornment position="end">€</InputAdornment>,
+              }}
+              inputProps={{
+                min: 0,
+                step: 1,
+              }}
+            />
+
+            <FormControl size="small" sx={{ minWidth: 140 }}>
+              <InputLabel>Промоции</InputLabel>
+              <Select
+                value="all"
+                label="Промоции"
+                disabled
+              >
+                <MenuItem value="all">Всички</MenuItem>
+                <MenuItem value="yes">С промоции</MenuItem>
+                <MenuItem value="no">Без промоции</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl size="small" sx={{ minWidth: 120 }}>
+              <InputLabel>Рейтинг</InputLabel>
+              <Select
+                value="all"
+                label="Рейтинг"
+                disabled
+              >
+                <MenuItem value="all">Всички</MenuItem>
+                <MenuItem value="4.5">4.5+</MenuItem>
+                <MenuItem value="4.0">4.0+</MenuItem>
+                <MenuItem value="3.5">3.5+</MenuItem>
+                <MenuItem value="3.0">3.0+</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl size="small" sx={{ minWidth: 120 }}>
+              <InputLabel>Тип</InputLabel>
+              <Select
+                value="all"
+                label="Тип"
+                disabled
+              >
+                <MenuItem value="all">Всички</MenuItem>
+                <MenuItem value="real">Реално</MenuItem>
+                <MenuItem value="ai">AI</MenuItem>
+              </Select>
+            </FormControl>
+
+            {/* Spacer to push the button to the right */}
+            <Box sx={{ flexGrow: 1 }} />
+
+            {/* Reset Filters Button */}
+            <Box
               sx={{
-                p: 6,
-                textAlign: "center",
-                borderRadius: `${borderRadius}px`,
-                border: "1px solid",
-                borderColor: "divider",
+                minWidth: 44,
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                px: 2,
+                py: 1,
+                borderRadius: 1,
+                bgcolor: "info.main",
+                color: "white",
               }}
             >
-              <Typography variant="h5" gutterBottom>
-                Няма резултати
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                Не бяха намерени обяви, отговарящи на вашите критерии.
-              </Typography>
-              {activeFiltersCount > 0 && (
-                <Button variant="contained" onClick={handleClearFilters}>
-                  Изчисти филтрите
-                </Button>
-              )}
-            </Paper>
-          )}
+              <RotateLeftIcon />
+              <Typography variant="button">Нулирай филтрите</Typography>
+            </Box>
+          </Stack>
         </Stack>
-      </Box>
-    </StyledPage>
+
+        {/* Results count */}
+        <Typography variant="body1" sx={{ px: 2, color: "text.secondary" }}>
+          {mockListings.length.toLocaleString("bg-BG")} {mockListings.length === 1 ? "намерена обява" : "намерени обяви"}
+        </Typography>
+
+        {/* Listings Grid */}
+        <Grid container spacing={2} justifyContent="space-between">
+          {mockListings.map((listing) => (
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={listing.id}>
+              <TalentCard1
+                name={listing.userFullname}
+                title={listing.category}
+                rate={listing.offerPrice.toString()}
+                ratingValue={listing.rating}
+                ratingCountText={listing.reviewCount.toString()}
+                experienceText={Math.max(1, Math.floor(listing.finishedProjects / 10)).toString()}
+                finishedProjectsText={listing.finishedProjects.toString()}
+                description={listing.description}
+                imageUrl={listing.image}
+                avatarUrl={listing.userPicture || listing.image}
+              />
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Pagination */}
+        <Pagination
+          count={10}
+          page={1}
+          onChange={() => { }}
+          shape="circular"
+          size="large"
+          color="standard"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: 4,
+          }}
+        />
+      </Stack>
+    </StyledPage >
   );
 };
 

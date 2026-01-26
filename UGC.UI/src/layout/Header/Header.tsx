@@ -13,7 +13,6 @@ import LogoSection from "./LogoSection";
 import MobileSection from "./MobileSection";
 import ProfileSection from "./ProfileSection";
 import NotificationSection from "./NotificationSection";
-import SearchSection from "./SearchSection";
 import { MenuList } from "../Navigation/MenuList";
 
 // assets
@@ -104,11 +103,6 @@ export default function Header() {
 
           {/* Spacer */}
           <Box sx={{ flexGrow: 1 }} />
-
-          {/* Search */}
-          <Box sx={{ display: { xs: "none", md: "block" }, width: 300 }}>
-            <SearchSection />
-          </Box>
 
           {/* Notification */}
           <NotificationSection />

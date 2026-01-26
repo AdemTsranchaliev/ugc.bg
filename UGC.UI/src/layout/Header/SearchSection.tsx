@@ -120,7 +120,6 @@ export default function SearchSection() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="търси по роля, умения, ключови думи"
-          size="small"
           endAdornment={
             <InputAdornment position="end">
               <HeaderAvatar ref={undefined}>
@@ -135,7 +134,22 @@ export default function SearchSection() {
               sx: { bgcolor: "transparent", pl: 0.5 },
             },
           }}
-          sx={{ width: "100%", px: 2 }}
+          sx={{
+            width: "100%",
+            px: 2,
+            minHeight: 56,
+            py: 1,
+            borderRadius: 10,
+            '& fieldset': {
+              borderRadius: 10,
+            },
+            '&:hover fieldset': {
+              borderRadius: 10,
+            },
+            '&.Mui-focused fieldset': {
+              borderRadius: 10,
+            }
+          }}
         />
       </Box>
     </>
