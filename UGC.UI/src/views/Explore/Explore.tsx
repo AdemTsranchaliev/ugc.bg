@@ -218,171 +218,220 @@ export const Explore = () => {
 
   return (
     <StyledPage>
-      {/* Search */}
-      <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" sx={{ mb: 4 }}>
-        <Box sx={{ width: "80%" }}>
-          <SearchSection />
-        </Box>
-      </Stack>
-
       <Stack spacing={3}>
-        {/* Header */}
-        <Typography variant="h1" sx={{ px: 2, color: "#000", fontWeight: 500 }}>
-          AI UGC
-        </Typography>
-
-        {/* Filter Section */}
+        {/* Search */}
         <Stack
           direction="column"
           spacing={2}
+          alignItems="center"
+          justifyContent="center"
           sx={{
+            position: "relative",
+            overflow: "hidden",
             width: "100%",
-            backgroundColor: "#fafbfc",
             p: 2,
-            borderRadius: `${borderRadius}px`,
-            boxShadow: "0 18px 44px rgba(0,0,0,0.16)",
+            borderRadius,
+            "&:before": {
+              content: '""',
+              position: "absolute",
+              zIndex: 0,
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundImage: `url("https://fastly.picsum.photos/id/4/5000/3333.jpg?hmac=ghf06FdmgiD0-G4c9DdNM8RnBIN7BO0-ZGEw47khHP4")`,
+              // backgroundImage: `url("https://fastly.picsum.photos/id/60/1920/1200.jpg?hmac=fAMNjl4E_sG_WNUjdU39Kald5QAHQMh-_-TsIbbeDNI")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              filter: "blur(4px) brightness(0.8)",
+              transform: "scale(1.1)",
+              backgroundRepeat: "no-repeat",
+              pointerEvents: "none",
+            },
+            "&::after": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 1,
+            },
           }}
         >
-          {/* Filters */}
+          <Box sx={{ width: "80%", pb: 4, zIndex: 2 }}>
+            <SearchSection />
+          </Box>
+
+          {/* Header */}
+          <Typography
+            variant="h1"
+            sx={{
+              width: "100%",
+              px: 2,
+              color: "#fff",
+              fontWeight: 500,
+              zIndex: 2,
+            }}>
+            AI UGC
+          </Typography>
+
+          {/* Filter Section */}
           <Stack
-            direction="row"
-            spacing={1}
-            alignItems="center"
+            direction="column"
+            spacing={2}
+            sx={{
+              width: "100%",
+              backgroundColor: "#fff",
+              p: 2,
+              borderRadius: `${borderRadius}px`,
+              boxShadow: "0 18px 44px rgba(0,0,0,0.16)",
+              zIndex: 2,
+            }}
           >
-            <FormControl size="small" sx={{ minWidth: 200 }}>
-              <InputLabel>Сортирай</InputLabel>
-              <Select
-                value="popular"
-                input={
-                  <OutlinedInput
-                    label="Сортирай"
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <SwapVertIcon />
-                      </InputAdornment>
-                    }
-                  />
-                }
-                disabled
-              >
-                <MenuItem value="popular">Популярно</MenuItem>
-                <MenuItem value="price-low">Цена: Ниска към Висока</MenuItem>
-                <MenuItem value="price-high">Цена: Висока към Ниска</MenuItem>
-                <MenuItem value="rating">Най-висок рейтинг</MenuItem>
-                <MenuItem value="newest">Най-нови</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl size="small" sx={{ minWidth: 150 }}>
-              <InputLabel>Категория</InputLabel>
-              <Select
-                value="Всички"
-                label="Категория"
-                disabled
-              >
-                {categories.map((cat) => (
-                  <MenuItem key={cat} value={cat}>
-                    {cat}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>Цена</InputLabel>
-              <Select
-                value="all"
-                label="Цена"
-                disabled
-              >
-                <MenuItem value="all">Всички</MenuItem>
-                <MenuItem value="0-50">0 - 50 лв.</MenuItem>
-                <MenuItem value="50-100">50 - 100 лв.</MenuItem>
-                <MenuItem value="100-150">100 - 150 лв.</MenuItem>
-                <MenuItem value="150+">Над 150 лв.</MenuItem>
-              </Select>
-            </FormControl>
-
-            <TextField
-              size="small"
-              label="Бюджет"
-              type="number"
-              value=""
-              placeholder="Въведете бюджет"
-              sx={{ minWidth: 140 }}
-              disabled
-              InputProps={{
-                endAdornment: <InputAdornment position="end">€</InputAdornment>,
-              }}
-              inputProps={{
-                min: 0,
-                step: 1,
-              }}
-            />
-
-            <FormControl size="small" sx={{ minWidth: 140 }}>
-              <InputLabel>Промоции</InputLabel>
-              <Select
-                value="all"
-                label="Промоции"
-                disabled
-              >
-                <MenuItem value="all">Всички</MenuItem>
-                <MenuItem value="yes">С промоции</MenuItem>
-                <MenuItem value="no">Без промоции</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>Рейтинг</InputLabel>
-              <Select
-                value="all"
-                label="Рейтинг"
-                disabled
-              >
-                <MenuItem value="all">Всички</MenuItem>
-                <MenuItem value="4.5">4.5+</MenuItem>
-                <MenuItem value="4.0">4.0+</MenuItem>
-                <MenuItem value="3.5">3.5+</MenuItem>
-                <MenuItem value="3.0">3.0+</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>Тип</InputLabel>
-              <Select
-                value="all"
-                label="Тип"
-                disabled
-              >
-                <MenuItem value="all">Всички</MenuItem>
-                <MenuItem value="real">Реално</MenuItem>
-                <MenuItem value="ai">AI</MenuItem>
-              </Select>
-            </FormControl>
-
-            {/* Spacer to push the button to the right */}
-            <Box sx={{ flexGrow: 1 }} />
-
-            {/* Reset Filters Button */}
-            <Box
-              sx={{
-                minWidth: 44,
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                px: 2,
-                py: 1,
-                borderRadius: 1,
-                bgcolor: "info.main",
-                color: "white",
-              }}
+            {/* Filters */}
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
             >
-              <RotateLeftIcon />
-              <Typography variant="button">Нулирай филтрите</Typography>
-            </Box>
+              <FormControl size="small" sx={{ minWidth: 200 }}>
+                <InputLabel>Сортирай</InputLabel>
+                <Select
+                  value="popular"
+                  input={
+                    <OutlinedInput
+                      label="Сортирай"
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <SwapVertIcon />
+                        </InputAdornment>
+                      }
+                    />
+                  }
+                  disabled
+                >
+                  <MenuItem value="popular">Популярно</MenuItem>
+                  <MenuItem value="price-low">Цена: Ниска към Висока</MenuItem>
+                  <MenuItem value="price-high">Цена: Висока към Ниска</MenuItem>
+                  <MenuItem value="rating">Най-висок рейтинг</MenuItem>
+                  <MenuItem value="newest">Най-нови</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ minWidth: 150 }}>
+                <InputLabel>Категория</InputLabel>
+                <Select
+                  value="Всички"
+                  label="Категория"
+                  disabled
+                >
+                  {categories.map((cat) => (
+                    <MenuItem key={cat} value={cat}>
+                      {cat}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ minWidth: 120 }}>
+                <InputLabel>Цена</InputLabel>
+                <Select
+                  value="all"
+                  label="Цена"
+                  disabled
+                >
+                  <MenuItem value="all">Всички</MenuItem>
+                  <MenuItem value="0-50">0 - 50 лв.</MenuItem>
+                  <MenuItem value="50-100">50 - 100 лв.</MenuItem>
+                  <MenuItem value="100-150">100 - 150 лв.</MenuItem>
+                  <MenuItem value="150+">Над 150 лв.</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                size="small"
+                label="Бюджет"
+                type="number"
+                value=""
+                placeholder="Въведете бюджет"
+                sx={{ minWidth: 140 }}
+                disabled
+                InputProps={{
+                  endAdornment: <InputAdornment position="end">€</InputAdornment>,
+                }}
+                inputProps={{
+                  min: 0,
+                  step: 1,
+                }}
+              />
+
+              <FormControl size="small" sx={{ minWidth: 140 }}>
+                <InputLabel>Промоции</InputLabel>
+                <Select
+                  value="all"
+                  label="Промоции"
+                  disabled
+                >
+                  <MenuItem value="all">Всички</MenuItem>
+                  <MenuItem value="yes">С промоции</MenuItem>
+                  <MenuItem value="no">Без промоции</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ minWidth: 120 }}>
+                <InputLabel>Рейтинг</InputLabel>
+                <Select
+                  value="all"
+                  label="Рейтинг"
+                  disabled
+                >
+                  <MenuItem value="all">Всички</MenuItem>
+                  <MenuItem value="4.5">4.5+</MenuItem>
+                  <MenuItem value="4.0">4.0+</MenuItem>
+                  <MenuItem value="3.5">3.5+</MenuItem>
+                  <MenuItem value="3.0">3.0+</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ minWidth: 120 }}>
+                <InputLabel>Тип</InputLabel>
+                <Select
+                  value="all"
+                  label="Тип"
+                  disabled
+                >
+                  <MenuItem value="all">Всички</MenuItem>
+                  <MenuItem value="real">Реално</MenuItem>
+                  <MenuItem value="ai">AI</MenuItem>
+                </Select>
+              </FormControl>
+
+              {/* Spacer to push the button to the right */}
+              <Box sx={{ flexGrow: 1 }} />
+
+              {/* Reset Filters Button */}
+              <Box
+                sx={{
+                  minWidth: 44,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  px: 2,
+                  py: 1,
+                  borderRadius: 1,
+                  bgcolor: "info.main",
+                  color: "white",
+                }}
+              >
+                <RotateLeftIcon />
+                <Typography variant="button">Нулирай филтрите</Typography>
+              </Box>
+            </Stack>
           </Stack>
         </Stack>
+
 
         {/* Results count */}
         <Typography variant="body1" sx={{ px: 2, color: "text.secondary" }}>
