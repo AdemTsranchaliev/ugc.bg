@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Landing from "./Landing";
 import JoinCommunity from "./JoinCommunity";
 import PopularServices from "./PopularServices";
@@ -387,6 +389,12 @@ const _popularServices3 = [
 ];
 
 export const HomePage = () => {
+
+  console.time("HomePage render");
+  useEffect(() => {
+    console.timeEnd("HomePage render");
+  });
+
   return (
     <>
       <StyledPage>

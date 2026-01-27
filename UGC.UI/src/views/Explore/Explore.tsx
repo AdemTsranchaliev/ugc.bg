@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 // material-ui
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -208,6 +210,11 @@ export const Explore = () => {
   const {
     state: { borderRadius },
   } = useConfig();
+
+  console.time("Explore render");
+  useEffect(() => {
+    console.timeEnd("Explore render");
+  });
 
   return (
     <StyledPage>
