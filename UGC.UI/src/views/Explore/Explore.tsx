@@ -13,12 +13,13 @@ import MenuItem from "@mui/material/MenuItem";
 // icons
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 // project imports
 import { TalentCard1 } from "../../ui-component/cards/TalentCard1";
 import useConfig from "../../themes/context/useConfig";
 import { StyledPage } from "../../ui-component/StyledPage";
-import { InputAdornment, OutlinedInput, Pagination, TextField } from "@mui/material";
+import { Button, InputAdornment, OutlinedInput, Pagination, TextField } from "@mui/material";
 import { SearchSection } from "../../layout/Header";
 
 // Mock data for listings
@@ -671,6 +672,114 @@ const LandingSection2 = () => {
   );
 };
 
+const SingleSearch = () => {
+  const {
+    state: { borderRadius },
+  } = useConfig();
+
+  return (
+    <Box sx={{ position: "relative", pb: 4 }}>
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          width: "100%",
+          height: 240,
+          p: 2,
+          borderRadius,
+          "&:before": {
+            content: '""',
+            position: "absolute",
+            zIndex: 0,
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url("/assets/images/general/light-bg.png")`,
+            backgroundSize: "cover",
+            backgroundPosition: "bottom",
+            filter: "blur(6px) brightness(0.8)",
+            transform: "scale(1.1)",
+            backgroundRepeat: "no-repeat",
+            pointerEvents: "none",
+          },
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 1,
+          },
+        }}
+      />
+      {/* Filter Section */}
+      <Stack
+        direction="column"
+        spacing={2}
+        sx={{
+          position: "absolute",
+          top: "10%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 2,
+          width: "90%",
+        }}
+      >
+        {/* Title */}
+        <Typography variant="h2" sx={{ px: 2, fontWeight: 500, color: "#fff" }}>
+          Открийте творци или услуги чрез търсене
+        </Typography>
+
+        {/* Search */}
+        <SearchSection />
+
+        {/* Popular Searches - Example placeholder section */}
+        <Stack
+          direction="row"
+          sx={{
+            mt: 3,
+            pt: 3,
+            borderTop: "1px solid",
+            borderColor: "grey.700",
+            display: { xs: "none", md: "flex" },
+            alignItems: "center",
+            gap: 3,
+            flexWrap: "wrap",
+          }}
+        >
+          {[
+            "UGC",
+            "Instagram",
+            "Facebook",
+            "TikTok",
+            "Shorts",
+            "YouTube",
+          ].map((item, index) => (
+            <Button
+              key={index}
+              variant="outlined"
+              endIcon={<ArrowRightAltIcon />}
+              sx={(theme) => ({
+                color: theme.palette.common.white,
+                borderColor: theme.palette.common.white,
+                "&:hover": {
+                  borderColor: theme.palette.common.white,
+                  backgroundColor: theme.palette.action.hover,
+                },
+              })}
+            >
+              {item}
+            </Button>
+          ))}
+        </Stack>
+      </Stack>
+    </Box>
+  );
+};
+
 export const Explore = () => {
   // const {
   //   state: { borderRadius },
@@ -686,6 +795,7 @@ export const Explore = () => {
       <Stack spacing={3}>
         {/* <LandingSection1 /> */}
         <LandingSection2 />
+        {/* <SingleSearch /> */}
 
 
         {/* Results count */}
