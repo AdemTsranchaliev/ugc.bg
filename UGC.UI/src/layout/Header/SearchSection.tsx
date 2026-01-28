@@ -139,15 +139,15 @@ export default function SearchSection() {
             px: 2,
             minHeight: 56,
             py: 1,
-            borderRadius: 10,
+            borderRadius: 4,
             '& fieldset': {
-              borderRadius: 10,
+              borderRadius: 4,
             },
             '&:hover fieldset': {
-              borderRadius: 10,
+              borderRadius: 4,
             },
             '&.Mui-focused fieldset': {
-              borderRadius: 10,
+              borderRadius: 4,
             }
           }}
         />
