@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 // material-ui
 import Typography from "@mui/material/Typography";
@@ -10,6 +10,7 @@ import { TalentCard1 } from "../../ui-component/cards/TalentCard1";
 import { StyledPage } from "../../ui-component/StyledPage";
 import { Pagination } from "@mui/material";
 import ExploreLanding from "./ExploreLanding";
+import ProductFilter from "./ProductFilter";
 
 // Mock data for listings
 const mockListings = [
@@ -184,12 +185,47 @@ const mockListings = [
 ];
 
 
+const defaultFilter = {
+  sort: "popular",
+  categories: ["all"] as string[],
+  price: "all",
+  budget: "",
+  promo: "all",
+  rating: "all",
+  type: "all",
+};
+
 export const Explore = () => {
+  const [filter, setFilter] = useState(defaultFilter);
 
   console.time("Explore render");
   useEffect(() => {
     console.timeEnd("Explore render");
   });
+
+  const handelFilter = useCallback((filterType: string, value: string) => {
+    setFilter((prev) => {
+      if (filterType === "reset") return defaultFilter;
+      const next = { ...prev };
+      if (filterType === "sort") next.sort = value;
+      else if (filterType === "categories") {
+        if (value === "all") {
+          next.categories = ["all"];
+        } else {
+          const hasAll = prev.categories.includes("all");
+          const rest = hasAll ? [] : prev.categories.filter((c) => c !== value);
+          const hasValue = prev.categories.includes(value);
+          const nextList = hasValue ? rest.filter((c) => c !== value) : [...rest, value];
+          next.categories = nextList.length === 0 ? ["all"] : nextList;
+        }
+      } else if (filterType === "price") next.price = value;
+      else if (filterType === "budget") next.budget = value;
+      else if (filterType === "promo") next.promo = value;
+      else if (filterType === "rating") next.rating = value;
+      else if (filterType === "type") next.type = value;
+      return next;
+    });
+  }, []);
 
   return (
     <StyledPage>
@@ -208,42 +244,54 @@ export const Explore = () => {
           </Typography>
         </Stack>
 
-        {/* Listings Grid */}
-        <Grid container spacing={2} justifyContent="space-between">
-          {mockListings.map((listing) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={listing.id}>
-              <TalentCard1
-                name={listing.userFullname}
-                title={listing.category}
-                rate={listing.offerPrice.toString()}
-                ratingValue={listing.rating}
-                ratingCountText={listing.reviewCount.toString()}
-                experienceText={Math.max(1, Math.floor(listing.finishedProjects / 10)).toString()}
-                finishedProjectsText={listing.finishedProjects.toString()}
-                description={listing.description}
-                imageUrl={listing.image}
-                avatarUrl={listing.userPicture || listing.image}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        {/* Filter sidebar + Listings Grid */}
+        <Grid container spacing={3}>
+          {/* Left: Filters */}
+          <Grid size={{ xs: 12, md: 2.5 }}>
+            <ProductFilter filter={filter} handelFilter={handelFilter} />
+          </Grid>
 
-        {/* Pagination */}
-        <Pagination
-          count={10}
-          page={1}
-          onChange={() => { }}
-          shape="circular"
-          size="large"
-          color="standard"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            mt: 4,
-          }}
-        />
+          {/* Right: Cards */}
+          <Grid size={{ xs: 12, md: 9.5 }}>
+            <Stack spacing={2}>
+              <Grid container spacing={2} justifyContent="space-between">
+                {mockListings.map((listing) => (
+                  <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={listing.id}>
+                    <TalentCard1
+                      name={listing.userFullname}
+                      title={listing.category}
+                      rate={listing.offerPrice.toString()}
+                      ratingValue={listing.rating}
+                      ratingCountText={listing.reviewCount.toString()}
+                      experienceText={Math.max(1, Math.floor(listing.finishedProjects / 10)).toString()}
+                      finishedProjectsText={listing.finishedProjects.toString()}
+                      description={listing.description}
+                      imageUrl={listing.image}
+                      avatarUrl={listing.userPicture || listing.image}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+
+              {/* Pagination */}
+              <Pagination
+                count={10}
+                page={1}
+                onChange={() => { }}
+                shape="circular"
+                size="large"
+                color="standard"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  mt: 4,
+                }}
+              />
+            </Stack>
+          </Grid>
+        </Grid>
       </Stack>
-    </StyledPage >
+    </StyledPage>
   );
 };
 

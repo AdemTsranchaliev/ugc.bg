@@ -24,7 +24,7 @@ import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import useConfig from "../../themes/context/useConfig";
 import { SearchSection } from "../../layout/Header";
 
-const categoriesWithCounts = [
+export const categoriesWithCounts = [
     { label: "Всички", value: "all", count: 0 },
     { label: "Уеб дизайн", value: "web-design", count: 124 },
     { label: "Уеб разработка", value: "web-dev", count: 89 },
@@ -37,7 +37,7 @@ const categoriesWithCounts = [
     { label: "Музика", value: "music", count: 31 },
 ];
 
-const sortOptions = [
+export const sortOptions = [
     { value: "popular", label: "Популярно" },
     { value: "price-low", label: "Цена: Ниска към Висока" },
     { value: "price-high", label: "Цена: Висока към Ниска" },
@@ -45,7 +45,7 @@ const sortOptions = [
     { value: "newest", label: "Най-нови" },
 ];
 
-const priceOptions = [
+export const priceOptions = [
     { value: "all", label: "Всички" },
     { value: "0-50", label: "0 - 50 лв." },
     { value: "50-100", label: "50 - 100 лв." },
@@ -53,13 +53,13 @@ const priceOptions = [
     { value: "150+", label: "Над 150 лв." },
 ];
 
-const promotionOptions = [
+export const promotionOptions = [
     { value: "all", label: "Всички" },
     { value: "yes", label: "С промоции" },
     { value: "no", label: "Без промоции" },
 ];
 
-const ratingOptions = [
+export const ratingOptions = [
     { value: "all", label: "Всички" },
     { value: "4.5", label: "4.5+" },
     { value: "4.0", label: "4.0+" },
@@ -67,7 +67,7 @@ const ratingOptions = [
     { value: "3.0", label: "3.0+" },
 ];
 
-const typeOptions = [
+export const typeOptions = [
     { value: "all", label: "Всички" },
     { value: "real", label: "Реално" },
     { value: "ai", label: "AI" },

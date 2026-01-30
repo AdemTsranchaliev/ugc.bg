@@ -27,6 +27,17 @@ type AccordionProps = {
   toggle?: boolean;
 };
 
+type ExpandedState = string | number | null | (string | number)[];
+
+function getInitialExpanded(
+  toggle: boolean | undefined,
+  defaultExpandedId: string | number | null | undefined,
+  data: AccordionProps["data"]
+): ExpandedState {
+  if (toggle) return defaultExpandedId ?? null;
+  return (data?.filter((item) => !item.disabled && item.defaultExpand).map((item) => item.id) ?? []) as (string | number)[];
+}
+
 export default function Accordion({
   data,
   defaultExpandedId = null,
@@ -34,27 +45,38 @@ export default function Accordion({
   square,
   toggle,
 }: AccordionProps) {
-  const [expanded, setExpanded] = useState(null);
-  const handleChange = (panel) => (_, newExpanded) => {
-    toggle && setExpanded(newExpanded ? panel : false);
+  const [expanded, setExpanded] = useState<ExpandedState>(() =>
+    getInitialExpanded(toggle, defaultExpandedId, data)
+  );
+
+  const handleChange = (panel: string | number) => (_: React.SyntheticEvent, newExpanded: boolean) => {
+    if (toggle) {
+      setExpanded(newExpanded ? panel : null);
+    } else {
+      setExpanded((prev) => {
+        const ids = Array.isArray(prev) ? prev : [];
+        return newExpanded ? [...ids, panel] : ids.filter((id) => id !== panel);
+      });
+    }
   };
 
   useEffect(() => {
-    setExpanded(defaultExpandedId);
-  }, [defaultExpandedId]);
+    if (toggle) setExpanded(defaultExpandedId ?? null);
+  }, [defaultExpandedId, toggle]);
 
   return (
     <Box sx={{ width: "100%" }}>
       {data &&
-        data.map((item) => (
+        data.map((item) => {
+          const isExpanded = toggle
+            ? expanded === item.id
+            : Array.isArray(expanded) && expanded.includes(item.id);
+          return (
           <MuiAccordion
             key={item.id}
             elevation={0}
             defaultExpanded={!item.disabled && item.defaultExpand}
-            expanded={
-              (!toggle && !item.disabled && item.expanded) ||
-              (toggle && expanded === item.id)
-            }
+            expanded={!item.disabled && isExpanded}
             disabled={item.disabled}
             square={square}
             onChange={handleChange(item.id)}
@@ -73,7 +95,8 @@ export default function Accordion({
             </MuiAccordionSummary>
             <MuiAccordionDetails>{item.content}</MuiAccordionDetails>
           </MuiAccordion>
-        ))}
+          );
+        })}
     </Box>
   );
 }

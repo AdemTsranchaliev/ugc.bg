@@ -53,6 +53,12 @@ export const TalentCard1 = ({
         position: "relative",
         bgcolor: "#fff",
         boxShadow: "0 18px 44px rgba(0,0,0,0.16)",
+        border: "2px solid transparent",
+        "&:hover": {
+          boxShadow: "0 24px 48px rgba(0,0,0,0.24)",
+          border: "2px solid #e0e0e0",
+          transition: "all 0.3s ease-in-out",
+        },
       }}
     >
       {/* Top image */}
