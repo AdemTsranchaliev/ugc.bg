@@ -72,29 +72,29 @@ export default function Accordion({
             ? expanded === item.id
             : Array.isArray(expanded) && expanded.includes(item.id);
           return (
-          <MuiAccordion
-            key={item.id}
-            elevation={0}
-            defaultExpanded={!item.disabled && item.defaultExpand}
-            expanded={!item.disabled && isExpanded}
-            disabled={item.disabled}
-            square={square}
-            onChange={handleChange(item.id)}
-          >
-            <MuiAccordionSummary
-              expandIcon={
-                expandIcon || expandIcon === false ? (
-                  expandIcon
-                ) : (
-                  <ExpandMoreIcon />
-                )
-              }
-              sx={{ color: "grey.600", fontWeight: 500 }}
+            <MuiAccordion
+              key={item.id}
+              elevation={0}
+              defaultExpanded={!item.disabled && item.defaultExpand}
+              expanded={!item.disabled && isExpanded}
+              disabled={item.disabled}
+              square={square}
+              onChange={handleChange(item.id)}
             >
-              {item.title}
-            </MuiAccordionSummary>
-            <MuiAccordionDetails>{item.content}</MuiAccordionDetails>
-          </MuiAccordion>
+              <MuiAccordionSummary
+                expandIcon={
+                  expandIcon || expandIcon === false ? (
+                    expandIcon
+                  ) : (
+                    <ExpandMoreIcon />
+                  )
+                }
+                sx={{ fontWeight: 600 }}
+              >
+                {item.title}
+              </MuiAccordionSummary>
+              <MuiAccordionDetails>{item.content}</MuiAccordionDetails>
+            </MuiAccordion>
           );
         })}
     </Box>
