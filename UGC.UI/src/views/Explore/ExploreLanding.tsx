@@ -23,6 +23,7 @@ import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 // project imports
 import useConfig from "../../themes/context/useConfig";
 import { SearchSection } from "../../layout/Header";
+import { MobileFiltersDrawer } from "./MobileFiltersDrawer";
 
 export const categoriesWithCounts = [
     { label: "Всички", value: "all", count: 0 },
@@ -147,7 +148,7 @@ const getCardStyles = (theme: Theme) => ({
     },
 });
 
-export const ExploreLanding = () => {
+export const ExploreLanding = ({ _tempIsExplore2 = false }: { _tempIsExplore2?: boolean }) => {
     const theme = useTheme();
     const {
         state: { borderRadius },
@@ -155,6 +156,7 @@ export const ExploreLanding = () => {
     const styles = getCardStyles(theme);
 
     const [openFilter, setOpenFilter] = useState<FilterId>(null);
+    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
     const anchorRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
     // Applied filter values (what's "live")
@@ -220,6 +222,22 @@ export const ExploreLanding = () => {
         setRating("all");
         setType("all");
         setOpenFilter(null);
+    };
+
+    const handleOpenMobileFilters = () => {
+        setPendingSort(sort);
+        setPendingCategory(new Set(categoryValues));
+        setPendingPrice(price);
+        setPendingBudget(budget);
+        setPendingPromo(promo);
+        setPendingRating(rating);
+        setPendingType(type);
+        setMobileFiltersOpen(true);
+    };
+
+    const handleApplyMobileFilters = () => {
+        handleApply();
+        setMobileFiltersOpen(false);
     };
 
     const handleCategoryToggle = (value: string) => {
@@ -467,53 +485,99 @@ export const ExploreLanding = () => {
             >
                 <SearchSection />
 
-                <ClickAwayListener onClickAway={() => setOpenFilter(null)}>
-                    <Box>
-                        <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" useFlexGap sx={{ gap: 1 }}>
-                            {[
-                                { id: "sort" as const, label: "Сортирай" },
-                                { id: "category" as const, label: "Категория" },
-                                { id: "price" as const, label: "Цена" },
-                                { id: "budget" as const, label: "Бюджет" },
-                                { id: "promo" as const, label: "Промоции" },
-                                { id: "rating" as const, label: "Рейтинг" },
-                                { id: "type" as const, label: "Тип" },
-                            ].map(({ id, label }) => (
-                                <Button
-                                    key={id}
-                                    ref={(el) => { anchorRefs.current[id] = el; }}
-                                    onClick={() => handleOpen(id)}
-                                    endIcon={<KeyboardArrowDownIcon sx={{ transform: openFilter === id ? "rotate(180deg)" : "none" }} />}
-                                    sx={styles.trigger}
-                                >
-                                    {label}
-                                </Button>
-                            ))}
+                {/* Filter buttons for mobile */}
+                <Button
+                    variant="contained"
+                    onClick={handleOpenMobileFilters}
+                    sx={{
+                        ...styles.applyBtn,
+                        display: {
+                            xs: "flex",
+                            md: "none",
+                        }
+                    }}
+                >
+                    Филтри
+                </Button>
 
-                            <Box sx={{ flexGrow: 1 }} />
+                <MobileFiltersDrawer
+                    open={mobileFiltersOpen}
+                    onClose={() => setMobileFiltersOpen(false)}
+                    pendingSort={pendingSort}
+                    setPendingSort={setPendingSort}
+                    pendingCategory={pendingCategory}
+                    onCategoryToggle={handleCategoryToggle}
+                    pendingPrice={pendingPrice}
+                    setPendingPrice={setPendingPrice}
+                    pendingBudget={pendingBudget}
+                    setPendingBudget={setPendingBudget}
+                    pendingPromo={pendingPromo}
+                    setPendingPromo={setPendingPromo}
+                    pendingRating={pendingRating}
+                    setPendingRating={setPendingRating}
+                    pendingType={pendingType}
+                    setPendingType={setPendingType}
+                    onClearAll={handleClearAll}
+                    onApply={handleApplyMobileFilters}
+                />
 
-                            <Button
-                                variant="text"
-                                startIcon={<RotateLeftIcon />}
-                                onClick={handleResetAllFilters}
-                                sx={{ color: "info.main", textTransform: "none", fontWeight: 500 }}
-                            >
-                                Нулирай
-                            </Button>
-                        </Stack>
-
-                        <Popper
-                            open={Boolean(anchorEl)}
-                            anchorEl={anchorEl}
-                            placement="bottom-start"
-                            disablePortal
-                            modifiers={[{ name: "offset", options: { offset: [0, 8] } }]}
-                            sx={{ zIndex: 100 }}
+                {/* Filter buttons */}
+                {!_tempIsExplore2 && (
+                    <ClickAwayListener onClickAway={() => setOpenFilter(null)}>
+                        <Box
+                            sx={{
+                                display: {
+                                    xs: "none",
+                                    md: "block",
+                                }
+                            }}
                         >
-                            {renderFilterCard()}
-                        </Popper>
-                    </Box>
-                </ClickAwayListener>
+                            <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" useFlexGap sx={{ gap: 1 }}>
+                                {[
+                                    { id: "sort" as const, label: "Сортирай" },
+                                    { id: "category" as const, label: "Категория" },
+                                    { id: "price" as const, label: "Цена" },
+                                    { id: "budget" as const, label: "Бюджет" },
+                                    { id: "promo" as const, label: "Промоции" },
+                                    { id: "rating" as const, label: "Рейтинг" },
+                                    { id: "type" as const, label: "Тип" },
+                                ].map(({ id, label }) => (
+                                    <Button
+                                        key={id}
+                                        ref={(el) => { anchorRefs.current[id] = el; }}
+                                        onClick={() => handleOpen(id)}
+                                        endIcon={<KeyboardArrowDownIcon sx={{ transform: openFilter === id ? "rotate(180deg)" : "none" }} />}
+                                        sx={styles.trigger}
+                                    >
+                                        {label}
+                                    </Button>
+                                ))}
+
+                                <Box sx={{ flexGrow: 1 }} />
+
+                                <Button
+                                    variant="text"
+                                    startIcon={<RotateLeftIcon />}
+                                    onClick={handleResetAllFilters}
+                                    sx={{ color: "info.main", textTransform: "none", fontWeight: 500 }}
+                                >
+                                    Нулирай
+                                </Button>
+                            </Stack>
+
+                            <Popper
+                                open={Boolean(anchorEl)}
+                                anchorEl={anchorEl}
+                                placement="bottom-start"
+                                disablePortal
+                                modifiers={[{ name: "offset", options: { offset: [0, 8] } }]}
+                                sx={{ zIndex: 100 }}
+                            >
+                                {renderFilterCard()}
+                            </Popper>
+                        </Box>
+                    </ClickAwayListener>
+                )}
             </Stack>
         </Box>
     );
