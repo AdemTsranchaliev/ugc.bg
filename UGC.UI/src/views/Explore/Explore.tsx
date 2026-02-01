@@ -199,18 +199,32 @@ export const Explore = () => {
 
         {/* Results count */}
         <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-          <Typography variant="h4" sx={{ px: { xs: 0, md: 2 }, fontWeight: 600 }}>
+          <Typography
+            variant="h4"
+            sx={{
+              px: { xs: 0, md: 2 },
+              fontWeight: 600,
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+            }}
+          >
             {mockListings.length.toLocaleString("bg-BG")} {mockListings.length === 1 ? "намерена обява" : "намерени обяви"}
           </Typography>
 
-          <Typography variant="body1" sx={{ px: { xs: 0, md: 2 }, color: "text.secondary" }}>
+          <Typography
+            variant="body1"
+            sx={{
+              px: { xs: 0, md: 2 },
+              color: "text.secondary",
+              fontSize: { xs: "0.75rem", md: "1rem" },
+            }}
+          >
             Страници: 1-12
           </Typography>
         </Stack>
 
-        <Grid container spacing={2} justifyContent="space-between">
+        <Grid container spacing={{ xs: 1.5, md: 2 }} justifyContent="space-between">
           {mockListings.map((listing) => (
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }} key={listing.id}>
+            <Grid size={{ xs: 6, sm: 6, lg: 3 }} key={listing.id}>
               <TalentCard1
                 name={listing.userFullname}
                 title={listing.category}
@@ -239,6 +253,7 @@ export const Explore = () => {
             display: "flex",
             justifyContent: "center",
             mt: 4,
+            "& .MuiPagination-item": { fontSize: { xs: "0.875rem", md: "1rem" } },
           }}
         />
       </Stack>

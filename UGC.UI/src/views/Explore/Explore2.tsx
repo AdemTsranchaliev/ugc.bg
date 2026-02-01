@@ -261,7 +261,7 @@ export const Explore = () => {
             <Stack spacing={2}>
               <Grid container spacing={2} justifyContent="space-between">
                 {mockListings.map((listing) => (
-                  <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={listing.id}>
+                  <Grid size={{ xs: 6, sm: 6, lg: 3 }} key={listing.id}>
                     <TalentCard1
                       name={listing.userFullname}
                       title={listing.category}
