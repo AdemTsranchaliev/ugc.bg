@@ -45,7 +45,7 @@ function MenuList() {
         case "group":
           if (item.url && item.id !== lastItemId) {
             return (
-              <List key={item.id}>
+              <List key={item.id} disablePadding sx={{ width: "auto" }}>
                 <NavItem
                   item={item}
                   level={1}
@@ -81,7 +81,19 @@ function MenuList() {
       }
     });
 
-  return <>{navItems}</>;
+  return (
+    <List
+      disablePadding
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 0.5,
+      }}
+    >
+      {navItems}
+    </List>
+  );
 }
 
 export default memo(MenuList);

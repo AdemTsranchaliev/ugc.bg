@@ -96,7 +96,7 @@ export default function Header() {
               alignItems="center"
               sx={{ mx: 2 }}
             >
-              {/* Horizontal Menu */}
+              {/* Navigation Menu */}
               <MenuList />
             </Stack>
           </Box>

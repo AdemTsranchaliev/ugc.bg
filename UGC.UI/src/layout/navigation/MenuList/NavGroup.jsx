@@ -258,47 +258,52 @@ export default function NavGroup({
           </Activity>
         </>
       ) : (
-        <List>
+        <List disablePadding sx={{ width: "auto" }}>
           <ListItemButton
             selected={isSelected}
             sx={{
-              borderRadius: `${borderRadius}px`,
-              p: 1,
-              my: 0.5,
-              mr: 1,
+              borderRadius: 0,
+              py: 1.5,
+              px: 2,
+              minHeight: "auto",
               display: "flex",
               alignItems: "center",
-              backgroundColor: "inherit",
+              backgroundColor: "transparent",
+              borderBottom: "2px solid",
+              borderColor: "transparent",
+              color: isSelected ? "secondary.main" : "grey.600",
+              "&:hover": {
+                backgroundColor: "transparent",
+                color: isSelected ? "secondary.main" : "grey.700",
+              },
+              "&.Mui-selected": {
+                backgroundColor: "transparent",
+                color: "secondary.main",
+                borderColor: "secondary.main",
+              },
             }}
             onMouseEnter={handleClick}
             onClick={handleClick}
             onMouseLeave={handleClose}
             aria-describedby={popperId}
           >
-            <Activity mode={itemIcon ? "visible" : "hidden"}>
-              <ListItemIcon sx={{ minWidth: 36 }}>
-                {currentItem.id === lastItemId ? (
-                  <IconMinusVertical stroke={1.5} size="20px" />
-                ) : (
-                  itemIcon
-                )}
-              </ListItemIcon>
-            </Activity>
             <ListItemText
-              sx={{ mr: 1, mb: 0.25 }}
+              disableTypography
+              sx={{ mr: 0.5 }}
               primary={
                 <Typography
-                  variant={isSelected ? "h5" : "body1"}
-                  sx={{ color: "inherit" }}
+                  component="span"
+                  variant="body1"
+                  sx={{ fontWeight: 500, color: "inherit" }}
                 >
-                  {currentItem.id === lastItemId ? "asd" : currentItem.title}
+                  {currentItem.id === lastItemId ? "More" : currentItem.title}
                 </Typography>
               }
             />
             {openMini ? (
-              <IconChevronDown stroke={1.5} size="16px" />
+              <IconChevronDown stroke={1.5} size="16px" color="inherit" />
             ) : (
-              <IconChevronRight stroke={1.5} size="16px" />
+              <IconChevronRight stroke={1.5} size="16px" color="inherit" />
             )}
 
             <Activity mode={true ? "visible" : "hidden"}>

@@ -88,218 +88,55 @@ export default function NavItem({
   };
 
   return (
-    <>
-      {!isHorizontal ? (
-        <ListItemButton
-          component={Link}
-          to={item.url}
-          target={itemTarget}
-          disabled={item.disabled}
-          disableRipple={!drawerOpen}
-          sx={{
-            zIndex: 1201,
-            borderRadius: `${borderRadius}px`,
-            mb: 0.5,
-            ...(drawerOpen && level !== 1 && { ml: `${level * 18}px` }),
-            ...(!drawerOpen && { pl: 1.25 }),
-            ...((!drawerOpen || level !== 1) && {
-              py: level === 1 ? 0 : 1,
-              "&:hover": { bgcolor: "transparent" },
-              "&.Mui-selected": {
-                "&:hover": { bgcolor: "transparent" },
-                bgcolor: "transparent",
-              },
-            }),
-          }}
-          selected={isSelected}
-          onClick={() => itemHandler()}
-        >
-          <ButtonBase
-            aria-label="theme-icon"
-            sx={{ borderRadius: `${borderRadius}px` }}
-            disableRipple={drawerOpen}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: level === 1 ? 36 : 18,
-                color: isSelected ? "secondary.main" : "text.primary",
-                ...(!drawerOpen &&
-                  level === 1 && {
-                  borderRadius: `${borderRadius}px`,
-                  width: 46,
-                  height: 46,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  "&:hover": { bgcolor: "secondary.light" },
-                  ...(isSelected && {
-                    bgcolor: "secondary.light",
-                    "&:hover": { bgcolor: "secondary.light" },
-                  }),
-                }),
-
-                // dark overrides
-                ...theme.applyStyles("dark", {
-                  color:
-                    isSelected && drawerOpen ? "text.primary" : "text.primary",
-
-                  ...(!drawerOpen &&
-                    level === 1 && {
-                    "&:hover": {
-                      bgcolor: withAlpha(
-                        theme.vars.palette.secondary.main,
-                        0.25
-                      ),
-                    },
-                    ...(isSelected && {
-                      bgcolor: withAlpha(
-                        theme.vars.palette.secondary.main,
-                        0.25
-                      ),
-                      "&:hover": {
-                        bgcolor: withAlpha(
-                          theme.vars.palette.secondary.main,
-                          0.3
-                        ),
-                      },
-                    }),
-                  }),
-                }),
-              }}
-            >
-              {itemIcon}
-            </ListItemIcon>
-          </ButtonBase>
-
-          {(drawerOpen || (!drawerOpen && level !== 1)) && (
-            <Tooltip title={item.title} disableHoverListener={!hoverStatus}>
-              <ListItemText
-                primary={
-                  <Typography
-                    component="span"
-                    ref={ref}
-                    noWrap
-                    variant={isSelected ? "h5" : "body1"}
-                    sx={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      width: 102,
-                      color: "inherit",
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-                }
-                secondary={
-                  item.caption && (
-                    <Typography
-                      component="span"
-                      variant="caption"
-                      gutterBottom
-                      sx={{
-                        display: "block",
-                        fontSize: "0.6875rem",
-                        fontWeight: 500,
-                        color: "text.secondary",
-                        textTransform: "capitalize",
-                        lineHeight: 1.66,
-                      }}
-                    >
-                      Caption
-                    </Typography>
-                  )
-                }
-              />
-            </Tooltip>
-          )}
-
-          <Activity mode={drawerOpen && item.chip ? "visible" : "hidden"}>
-            <Chip
-              color={item.chip?.color}
-              variant={item.chip?.variant}
-              size={item.chip?.size}
-              label={item.chip?.label}
-              avatar={
-                <Activity mode={item.chip?.avatar ? "visible" : "hidden"}>
-                  <Avatar>{item.chip?.avatar}</Avatar>
-                </Activity>
-              }
-            />
-          </Activity>
-        </ListItemButton>
-      ) : (
-        <ListItemButton
-          component={Link}
-          to={item.url}
-          target={itemTarget}
-          disabled={item.disabled}
-          sx={{
-            borderRadius: isParents ? `${borderRadius}px` : 0,
-            mb: isParents ? 0 : 0.5,
-            alignItems: "flex-start",
-            backgroundColor: level > 1 ? "transparent !important" : "inherit",
-            py: 1,
-            pl: 2,
-            mr: isParents ? 1 : 0,
-          }}
-          selected={isSelected}
-          onClick={() => itemHandler()}
-        >
-          <ListItemIcon
+    <ListItemButton
+      component={Link}
+      to={item.url}
+      target={itemTarget}
+      disabled={item.disabled}
+      sx={{
+        borderRadius: 0,
+        py: 1.5,
+        px: 2,
+        minHeight: "auto",
+        alignItems: "center",
+        backgroundColor: "transparent",
+        borderBottom: "2px solid",
+        borderColor: "transparent",
+        color: isSelected ? "secondary.main" : "grey.600",
+        "&:hover": {
+          backgroundColor: "transparent",
+          color: isSelected ? "secondary.main" : "grey.700",
+        },
+        "&.Mui-selected": {
+          backgroundColor: "transparent",
+          color: "secondary.main",
+          borderColor: "secondary.main",
+          "&:hover": {
+            backgroundColor: "transparent",
+            color: "secondary.dark",
+            borderColor: "secondary.dark",
+          },
+        },
+      }}
+      selected={isSelected}
+      onClick={() => itemHandler()}
+    >
+      <ListItemText
+        disableTypography
+        primary={
+          <Typography
+            component="span"
+            variant="body1"
             sx={{
-              my: "auto",
-              minWidth: !item?.icon ? 18 : 36,
+              fontWeight: 500,
+              color: "inherit",
             }}
           >
-            {itemIcon}
-          </ListItemIcon>
-
-          <ListItemText
-            sx={{ mb: 0.25 }}
-            primary={
-              <Typography
-                component="span"
-                variant={isSelected ? "h5" : "body1"}
-                sx={{ color: "inherit" }}
-              >
-                {item.title}
-              </Typography>
-            }
-            secondary={
-              <Activity mode={item.caption ? "visible" : "hidden"}>
-                <Typography
-                  component="span"
-                  gutterBottom
-                  sx={{
-                    display: "block",
-                    fontSize: "0.6875rem",
-                    fontWeight: 500,
-                    color: "text.secondary",
-                    textTransform: "capitalize",
-                    lineHeight: 1.66,
-                  }}
-                >
-                  {item.caption}
-                </Typography>
-              </Activity>
-            }
-          />
-
-          <Activity mode={item.chip ? "visible" : "hidden"}>
-            <Chip
-              color={item.chip?.color}
-              variant={item.chip?.variant}
-              size={item.chip?.size}
-              label={item.chip?.label}
-              avatar={
-                <Activity mode={item.chip?.avatar ? "visible" : "hidden"}>
-                  <Avatar>{item.chip?.avatar}</Avatar>
-                </Activity>
-              }
-            />
-          </Activity>
-        </ListItemButton>
-      )}
-    </>
+            {item.title}
+          </Typography>
+        }
+      />
+    </ListItemButton>
   );
 }
 
