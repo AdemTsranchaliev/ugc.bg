@@ -489,7 +489,10 @@ export const ExploreLanding = ({ _tempIsExplore2 = false }: { _tempIsExplore2?: 
                     left: "50%",
                     transform: "translateX(-50%)",
                     zIndex: 100,
-                    width: "90%",
+                    width: {
+                        xs: "100%",
+                        md: "90%",
+                    },
                     backgroundColor: "#fff",
                     p: 2,
                     borderRadius: 4,
