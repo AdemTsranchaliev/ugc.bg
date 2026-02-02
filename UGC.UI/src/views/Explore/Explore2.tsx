@@ -228,75 +228,77 @@ export const Explore = () => {
   }, []);
 
   return (
-    <StyledPage>
-      <Stack spacing={3}>
-        {/* Landing */}
-        <ExploreLanding _tempIsExplore2={true} />
+    <>
+      {/* Landing */}
+      <ExploreLanding _tempIsExplore2={true} />
+      {/* Page content */}
+      <StyledPage>
+        <Stack spacing={3}>
+          {/* Results count */}
+          <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+            <Typography variant="h4" sx={{ px: { xs: 0, md: 2 }, fontWeight: 600 }}>
+              {mockListings.length.toLocaleString("bg-BG")} {mockListings.length === 1 ? "намерена обява" : "намерени обяви"}
+            </Typography>
 
-        {/* Results count */}
-        <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-          <Typography variant="h4" sx={{ px: { xs: 0, md: 2 }, fontWeight: 600 }}>
-            {mockListings.length.toLocaleString("bg-BG")} {mockListings.length === 1 ? "намерена обява" : "намерени обяви"}
-          </Typography>
+            <Typography variant="body1" sx={{ px: { xs: 0, md: 2 }, color: "text.secondary" }}>
+              Страници: 1-12
+            </Typography>
+          </Stack>
 
-          <Typography variant="body1" sx={{ px: { xs: 0, md: 2 }, color: "text.secondary" }}>
-            Страници: 1-12
-          </Typography>
+          {/* Filter sidebar + Listings Grid */}
+          <Grid container spacing={3}>
+            {/* Left: Filters */}
+            <Grid size={{ xs: 12, md: 2.5 }} sx={{
+              display: {
+                xs: "none",
+                md: "block",
+              }
+            }}>
+              <ProductFilter filter={filter} handelFilter={handelFilter} />
+            </Grid>
+
+            {/* Right: Cards */}
+            <Grid size={{ xs: 12, md: 9.5 }}>
+              <Stack spacing={2}>
+                <Grid container spacing={2} justifyContent="space-between">
+                  {mockListings.map((listing) => (
+                    <Grid size={{ xs: 6, sm: 6, lg: 3 }} key={listing.id}>
+                      <TalentCard1
+                        name={listing.userFullname}
+                        title={listing.category}
+                        rate={listing.offerPrice.toString()}
+                        ratingValue={listing.rating}
+                        ratingCountText={listing.reviewCount.toString()}
+                        experienceText={Math.max(1, Math.floor(listing.finishedProjects / 10)).toString()}
+                        finishedProjectsText={listing.finishedProjects.toString()}
+                        description={listing.description}
+                        imageUrl={listing.image}
+                        avatarUrl={listing.userPicture || listing.image}
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
+
+                {/* Pagination */}
+                <Pagination
+                  count={5}
+                  page={1}
+                  onChange={() => { }}
+                  shape="circular"
+                  size="large"
+                  color="standard"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mt: 4,
+                  }}
+                />
+              </Stack>
+            </Grid>
+          </Grid>
         </Stack>
-
-        {/* Filter sidebar + Listings Grid */}
-        <Grid container spacing={3}>
-          {/* Left: Filters */}
-          <Grid size={{ xs: 12, md: 2.5 }} sx={{
-            display: {
-              xs: "none",
-              md: "block",
-            }
-          }}>
-            <ProductFilter filter={filter} handelFilter={handelFilter} />
-          </Grid>
-
-          {/* Right: Cards */}
-          <Grid size={{ xs: 12, md: 9.5 }}>
-            <Stack spacing={2}>
-              <Grid container spacing={2} justifyContent="space-between">
-                {mockListings.map((listing) => (
-                  <Grid size={{ xs: 6, sm: 6, lg: 3 }} key={listing.id}>
-                    <TalentCard1
-                      name={listing.userFullname}
-                      title={listing.category}
-                      rate={listing.offerPrice.toString()}
-                      ratingValue={listing.rating}
-                      ratingCountText={listing.reviewCount.toString()}
-                      experienceText={Math.max(1, Math.floor(listing.finishedProjects / 10)).toString()}
-                      finishedProjectsText={listing.finishedProjects.toString()}
-                      description={listing.description}
-                      imageUrl={listing.image}
-                      avatarUrl={listing.userPicture || listing.image}
-                    />
-                  </Grid>
-                ))}
-              </Grid>
-
-              {/* Pagination */}
-              <Pagination
-                count={5}
-                page={1}
-                onChange={() => { }}
-                shape="circular"
-                size="large"
-                color="standard"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  mt: 4,
-                }}
-              />
-            </Stack>
-          </Grid>
-        </Grid>
-      </Stack>
-    </StyledPage>
+      </StyledPage>
+    </>
   );
 };
 

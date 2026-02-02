@@ -6,6 +6,8 @@ import {
   Rating,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import {
@@ -41,6 +43,9 @@ export const TalentCard1 = ({
   avatarUrl,
   onFavoriteClick,
 }: TalentCard1Props) => {
+  const theme = useTheme();
+  const downSM = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Card
       elevation={0}
@@ -252,23 +257,25 @@ export const TalentCard1 = ({
         </Stack>
 
         {/* Description */}
-        <Typography
-          sx={{
-            mt: { xs: 0.7, md: 1.4 },
-            color: "rgba(47, 52, 58, 0.75)",
-            fontSize: { xs: 10.5, md: 13 },
-            lineHeight: 1.35,
-            textWrap: "pretty",
-            display: "-webkit-box",
-            WebkitLineClamp: { xs: 2, md: 3 },
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            maxHeight: { xs: "calc(1.35em * 2)", md: "calc(1.35em * 3)" },
-          }}
-        >
-          {description}
-        </Typography>
+        {!downSM && (
+          <Typography
+            sx={{
+              mt: { xs: 0.7, md: 1.4 },
+              color: "rgba(47, 52, 58, 0.75)",
+              fontSize: { xs: 10.5, md: 13 },
+              lineHeight: 1.35,
+              textWrap: "pretty",
+              display: "-webkit-box",
+              WebkitLineClamp: { xs: 2, md: 3 },
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              maxHeight: { xs: "calc(1.35em * 2)", md: "calc(1.35em * 3)" },
+            }}
+          >
+            {description}
+          </Typography>
+        )}
       </Box>
     </Card>
   );
