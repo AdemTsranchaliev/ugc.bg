@@ -419,6 +419,8 @@ export const ExploreLanding = ({ _tempIsExplore2 = false }: { _tempIsExplore2?: 
                     height: 250,
                     p: 2,
                     borderRadius,
+                    // On mobile let the background image extend to full viewport (no clip)
+                    [theme.breakpoints.down("md")]: { overflow: "visible" },
                     "&:before": {
                         content: '""',
                         position: "absolute",
@@ -433,6 +435,12 @@ export const ExploreLanding = ({ _tempIsExplore2 = false }: { _tempIsExplore2?: 
                         filter: "blur(2px) brightness(0.8)",
                         backgroundRepeat: "no-repeat",
                         pointerEvents: "none",
+                        // Full viewport width on mobile – only this image layer spreads edge-to-edge
+                        [theme.breakpoints.down("md")]: {
+                            width: "100vw",
+                            left: "50%",
+                            marginLeft: "-50vw",
+                        },
                     },
                     "&::after": {
                         content: '""',
@@ -443,6 +451,11 @@ export const ExploreLanding = ({ _tempIsExplore2 = false }: { _tempIsExplore2?: 
                         bottom: 0,
                         backgroundColor: "rgba(0, 0, 0, 0.5)",
                         zIndex: 1,
+                        [theme.breakpoints.down("md")]: {
+                            width: "100vw",
+                            left: "50%",
+                            marginLeft: "-50vw",
+                        },
                     },
                 }}
             >
