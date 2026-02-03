@@ -184,11 +184,10 @@ const mockListings = [
 ];
 
 
-export const Explore = () => {
-
-  console.time("Explore render");
+export const ExploreList = () => {
+  console.time("ExploreList render");
   useEffect(() => {
-    console.timeEnd("Explore render");
+    console.timeEnd("ExploreList render");
   });
 
   return (
@@ -263,4 +262,4 @@ export const Explore = () => {
   );
 };
 
-export default Explore;
+export default ExploreList;

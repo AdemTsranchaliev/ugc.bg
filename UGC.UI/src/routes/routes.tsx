@@ -7,8 +7,8 @@ import Loader from "../ui-component/Loader";
 
 // Lazy load route components for code splitting
 const HomePage = lazy(() => import("../views/Home").then(module => ({ default: module.HomePage })));
-const Explore = lazy(() => import("../views/Explore").then(module => ({ default: module.Explore })));
-const Explore2 = lazy(() => import("../views/Explore/Explore2").then(module => ({ default: module.default })));
+const ExploreList = lazy(() => import("../views/Explore").then(module => ({ default: module.ExploreList })));
+const ExploreWithFilters = lazy(() => import("../views/Explore").then(module => ({ default: module.ExploreWithFilters })));
 const AuthPage = lazy(() => import("../views/Auth").then(module => ({ default: module.AuthPage })));
 const ForgotPasswordPage = lazy(() => import("../views/Auth").then(module => ({ default: module.ForgotPasswordPage })));
 const VerifyEmailPage = lazy(() => import("../views/Auth").then(module => ({ default: module.VerifyEmailPage })));
@@ -41,7 +41,7 @@ export const routes = createBrowserRouter([
         path: "/explore",
         element: (
           <SuspenseWrapper>
-            <Explore />
+            <ExploreList />
           </SuspenseWrapper>
         )
       },
@@ -49,7 +49,7 @@ export const routes = createBrowserRouter([
         path: "/explore2",
         element: (
           <SuspenseWrapper>
-            <Explore2 />
+            <ExploreWithFilters />
           </SuspenseWrapper>
         )
       },

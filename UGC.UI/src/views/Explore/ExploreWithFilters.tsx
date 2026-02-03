@@ -195,12 +195,12 @@ const defaultFilter = {
   type: "all",
 };
 
-export const Explore = () => {
+export const ExploreWithFilters = () => {
   const [filter, setFilter] = useState(defaultFilter);
 
-  console.time("Explore render");
+  console.time("ExploreWithFilters render");
   useEffect(() => {
-    console.timeEnd("Explore render");
+    console.timeEnd("ExploreWithFilters render");
   });
 
   const handelFilter = useCallback((filterType: string, value: string) => {
@@ -230,7 +230,7 @@ export const Explore = () => {
   return (
     <>
       {/* Landing */}
-      <ExploreLanding _tempIsExplore2={true} />
+      <ExploreLanding _tempIsExplore2 />
       {/* Page content */}
       <StyledPage>
         <Stack spacing={3}>
@@ -302,4 +302,4 @@ export const Explore = () => {
   );
 };
 
-export default Explore;
+export default ExploreWithFilters;
