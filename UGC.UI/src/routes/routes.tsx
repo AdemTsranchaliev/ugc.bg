@@ -14,6 +14,7 @@ const ForgotPasswordPage = lazy(() => import("../views/Auth").then(module => ({ 
 const VerifyEmailPage = lazy(() => import("../views/Auth").then(module => ({ default: module.VerifyEmailPage })));
 const CreatorDashboardPage = lazy(() => import("../views/Creator").then(module => ({ default: module.CreatorDashboardPage })));
 const CreatorSettingsPage = lazy(() => import("../views/Creator").then(module => ({ default: module.CreatorSettingsPage })));
+const CreatorProfilePage = lazy(() => import("../views/Creator").then(module => ({ default: module.CreatorProfilePage })));
 const PublicProfilePage = lazy(() => import("../views/Profile").then(module => ({ default: module.PublicProfilePage })));
 const NotFound = lazy(() => import("../views/Maintenance").then(module => ({ default: module.NotFound })));
 
@@ -90,6 +91,14 @@ export const routes = createBrowserRouter([
         element: (
           <SuspenseWrapper>
             <CreatorSettingsPage />
+          </SuspenseWrapper>
+        )
+      },
+      {
+        path: "/creator/profile",
+        element: (
+          <SuspenseWrapper>
+            <CreatorProfilePage />
           </SuspenseWrapper>
         )
       },
