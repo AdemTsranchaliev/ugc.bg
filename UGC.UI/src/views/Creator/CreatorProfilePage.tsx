@@ -27,7 +27,6 @@ import {
   VideoSettings,
 } from "@mui/icons-material";
 import { IconBrandInstagram, IconBrandTiktok, IconBrandYoutube } from '@tabler/icons-react';
-// import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
 
 // project imports
 import MainCard from "../../ui-component/cards/MainCard";
@@ -67,21 +66,22 @@ const PORTFOLIO_IMAGES = [
   },
 ];
 
-const TAGS = ["Skincare", "Tech", "Apps", "Fashion"];
-const PORTFOLIO_TABS = ["All", "UGC Reels", "Unboxing", "Photos"];
+const TAGS = ["Грижа за кожата", "Технологии", "Приложения", "Мода"];
+const PORTFOLIO_TABS = ["Всички", "UGC Reels", "Unboxing", "Снимки", "Видеа"];
+const PORTFOLIO_TYPE_LABELS: Record<string, string> = { VIDEO: "ВИДЕО", AD: "РЕКЛАМА", PHOTO: "СНИМКА" };
 
 const SERVICES = [
   {
-    title: "1 UGC Video (15-30s)",
-    description: "Includes hook variations & editing",
-    price: "Starting at $150",
+    title: "1 UGC видео (15–30 сек)",
+    description: "Включва варианти на куки и монтаж",
+    price: "От 150 лв.",
     icon: <Videocam sx={{ color: "dark.text.primary" }} />,
     bgColor: "orange.main",
   },
   {
-    title: "Product Photography",
-    description: "5 High-res edited photos",
-    price: "Starting at $80",
+    title: "Продуктова фотография",
+    description: "5 снимки с висока резолюция и монтаж",
+    price: "От 80 лв.",
     icon: <CameraAlt sx={{ color: "#fff" }} />,
     bgColor: "primary.main",
   },
@@ -90,14 +90,14 @@ const SERVICES = [
 const TESTIMONIALS = [
   {
     quote:
-      "Elena is absolutely amazing to work with! Her content converted 3x better than our previous ads.",
+      "Елена е абсолютно невероятна за работа! Нейното съдържание конвертираше 3 пъти по-добре от предишните ни реклами.",
     name: "Sarah J.",
     company: "GlowSkin",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&q=80",
   },
   {
     quote:
-      "High quality, fast delivery, and super creative hooks. Highly recommended!",
+      "Високо качество, бърза доставка и супер креативни куки. Горещо препоръчваме!",
     name: "Mike T.",
     company: "TechStart",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
@@ -221,9 +221,9 @@ export default function CreatorProfilePage() {
                     color="text.secondary"
                     sx={{ mt: 1.5, }}
                   >
-                    Professional UGC Creator specializing in beauty & tech. I
-                    create authentic hooks that convert viewers into customers.
-                    Let&apos;s create magic! ✨
+                    Професионален UGC създател, специализиран в красота и технологии.
+                    Създавам автентични куки, които превръщат зрителите в клиенти.
+                    Нека създадем магия! ✨
                   </Typography>
 
                   <Stack
@@ -255,7 +255,7 @@ export default function CreatorProfilePage() {
                         24
                       </Typography>
                       <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
-                        PROJECTS
+                        ПРОЕКТИ
                       </Typography>
                     </Box>
                     <Box sx={{ textAlign: "center" }}>
@@ -263,7 +263,7 @@ export default function CreatorProfilePage() {
                         1.2k
                       </Typography>
                       <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
-                        FOLLOWERS
+                        ПОСЛЕДОВАТЕЛИ
                       </Typography>
                     </Box>
                   </Stack>
@@ -298,7 +298,7 @@ export default function CreatorProfilePage() {
                       fontWeight: 600,
                     }}
                   >
-                    Edit Profile Details
+                    Редактирай профила
                   </Button>
                 </Box>
               </MainCard>
@@ -333,34 +333,35 @@ export default function CreatorProfilePage() {
                     gap={1}
                   >
                     <Typography variant="h4">
-                      Featured Reel
+                      Избрано видео
                     </Typography>
                     <Stack direction="row" alignItems="center" spacing={1}>
+                      <Fab variant="extended" size="small" sx={{ boxShadow: 'none' }}>
+                        <VideoSettings fontSize="small" sx={{ mr: 1 }} />
+                        Смени видеото
+                      </Fab>
                       <FormControlLabel
+                        labelPlacement="start"
                         control={
                           <StyledSwitch
                             checked={featuredReelPublic}
                             onChange={(_, v) => setFeaturedReelPublic(v)}
-                            // color="success"
                             size="small"
                           />
                         }
                         label={
                           <Typography variant="h5" sx={{ color: featuredReelPublic ? 'text.primary' : 'text.secondary', fontWeight: 'bold', mx: 1 }}>
-                            {featuredReelPublic ? "Public" : "Private"}
+                            {featuredReelPublic ? "Публично" : "Лично"}
                           </Typography>
                         }
                       />
-                      <Fab variant="extended" size="small" sx={{ boxShadow: 'none' }}>
-                        <VideoSettings fontSize="small" sx={{ mr: 1 }} />
-                        Change Video
-                      </Fab>
-                      <Tooltip title="Edit">
+
+                      <Tooltip title="Редактиране">
                         <IconButton size="small">
                           <Edit fontSize="small" />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="Drag to reorder">
+                      <Tooltip title="Плъзнете за пренареждане">
                         <Stack
                           direction="row"
                           alignItems="center"
@@ -371,7 +372,7 @@ export default function CreatorProfilePage() {
                           <DragIndicator fontSize="small" />
                         </Stack>
                       </Tooltip>
-                      <Tooltip title="More options">
+                      <Tooltip title="Още опции">
                         <IconButton size="small">
                           <MoreVert fontSize="small" />
                         </IconButton>
@@ -442,20 +443,20 @@ export default function CreatorProfilePage() {
                     gap={1}
                   >
                     <Typography variant="h4">
-                      Portfolio
+                      Портфолио
                     </Typography>
                     <Stack direction="row" spacing={0.5}>
-                      <Tooltip title="Edit">
+                      <Tooltip title="Редактиране">
                         <IconButton size="small">
                           <Edit fontSize="small" />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="Initiate drag to reorder">
+                      <Tooltip title="Плъзнете за пренареждане">
                         <IconButton size="small">
                           <GridView fontSize="small" />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="More options">
+                      <Tooltip title="Още опции">
                         <IconButton size="small">
                           <MoreVert fontSize="small" />
                         </IconButton>
@@ -503,7 +504,7 @@ export default function CreatorProfilePage() {
                             }}
                           />
                           <Chip
-                            label={item.type}
+                            label={PORTFOLIO_TYPE_LABELS[item.type] ?? item.type}
                             size="small"
                             sx={{
                               position: "absolute",
@@ -555,7 +556,7 @@ export default function CreatorProfilePage() {
                         <Stack alignItems="center" spacing={0.5}>
                           <Add sx={{ fontSize: 48, color: "grey.500" }} />
                           <Typography variant="body2" color="text.secondary" fontWeight={500}>
-                            ADD MEDIA
+                            ДОБАВИ
                           </Typography>
                         </Stack>
                       </Box>
@@ -582,7 +583,7 @@ export default function CreatorProfilePage() {
                   }}
                 >
                   <Typography variant="h4" sx={{ mb: 1.5 }}>
-                    Services
+                    Услуги
                   </Typography>
                   <Stack spacing={2}>
                     {SERVICES.map((service, index) => (
@@ -643,7 +644,7 @@ export default function CreatorProfilePage() {
                       fontWeight: 600,
                     }}
                   >
-                    Add New Service
+                    Добави нова услуга
                   </Button>
                 </MainCard>
 
@@ -673,7 +674,7 @@ export default function CreatorProfilePage() {
                     gap={1}
                   >
                     <Typography variant="h4">
-                      Client Love
+                      Отзиви от клиенти
                     </Typography>
 
                   </Stack>
