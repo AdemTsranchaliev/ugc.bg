@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 // material-ui
+import { useTheme, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -105,6 +106,8 @@ const TESTIMONIALS = [
 ];
 
 export default function CreatorProfilePage() {
+  const theme = useTheme();
+  const downSM = useMediaQuery(theme.breakpoints.down("sm"));
   const [portfolioTab, setPortfolioTab] = useState(0);
   const [featuredReelPublic, setFeaturedReelPublic] = useState(true);
 
@@ -336,26 +339,14 @@ export default function CreatorProfilePage() {
                       Избрано видео
                     </Typography>
                     <Stack direction="row" alignItems="center" spacing={1}>
-                      <Fab variant="extended" size="small" sx={{ boxShadow: 'none' }}>
-                        <VideoSettings fontSize="small" sx={{ mr: 1 }} />
-                        Смени видеото
-                      </Fab>
-                      <FormControlLabel
-                        labelPlacement="start"
-                        control={
-                          <StyledSwitch
-                            checked={featuredReelPublic}
-                            onChange={(_, v) => setFeaturedReelPublic(v)}
-                            size="small"
-                          />
-                        }
-                        label={
-                          <Typography variant="h5" sx={{ color: featuredReelPublic ? 'text.primary' : 'text.secondary', fontWeight: 'bold', mx: 1 }}>
-                            {featuredReelPublic ? "Публично" : "Лично"}
-                          </Typography>
-                        }
-                      />
-
+                      {!downSM && (
+                        <>
+                          <Fab variant="extended" size="small" sx={{ boxShadow: 'none', }}>
+                            <VideoSettings fontSize="small" sx={{ mr: 1 }} />
+                            Смени видеото
+                          </Fab>
+                        </>
+                      )}
                       <Tooltip title="Редактиране">
                         <IconButton size="small">
                           <Edit fontSize="small" />
@@ -582,9 +573,45 @@ export default function CreatorProfilePage() {
                     },
                   }}
                 >
-                  <Typography variant="h4" sx={{ mb: 1.5 }}>
-                    Услуги
-                  </Typography>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    flexWrap="wrap"
+                    gap={1}
+                  >
+                    <Typography variant="h4">
+                      Услуги
+                    </Typography>
+                    <Stack direction="row" spacing={0.5}>
+                      <FormControlLabel
+                        labelPlacement="start"
+                        control={
+                          <StyledSwitch
+                            checked={featuredReelPublic}
+                            onChange={(_, v) => setFeaturedReelPublic(v)}
+                            size="small"
+                          />
+                        }
+                        label={
+                          <Typography variant="h5" sx={{ color: featuredReelPublic ? 'text.primary' : 'text.secondary', fontWeight: 'bold', mx: 1 }}>
+                            {featuredReelPublic ? "Публично" : "Лично"}
+                          </Typography>
+                        }
+                      />
+                      <Tooltip title="Редактиране">
+                        <IconButton size="small">
+                          <Edit fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="Още опции">
+                        <IconButton size="small">
+                          <MoreVert fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    </Stack>
+                  </Stack>
+
                   <Stack spacing={2}>
                     {SERVICES.map((service, index) => (
                       <Stack
