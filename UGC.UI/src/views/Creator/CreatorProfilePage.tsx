@@ -456,6 +456,8 @@ export default function CreatorProfilePage() {
                   </Stack>
 
                   <Tabs
+                    variant="scrollable"
+                    scrollButtons="auto"
                     value={portfolioTab}
                     onChange={(_, v) => setPortfolioTab(v)}
                     sx={{
