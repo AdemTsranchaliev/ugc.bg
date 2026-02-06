@@ -27,12 +27,18 @@ import {
   GridView,
   VisibilityOff,
   Delete,
+  DragIndicator,
+  VideoSettings,
 } from "@mui/icons-material";
 import { IconBrandInstagram, IconBrandTiktok, IconBrandYoutube } from '@tabler/icons-react';
+// import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
 
 // project imports
 import MainCard from "../../ui-component/cards/MainCard";
 import Divider from "@mui/material/Divider";
+import Tooltip from "@mui/material/Tooltip";
+import { StyledSwitch } from "../../ui-component/StyledSwitch";
+import Fab from "@mui/material/Fab";
 
 // Placeholder images matching reference (Elena Petrova, Moraine Lake cover, portfolio items)
 const COVER_IMAGE =
@@ -124,18 +130,18 @@ export default function CreatorProfilePage() {
                 border
                 boxShadow
                 shadow
+                contentSX={{ p: 0 }}
                 sx={{
                   borderRadius: 8,
                   overflow: "hidden",
                   border: "1px solid",
                   borderColor: "grey.200",
-                  boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
                   "&:hover": {
-                    boxShadow: "0 18px 44px rgba(0,0,0,0.14)",
+                    boxShadow: "0 10px 44px rgba(0,0,0,0.14)",
                     transition: "all 0.3s ease-in-out",
                   },
                 }}
-                contentSX={{ p: 0 }}
               >
                 {/* Cover image with edit overlay */}
                 <Box
@@ -307,8 +313,19 @@ export default function CreatorProfilePage() {
                 <MainCard
                   border
                   boxShadow
-                  sx={{ borderRadius: 3, overflow: "hidden" }}
+                  shadow
                   contentSX={{ p: 2 }}
+                  sx={{
+                    borderRadius: 5,
+                    overflow: "hidden",
+                    border: "1px solid",
+                    borderColor: "grey.200",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
+                    "&:hover": {
+                      boxShadow: "0 10px 44px rgba(0,0,0,0.14)",
+                      transition: "all 0.3s ease-in-out",
+                    },
+                  }}
                 >
                   <Stack
                     direction="row"
@@ -317,31 +334,50 @@ export default function CreatorProfilePage() {
                     flexWrap="wrap"
                     gap={1}
                   >
-                    <Typography variant="h6" fontWeight={700}>
+                    <Typography variant="h4">
                       Featured Reel
                     </Typography>
                     <Stack direction="row" alignItems="center" spacing={1}>
                       <FormControlLabel
                         control={
-                          <Switch
+                          <StyledSwitch
                             checked={featuredReelPublic}
                             onChange={(_, v) => setFeaturedReelPublic(v)}
-                            color="success"
+                            // color="success"
                             size="small"
                           />
                         }
                         label={
-                          <Typography variant="body2" fontWeight={500}>
-                            Public
+                          <Typography variant="h5" sx={{ color: featuredReelPublic ? 'text.primary' : 'text.secondary', fontWeight: 'bold', mx: 1 }}>
+                            {featuredReelPublic ? "Public" : "Private"}
                           </Typography>
                         }
                       />
-                      <IconButton size="small">
-                        <Edit fontSize="small" />
-                      </IconButton>
-                      <IconButton size="small">
-                        <MoreVert fontSize="small" />
-                      </IconButton>
+                      <Fab variant="extended" size="small" sx={{ boxShadow: 'none' }}>
+                        <VideoSettings fontSize="small" sx={{ mr: 1 }} />
+                        Change Video
+                      </Fab>
+                      <Tooltip title="Edit">
+                        <IconButton size="small">
+                          <Edit fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="Drag to reorder">
+                        <Stack
+                          direction="row"
+                          alignItems="center"
+                          sx={{
+                            cursor: "grab",
+                          }}
+                        >
+                          <DragIndicator fontSize="small" />
+                        </Stack>
+                      </Tooltip>
+                      <Tooltip title="More options">
+                        <IconButton size="small">
+                          <MoreVert fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
                     </Stack>
                   </Stack>
                   <Box
@@ -350,7 +386,7 @@ export default function CreatorProfilePage() {
                       borderRadius: 2,
                       overflow: "hidden",
                       position: "relative",
-                      height: 220,
+                      height: 320,
                       backgroundImage: `url(${FEATURED_REEL_PLACEHOLDER})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
@@ -369,7 +405,7 @@ export default function CreatorProfilePage() {
                     />
                     <IconButton
                       sx={{
-                        bgcolor: "rgba(255,255,255,0.9)",
+                        backgroundColor: "rgba(255, 255, 255, 0.4)",
                         color: "text.primary",
                         width: 64,
                         height: 64,
@@ -666,7 +702,7 @@ export default function CreatorProfilePage() {
           </Grid>
 
         </Box>
-      </Box>
+      </Box >
     </Box >
   );
 }
