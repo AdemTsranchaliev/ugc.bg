@@ -11,7 +11,6 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 // icons
@@ -21,12 +20,9 @@ import {
   MoreVert,
   PlayArrow,
   Add,
-  Visibility,
   Videocam,
   CameraAlt,
   GridView,
-  VisibilityOff,
-  Delete,
   DragIndicator,
   VideoSettings,
 } from "@mui/icons-material";
@@ -47,10 +43,11 @@ const AVATAR_IMAGE =
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=400&q=80";
 const FEATURED_REEL_PLACEHOLDER =
   "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80";
+
 const PORTFOLIO_IMAGES = [
   {
     url: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=400&q=80",
-    type: "REEL" as const,
+    type: "VIDEO" as const,
   },
   {
     url: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=400&q=80",
@@ -58,7 +55,7 @@ const PORTFOLIO_IMAGES = [
   },
   {
     url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=400&q=80",
-    type: "REEL" as const,
+    type: "VIDEO" as const,
   },
   {
     url: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80",
@@ -78,13 +75,15 @@ const SERVICES = [
     title: "1 UGC Video (15-30s)",
     description: "Includes hook variations & editing",
     price: "Starting at $150",
-    icon: <Videocam sx={{ color: "primary.main" }} />,
+    icon: <Videocam sx={{ color: "dark.text.primary" }} />,
+    bgColor: "orange.main",
   },
   {
     title: "Product Photography",
     description: "5 High-res edited photos",
     price: "Starting at $80",
-    icon: <CameraAlt sx={{ color: "secondary.main" }} />,
+    icon: <CameraAlt sx={{ color: "#fff" }} />,
+    bgColor: "primary.main",
   },
 ];
 
@@ -108,7 +107,6 @@ const TESTIMONIALS = [
 export default function CreatorProfilePage() {
   const [portfolioTab, setPortfolioTab] = useState(0);
   const [featuredReelPublic, setFeaturedReelPublic] = useState(true);
-  const [clientLoveHidden, setClientLoveHidden] = useState(false);
 
   return (
     <Box
@@ -422,8 +420,19 @@ export default function CreatorProfilePage() {
                 <MainCard
                   border
                   boxShadow
-                  sx={{ borderRadius: 3, overflow: "hidden" }}
+                  shadow
                   contentSX={{ p: 2 }}
+                  sx={{
+                    borderRadius: 5,
+                    overflow: "hidden",
+                    border: "1px solid",
+                    borderColor: "grey.200",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
+                    "&:hover": {
+                      boxShadow: "0 10px 44px rgba(0,0,0,0.14)",
+                      transition: "all 0.3s ease-in-out",
+                    },
+                  }}
                 >
                   <Stack
                     direction="row"
@@ -432,19 +441,25 @@ export default function CreatorProfilePage() {
                     flexWrap="wrap"
                     gap={1}
                   >
-                    <Typography variant="h6" fontWeight={700}>
+                    <Typography variant="h4">
                       Portfolio
                     </Typography>
                     <Stack direction="row" spacing={0.5}>
-                      <IconButton size="small">
-                        <Edit fontSize="small" />
-                      </IconButton>
-                      <IconButton size="small">
-                        <GridView fontSize="small" />
-                      </IconButton>
-                      <IconButton size="small">
-                        <MoreVert fontSize="small" />
-                      </IconButton>
+                      <Tooltip title="Edit">
+                        <IconButton size="small">
+                          <Edit fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="Initiate drag to reorder">
+                        <IconButton size="small">
+                          <GridView fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="More options">
+                        <IconButton size="small">
+                          <MoreVert fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
                     </Stack>
                   </Stack>
 
@@ -454,8 +469,8 @@ export default function CreatorProfilePage() {
                     sx={{
                       mt: 1.5,
                       minHeight: "auto",
-                      "& .MuiTab-root": { minHeight: "auto", py: 1, textTransform: "none", fontWeight: 500 },
-                      "& .Mui-selected": { color: "primary.main", fontWeight: 600 },
+                      "& .MuiTab-root": { minHeight: "auto", py: 1, textTransform: "none", fontWeight: "bold" },
+                      "& .Mui-selected": { color: "primary.main", fontWeight: "bold" },
                       "& .MuiTabs-indicator": { backgroundColor: "primary.main" },
                     }}
                   >
@@ -498,45 +513,26 @@ export default function CreatorProfilePage() {
                               color: "white",
                               fontWeight: 600,
                               fontSize: "0.7rem",
+                              borderRadius: 2,
                             }}
                           />
-                          <Box
-                            sx={{
-                              position: "absolute",
-                              bottom: 8,
-                              left: 8,
-                              bgcolor: "rgba(0,0,0,0.5)",
-                              borderRadius: 1,
-                              p: 0.5,
-                            }}
-                          >
-                            <PlayArrow sx={{ color: "white", fontSize: 20 }} />
-                          </Box>
-                          {index === 1 && (
-                            <Stack
-                              className="portfolio-actions"
-                              direction="row"
-                              alignItems="center"
-                              justifyContent="center"
-                              spacing={1}
+                          {item.type === "VIDEO" && (
+                            <IconButton
                               sx={{
                                 position: "absolute",
-                                inset: 0,
-                                bgcolor: "rgba(0,0,0,0.4)",
-                                opacity: 0,
-                                transition: "opacity 0.2s",
+                                bottom: 8,
+                                left: 8,
+                                backgroundColor: "rgba(255, 255, 255, 0.4)",
+                                color: "text.primary",
+                                width: 30,
+                                height: 30,
+                                zIndex: 1,
+                                cursor: "pointer",
+                                "&:hover": { bgcolor: "white" },
                               }}
                             >
-                              <Chip label="S" size="small" variant="outlined" />
-                              <Chip label="M" size="small" color="primary" />
-                              <Chip label="L" size="small" variant="outlined" />
-                              <IconButton size="small" sx={{ bgcolor: "primary.main", color: "white" }}>
-                                <Edit fontSize="small" />
-                              </IconButton>
-                              <IconButton size="small" sx={{ bgcolor: "error.main", color: "white" }}>
-                                <Delete fontSize="small" />
-                              </IconButton>
-                            </Stack>
+                              <PlayArrow sx={{ fontSize: 20 }} />
+                            </IconButton>
                           )}
                         </Box>
                       </Grid>
@@ -571,10 +567,21 @@ export default function CreatorProfilePage() {
                 <MainCard
                   border
                   boxShadow
-                  sx={{ borderRadius: 3 }}
+                  shadow
                   contentSX={{ p: 2 }}
+                  sx={{
+                    borderRadius: 5,
+                    overflow: "hidden",
+                    border: "1px solid",
+                    borderColor: "grey.200",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
+                    "&:hover": {
+                      boxShadow: "0 10px 44px rgba(0,0,0,0.14)",
+                      transition: "all 0.3s ease-in-out",
+                    },
+                  }}
                 >
-                  <Typography variant="h6" fontWeight={700} sx={{ mb: 1.5 }}>
+                  <Typography variant="h4" sx={{ mb: 1.5 }}>
                     Services
                   </Typography>
                   <Stack spacing={2}>
@@ -582,26 +589,43 @@ export default function CreatorProfilePage() {
                       <Stack
                         key={index}
                         direction="row"
-                        alignItems="flex-start"
+                        alignItems="center"
                         spacing={2}
                         sx={{
                           p: 1.5,
-                          borderRadius: 2,
-                          border: "1px solid",
-                          borderColor: "grey.200",
                         }}
                       >
-                        <Box sx={{ pt: 0.25 }}>{service.icon}</Box>
-                        <Stack flex={1} spacing={0.25}>
+                        <Stack
+                          direction="row"
+                          alignItems="center"
+                          justifyContent="center"
+                          sx={{
+                            p: 1.5,
+                            backgroundColor: service.bgColor,
+                            borderRadius: "50%",
+                          }}>
+                          {service.icon}
+                        </Stack>
+
+                        <Stack direction="column">
                           <Typography variant="subtitle1" fontWeight={600}>
                             {service.title}
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
                             {service.description}
                           </Typography>
-                          <Typography variant="body2" fontWeight={600} color="primary.main">
-                            {service.price}
-                          </Typography>
+                          <Chip
+                            sx={{
+                              height: 'auto',
+                              width: 'fit-content',
+                              borderRadius: 1,
+                            }}
+                            label={
+                              <Typography variant="caption" sx={{ fontWeight: 600 }}>
+                                {service.price}
+                              </Typography>
+                            }
+                          />
                         </Stack>
                       </Stack>
                     ))}
@@ -627,8 +651,19 @@ export default function CreatorProfilePage() {
                 <MainCard
                   border
                   boxShadow
-                  sx={{ borderRadius: 3 }}
+                  shadow
                   contentSX={{ p: 2 }}
+                  sx={{
+                    borderRadius: 5,
+                    overflow: "hidden",
+                    border: "1px solid",
+                    borderColor: "grey.200",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
+                    "&:hover": {
+                      boxShadow: "0 10px 44px rgba(0,0,0,0.14)",
+                      transition: "all 0.3s ease-in-out",
+                    },
+                  }}
                 >
                   <Stack
                     direction="row"
@@ -637,72 +672,48 @@ export default function CreatorProfilePage() {
                     flexWrap="wrap"
                     gap={1}
                   >
-                    <Typography variant="h6" fontWeight={700}>
+                    <Typography variant="h4">
                       Client Love
                     </Typography>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={clientLoveHidden}
-                          onChange={(_, v) => setClientLoveHidden(v)}
-                          size="small"
-                        />
-                      }
-                      label={
-                        <Stack direction="row" alignItems="center" spacing={0.5}>
-                          {clientLoveHidden ? (
-                            <VisibilityOff fontSize="small" />
-                          ) : (
-                            <Visibility fontSize="small" />
-                          )}
-                          <Typography variant="body2" fontWeight={500}>
-                            {clientLoveHidden ? "HIDDEN" : "VISIBLE"}
-                          </Typography>
-                        </Stack>
-                      }
-                    />
+
                   </Stack>
-                  {!clientLoveHidden && (
-                    <Grid container spacing={2} sx={{ mt: 1 }}>
-                      {TESTIMONIALS.map((t, i) => (
-                        <Grid size={{ xs: 12, sm: 6 }} key={i}>
-                          <Box
-                            sx={{
-                              p: 2,
-                              borderRadius: 2,
-                              border: "1px solid",
-                              borderColor: "grey.200",
-                            }}
-                          >
-                            <Stack direction="row" spacing={0.5} sx={{ mb: 1 }}>
-                              {[1, 2, 3, 4, 5].map((_) => (
-                                <Star key={_} sx={{ color: "#FDB022", fontSize: 18 }} />
-                              ))}
-                            </Stack>
-                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
-                              &quot;{t.quote}&quot;
+                  <Grid container spacing={2} sx={{ mt: 1 }}>
+                    {TESTIMONIALS.map((t, i) => (
+                      <Grid size={{ xs: 12, sm: 6 }} key={i}>
+                        <Box
+                          sx={{
+                            p: 2,
+                            borderRadius: 2,
+                            backgroundColor: "#f8f9fb",
+                          }}
+                        >
+                          <Stack direction="row" spacing={0.5} sx={{ mb: 1 }}>
+                            {[1, 2, 3, 4, 5].map((_) => (
+                              <Star key={_} sx={{ color: "#FDB022", fontSize: 18 }} />
+                            ))}
+                          </Stack>
+                          <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
+                            &quot;{t.quote}&quot;
+                          </Typography>
+                          <Stack direction="row" alignItems="center" spacing={1}>
+                            <Avatar
+                              src={t.avatar}
+                              sx={{ width: 32, height: 32 }}
+                            />
+                            <Typography variant="body2" fontWeight={600}>
+                              {t.name}, {t.company}
                             </Typography>
-                            <Stack direction="row" alignItems="center" spacing={1}>
-                              <Avatar
-                                src={t.avatar}
-                                sx={{ width: 32, height: 32 }}
-                              />
-                              <Typography variant="body2" fontWeight={600}>
-                                {t.name}, {t.company}
-                              </Typography>
-                            </Stack>
-                          </Box>
-                        </Grid>
-                      ))}
-                    </Grid>
-                  )}
+                          </Stack>
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
                 </MainCard>
               </Stack>
             </Grid>
           </Grid>
-
         </Box>
-      </Box >
+      </Box>
     </Box >
   );
 }
