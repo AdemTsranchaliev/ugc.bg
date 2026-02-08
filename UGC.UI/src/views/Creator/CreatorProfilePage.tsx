@@ -205,7 +205,7 @@ export default function CreatorProfilePage() {
                   spacing={1}
                   flexWrap="wrap"
                 >
-                  <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
+                  <Typography variant="body2" color="primary.main" sx={{ fontWeight: 600 }}>
                     @elena_ugc
                   </Typography>
                   <Chip
@@ -231,7 +231,6 @@ export default function CreatorProfilePage() {
                   direction="row"
                   flexWrap="wrap"
                   gap={0.75}
-                  justifyContent="center"
                   sx={{ my: 2 }}
                 >
                   {TAGS.map((tag) => (
@@ -720,7 +719,7 @@ export default function CreatorProfilePage() {
                             <Star key={_} sx={{ color: "#FDB022", fontSize: 18 }} />
                           ))}
                         </Stack>
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5, fontStyle: 'italic' }}>
                           &quot;{t.quote}&quot;
                         </Typography>
                         <Stack direction="row" alignItems="center" spacing={1}>
