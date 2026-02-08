@@ -15,7 +15,6 @@ const VerifyEmailPage = lazy(() => import("../views/Auth").then(module => ({ def
 const CreatorDashboardPage = lazy(() => import("../views/Creator").then(module => ({ default: module.CreatorDashboardPage })));
 const CreatorSettingsPage = lazy(() => import("../views/Creator").then(module => ({ default: module.CreatorSettingsPage })));
 const CreatorProfilePage = lazy(() => import("../views/Creator").then(module => ({ default: module.CreatorProfilePage })));
-const PublicProfilePage = lazy(() => import("../views/Profile").then(module => ({ default: module.PublicProfilePage })));
 const NotFound = lazy(() => import("../views/Maintenance").then(module => ({ default: module.NotFound })));
 
 // Wrapper component to add Suspense boundary
@@ -99,14 +98,6 @@ export const routes = createBrowserRouter([
         element: (
           <SuspenseWrapper>
             <CreatorProfilePage />
-          </SuspenseWrapper>
-        )
-      },
-      {
-        path: "/@:handle",
-        element: (
-          <SuspenseWrapper>
-            <PublicProfilePage />
           </SuspenseWrapper>
         )
       },
