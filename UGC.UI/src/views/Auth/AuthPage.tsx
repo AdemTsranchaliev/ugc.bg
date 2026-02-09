@@ -46,8 +46,10 @@ export default function AuthPage() {
         sx={{
           display: "flex",
           flexDirection: "row",
+          width: "100%",
           maxWidth: 900,
           mx: "auto",
+          boxSizing: "border-box",
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
           borderTopRightRadius: 24,
           borderBottomRightRadius: 24,
@@ -151,16 +153,17 @@ export default function AuthPage() {
         <Box
           sx={{
             flex: { xs: "1 1 auto", md: "1 1 50%" },
+            width: { xs: "100%", md: "auto" },
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             bgcolor: "#f9fafb",
-            py: 6,
-            px: 4,
+            py: { xs: 4, md: 6 },
+            px: { xs: 2, sm: 4 },
             borderTopRightRadius: 24,
             borderBottomRightRadius: 24,
-            borderBottomLeftRadius: 0,
-            borderTopLeftRadius: 0,
+            borderBottomLeftRadius: { xs: 24, md: 0 },
+            borderTopLeftRadius: { xs: 24, md: 0 },
           }}
         >
           <Box sx={{ width: "100%" }}>
@@ -207,7 +210,7 @@ export default function AuthPage() {
                   fullWidth
                   startIcon={provider.icon}
                   sx={{
-                    py: 1.5,
+                    py: 1,
                     borderColor: "grey.300",
                     bgcolor: "#fff",
                     color: "text.primary",
