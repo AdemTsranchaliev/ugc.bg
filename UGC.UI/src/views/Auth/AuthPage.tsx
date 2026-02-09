@@ -6,6 +6,7 @@ import {
   Button,
   Checkbox,
   Divider,
+  Fade,
   Link,
   Stack,
   Tab,
@@ -95,7 +96,13 @@ export default function AuthPage() {
             },
           }}
         >
-          <Box sx={{ position: "relative", zIndex: 1 }}>
+          <Box
+            sx={{
+              position: "relative",
+              zIndex: 1,
+              transition: "opacity 0.35s ease-out, transform 0.35s ease-out",
+            }}
+          >
             <FormatQuoteRoundedIcon
               sx={{
                 fontSize: 56,
@@ -166,7 +173,7 @@ export default function AuthPage() {
             borderTopLeftRadius: { xs: 24, md: 0 },
           }}
         >
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: "100%", position: "relative" }}>
             <Stack spacing={1} sx={{ mb: 3 }}>
               <Typography variant="h3">
                 Добре дошли в UGC.BG
@@ -247,205 +254,209 @@ export default function AuthPage() {
             </Divider>
 
             {tabValue === 0 && (
-              <Stack spacing={2}>
-                <TextField
-                  label="Имейл адрес"
-                  placeholder="ivan.ivanov@gmail.com"
-                  fullWidth
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
+              <Fade in key="login" timeout={{ enter: 320, exit: 0 }}>
+                <Stack spacing={2}>
+                  <TextField
+                    label="Имейл адрес"
+                    placeholder="ivan.ivanov@gmail.com"
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        bgcolor: "#fff",
+                      },
+                    }}
+                  />
+                  <TextField
+                    label="Парола"
+                    type="password"
+                    placeholder="••••••••"
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        bgcolor: "#fff",
+                      },
+                    }}
+                  />
+                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Box />
+                    <Link href="/forgot-password" underline="hover" color="secondary.main" fontWeight={500}>
+                      Забравена парола?
+                    </Link>
+                  </Stack>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    fullWidth
+                    sx={{
+                      py: 1.5,
                       borderRadius: 2,
-                      bgcolor: "#fff",
-                    },
-                  }}
-                />
-                <TextField
-                  label="Парола"
-                  type="password"
-                  placeholder="••••••••"
-                  fullWidth
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      bgcolor: "#fff",
-                    },
-                  }}
-                />
-                <Stack direction="row" justifyContent="space-between" alignItems="center">
-                  <Box />
-                  <Link href="/forgot-password" underline="hover" color="secondary.main" fontWeight={500}>
-                    Забравена парола?
-                  </Link>
+                      textTransform: "none",
+                      fontWeight: 600,
+                      // bgcolor: "grey.900",
+                      bgcolor: "#261846",
+                      "&:hover": { bgcolor: "grey.800" },
+                      // background: (theme) =>
+                      //   `linear-gradient(135deg, ${theme.palette.secondary.dark} 0%, ${theme.palette.secondary.main} 100%)`,
+                      // "&:hover": {
+                      //   background: (theme) =>
+                      //     `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
+                      // },
+                    }}
+                  >
+                    Вход
+                  </Button>
                 </Stack>
-                <Button
-                  variant="contained"
-                  size="large"
-                  fullWidth
-                  sx={{
-                    py: 1.5,
-                    borderRadius: 2,
-                    textTransform: "none",
-                    fontWeight: 600,
-                    // bgcolor: "grey.900",
-                    bgcolor: "#261846",
-                    "&:hover": { bgcolor: "grey.800" },
-                    // background: (theme) =>
-                    //   `linear-gradient(135deg, ${theme.palette.secondary.dark} 0%, ${theme.palette.secondary.main} 100%)`,
-                    // "&:hover": {
-                    //   background: (theme) =>
-                    //     `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
-                    // },
-                  }}
-                >
-                  Вход
-                </Button>
-              </Stack>
+              </Fade>
             )}
 
             {tabValue === 1 && (
-              <Stack spacing={2}>
-                <Box>
-                  <Typography variant="subtitle2" color="text.primary" fontWeight={600} sx={{ mb: 1 }}>
-                    Тип профил
-                  </Typography>
-                  <ToggleButtonGroup
-                    exclusive
-                    value={profileType}
-                    onChange={(_, value) => value != null && setProfileType(value)}
-                    fullWidth
-                    sx={{
-                      display: "flex",
-                      "& > *": { flex: 1, minWidth: 0 },
-                      "& .MuiToggleButton-root": {
-                        width: "100%",
-                        textTransform: "none",
-                        fontWeight: 600,
-                        borderRadius: 2,
-                        py: 1,
-                        mx: 1,
-                        borderColor: "grey.300",
-                        color: "text.secondary",
-                        "&.Mui-selected": {
-                          borderColor: "secondary.main",
-                          color: "secondary.main",
-                          bgcolor: "secondary.light",
-                          "&:hover": {
+              <Fade in key="register" timeout={{ enter: 320, exit: 0 }}>
+                <Stack spacing={2}>
+                  <Box>
+                    <Typography variant="subtitle2" color="text.primary" fontWeight={600} sx={{ mb: 1 }}>
+                      Тип профил
+                    </Typography>
+                    <ToggleButtonGroup
+                      exclusive
+                      value={profileType}
+                      onChange={(_, value) => value != null && setProfileType(value)}
+                      fullWidth
+                      sx={{
+                        display: "flex",
+                        "& > *": { flex: 1, minWidth: 0 },
+                        "& .MuiToggleButton-root": {
+                          width: "100%",
+                          textTransform: "none",
+                          fontWeight: 600,
+                          borderRadius: 2,
+                          py: 1,
+                          mx: 1,
+                          borderColor: "grey.300",
+                          color: "text.secondary",
+                          "&.Mui-selected": {
+                            borderColor: "secondary.main",
+                            color: "secondary.main",
                             bgcolor: "secondary.light",
+                            "&:hover": {
+                              bgcolor: "secondary.light",
+                            },
                           },
                         },
+                      }}
+                    >
+                      <Badge
+                        badgeContent={
+                          profileType === "client" ? (
+                            <IconRosetteDiscountCheck stroke={2} size={20} color="blue" />
+                          ) : 0
+                        }
+                        showZero={false}
+                      >
+                        <ToggleButton value="client">
+                          Клиент
+                        </ToggleButton>
+                      </Badge>
+                      <Badge
+                        badgeContent={
+                          profileType === "creator" ? (
+                            <IconRosetteDiscountCheck stroke={2} size={20} color="blue" />
+                          ) : 0
+                        }
+                        showZero={false}
+                      >
+                        <ToggleButton value="creator">
+                          Създател
+                        </ToggleButton>
+                      </Badge>
+                    </ToggleButtonGroup>
+                  </Box>
+
+                  <TextField
+                    label="Пълно име"
+                    placeholder="Иван Иванов"
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        bgcolor: "#fff",
                       },
                     }}
-                  >
-                    <Badge
-                      badgeContent={
-                        profileType === "client" ? (
-                          <IconRosetteDiscountCheck stroke={2} size={20} color="blue" />
-                        ) : 0
-                      }
-                      showZero={false}
-                    >
-                      <ToggleButton value="client">
-                        Клиент
-                      </ToggleButton>
-                    </Badge>
-                    <Badge
-                      badgeContent={
-                        profileType === "creator" ? (
-                          <IconRosetteDiscountCheck stroke={2} size={20} color="blue" />
-                        ) : 0
-                      }
-                      showZero={false}
-                    >
-                      <ToggleButton value="creator">
-                        Създател
-                      </ToggleButton>
-                    </Badge>
-                  </ToggleButtonGroup>
-                </Box>
+                  />
+                  <TextField
+                    label="Имейл адрес"
+                    placeholder="ivan.ivanov@gmail.com"
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        bgcolor: "#fff",
+                      },
+                    }}
+                  />
+                  <TextField
+                    label="Парола"
+                    type="password"
+                    placeholder="••••••••"
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        bgcolor: "#fff",
+                      },
+                    }}
+                  />
+                  <TextField
+                    label="Потвърди парола"
+                    type="password"
+                    placeholder="••••••••"
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        bgcolor: "#fff",
+                      },
+                    }}
+                  />
 
-                <TextField
-                  label="Пълно име"
-                  placeholder="Иван Иванов"
-                  fullWidth
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      bgcolor: "#fff",
-                    },
-                  }}
-                />
-                <TextField
-                  label="Имейл адрес"
-                  placeholder="ivan.ivanov@gmail.com"
-                  fullWidth
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      bgcolor: "#fff",
-                    },
-                  }}
-                />
-                <TextField
-                  label="Парола"
-                  type="password"
-                  placeholder="••••••••"
-                  fullWidth
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      bgcolor: "#fff",
-                    },
-                  }}
-                />
-                <TextField
-                  label="Потвърди парола"
-                  type="password"
-                  placeholder="••••••••"
-                  fullWidth
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      bgcolor: "#fff",
-                    },
-                  }}
-                />
-
-                <Typography component="label" sx={{ display: "flex", alignItems: "flex-start", gap: 1, cursor: "pointer" }}>
-                  <Checkbox sx={{ mt: -0.5, p: 0.5 }} />
-                  <Typography variant="body2" color="text.secondary">
-                    Съгласявам се с{" "}
-                    <Link href="/terms" color="secondary.main" underline="hover" fontWeight={500}>
-                      Общите условия
-                    </Link>{" "}
-                    и{" "}
-                    <Link href="/privacy" color="secondary.main" underline="hover" fontWeight={500}>
-                      Политиката за поверителност
-                    </Link>
+                  <Typography component="label" sx={{ display: "flex", alignItems: "flex-start", gap: 1, cursor: "pointer" }}>
+                    <Checkbox sx={{ mt: -0.5, p: 0.5 }} />
+                    <Typography variant="body2" color="text.secondary">
+                      Съгласявам се с{" "}
+                      <Link href="/terms" color="secondary.main" underline="hover" fontWeight={500}>
+                        Общите условия
+                      </Link>{" "}
+                      и{" "}
+                      <Link href="/privacy" color="secondary.main" underline="hover" fontWeight={500}>
+                        Политиката за поверителност
+                      </Link>
+                    </Typography>
                   </Typography>
-                </Typography>
 
-                <Button
-                  variant="contained"
-                  size="large"
-                  fullWidth
-                  sx={{
-                    py: 1.5,
-                    borderRadius: 2,
-                    textTransform: "none",
-                    fontWeight: 600,
-                    bgcolor: "#261846",
-                    "&:hover": { bgcolor: "grey.800" },
-                  }}
-                >
-                  Регистрация
-                </Button>
-              </Stack>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    fullWidth
+                    sx={{
+                      py: 1.5,
+                      borderRadius: 2,
+                      textTransform: "none",
+                      fontWeight: 600,
+                      bgcolor: "#261846",
+                      "&:hover": { bgcolor: "grey.800" },
+                    }}
+                  >
+                    Регистрация
+                  </Button>
+                </Stack>
+              </Fade>
             )}
           </Box>
         </Box>
