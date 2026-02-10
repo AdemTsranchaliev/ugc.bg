@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router";
 import {
   Avatar,
   Badge,
@@ -7,7 +8,6 @@ import {
   Checkbox,
   Divider,
   Fade,
-  Link,
   Stack,
   Tab,
   Tabs,
@@ -283,7 +283,7 @@ export default function AuthPage() {
                   />
                   <Stack direction="row" justifyContent="space-between" alignItems="center">
                     <Box />
-                    <Link href="/forgot-password" underline="hover" color="secondary.main" fontWeight={500}>
+                    <Link to="/forgot-password" color="secondary.main">
                       Забравена парола?
                     </Link>
                   </Stack>
@@ -430,11 +430,11 @@ export default function AuthPage() {
                     <Checkbox sx={{ mt: -0.5, p: 0.5 }} />
                     <Typography variant="body2" color="text.secondary">
                       Съгласявам се с{" "}
-                      <Link href="/terms" color="secondary.main" underline="hover" fontWeight={500}>
+                      <Link to="/terms" color="secondary.main">
                         Общите условия
                       </Link>{" "}
                       и{" "}
-                      <Link href="/privacy" color="secondary.main" underline="hover" fontWeight={500}>
+                      <Link to="/privacy" color="secondary.main">
                         Политиката за поверителност
                       </Link>
                     </Typography>
