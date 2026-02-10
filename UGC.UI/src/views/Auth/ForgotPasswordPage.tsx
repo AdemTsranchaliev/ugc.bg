@@ -77,7 +77,6 @@ export default function ForgotPasswordPage() {
     >
       <Box width="100%" maxWidth={560}>
         <MainCard
-          // border
           boxShadow
           shadow
           sx={cardStyles}
