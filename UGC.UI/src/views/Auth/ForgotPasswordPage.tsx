@@ -4,6 +4,7 @@ import {
   Alert,
   Box,
   Button,
+  CircularProgress,
   Divider,
   Stack,
   Step,
@@ -15,6 +16,7 @@ import {
 
 // project imports
 import MainCard from "../../ui-component/cards/MainCard";
+import { IconArrowNarrowLeft, IconKey } from "@tabler/icons-react";
 
 const pageContainerStyles = {
   flex: 1,
@@ -40,6 +42,7 @@ export default function ForgotPasswordPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [code, setCode] = useState<string[]>(() => Array(CODE_LENGTH).fill(""));
   const codeInputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleNext = () => setActiveStep((prev) => Math.min(prev + 1, steps.length));
   const handleBack = () => setActiveStep((prev) => Math.max(prev - 1, 0));
@@ -67,6 +70,14 @@ export default function ForgotPasswordPage() {
     if (e.key === "Backspace" && !code[index] && index > 0) {
       codeInputRefs.current[index - 1]?.focus();
     }
+  };
+
+  const handleSubmitNewPassword = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      handleNext();
+    }, 2000);
   };
 
   return (
@@ -139,9 +150,60 @@ export default function ForgotPasswordPage() {
                   Изпрати код
                 </Button>
                 <Divider />
-                <Link to="/auth" color="text.secondary">
-                  Назад към вход
-                </Link>
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Box
+                    component="span"
+                    sx={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 1,
+                      "&:hover .back-arrow": {
+                        color: "black",
+                        transform: "translateX(-4px)",
+                      },
+                      "&:hover .back-text": {
+                        color: "black",
+                      },
+                    }}
+                  >
+                    <Link
+                      to="/auth"
+                      style={{
+                        textDecoration: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        color: "inherit",
+                      }}
+                    >
+                      <Box
+                        className="back-arrow"
+                        component="span"
+                        sx={{
+                          display: "inline-flex",
+                          color: "grey.600",
+                          transition: "color 0.3s ease-in-out, transform 0.3s ease-in-out",
+                        }}
+                      >
+                        <IconArrowNarrowLeft stroke={1.25} size={20} color="currentColor" />
+                      </Box>
+                      <Typography
+                        className="back-text"
+                        variant="body1"
+                        color="text.secondary"
+                        sx={{
+                          transition: "color 0.3s ease-in-out",
+                        }}
+                      >
+                        Върнете се към Вход
+                      </Typography>
+                    </Link>
+                  </Box>
+                </Stack>
               </Stack>
             )}
 
@@ -218,13 +280,21 @@ export default function ForgotPasswordPage() {
                   <Button
                     variant="contained"
                     fullWidth
-                    onClick={handleNext}
+                    disabled={isLoading}
+                    startIcon={
+                      isLoading ? (
+                        <CircularProgress size={20} color="inherit" sx={{ mr: 0.5 }} />
+                      ) : (
+                        <IconKey stroke={1.5} />
+                      )
+                    }
+                    onClick={handleSubmitNewPassword}
                     sx={{
                       bgcolor: "#261846",
                       "&:hover": { bgcolor: "grey.800" },
                     }}
                   >
-                    Смени паролата
+                    {isLoading ? "Смяна на парола" : "Смени паролата"}
                   </Button>
                 </Stack>
               </Stack>

@@ -1,15 +1,41 @@
+import { useState } from "react";
 import { Link } from "react-router";
-import { Box, Button, CardMedia, Divider, Stack, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  CardMedia,
+  Divider,
+  Snackbar,
+  Stack,
+  Typography,
+} from "@mui/material";
 import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
 
 // project imports
 import StyledPage from "../../ui-component/StyledPage";
 
 // assets
-import { IconMail, IconArrowNarrowLeft } from '@tabler/icons-react';
+import { IconMail, IconArrowNarrowLeft, IconMailCheck } from '@tabler/icons-react';
 import MailOpenOutline from "/assets/images/general/mail-open-outline.svg";
 
 export default function VerifyEmailPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleVerifyEmail = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setSnackbarOpen(true);
+    }, 2000);
+  };
+
+  const handleSnackbarClose = (_?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") return;
+    setSnackbarOpen(false);
+  };
+
   return (
     <StyledPage>
       <Box
@@ -143,18 +169,23 @@ export default function VerifyEmailPage() {
               </Typography>
             </Stack>
 
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                width: "100%",
-                mb: 3,
-                bgcolor: "#261846",
-                "&:hover": { bgcolor: "grey.800" },
-              }}
-            >
-              Потвърди
-            </Button>
+            <Stack direction="row" alignItems="center" justifyContent="center">
+              <Button
+                variant="contained"
+                color="primary"
+                loading={isLoading}
+                loadingPosition="start"
+                startIcon={<IconMailCheck stroke={1.5} />}
+                onClick={handleVerifyEmail}
+                sx={{
+                  mb: 3,
+                  bgcolor: "#261846",
+                  "&:hover": { bgcolor: "grey.800" },
+                }}
+              >
+                Потвърди
+              </Button>
+            </Stack>
 
             <Divider sx={{ mb: 2 }} />
 
@@ -215,6 +246,17 @@ export default function VerifyEmailPage() {
           </Box>
         </Box>
       </Box>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleSnackbarClose} severity="success" variant="filled" sx={{ width: "100%" }}>
+          Имейлът е потвърден успешно.
+        </Alert>
+      </Snackbar>
     </StyledPage>
   );
 }
