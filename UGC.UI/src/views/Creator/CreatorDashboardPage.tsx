@@ -16,9 +16,9 @@ import {
   Campaign,
   ChatBubbleOutline,
   Edit,
-  MoreVert,
   RocketLaunch,
   AutoFixHigh,
+  MoreVert,
   Star
 } from "@mui/icons-material";
 
@@ -170,11 +170,15 @@ export const CreatorDashboardPage = () => {
         </Stack>
       </Box>
 
-      {/* 4 stat cards */}
+      {/* 4 stat cards - 2x2 grid on mobile, vertical stack inside each card */}
       <Grid container spacing={2} sx={{ my: 4 }}>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+        <Grid size={{ xs: 6, sm: 6, lg: 3 }}>
           <MainCard border boxShadow contentSX={{ p: 2.5 }}>
-            <Stack direction="row" spacing={2} alignItems="center">
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 1.5, sm: 2 }}
+              alignItems={{ xs: "flex-start", sm: "center" }}
+            >
               <Box sx={statCardIconSx("primary.main")}><Campaign /></Box>
               <Stack>
                 <Typography variant="h4" color="text.secondary" sx={{ fontWeight: 500 }}>
@@ -187,9 +191,13 @@ export const CreatorDashboardPage = () => {
             </Stack>
           </MainCard>
         </Grid>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+        <Grid size={{ xs: 6, sm: 6, lg: 3 }}>
           <MainCard border boxShadow contentSX={{ p: 2.5 }}>
-            <Stack direction="row" spacing={2} alignItems="center">
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 1.5, sm: 2 }}
+              alignItems={{ xs: "flex-start", sm: "center" }}
+            >
               <Box sx={statCardIconSx("primary.main")}><RocketLaunch /></Box>
               <Stack>
                 <Typography variant="h4" color="text.secondary" sx={{ fontWeight: 500 }}>
@@ -202,9 +210,13 @@ export const CreatorDashboardPage = () => {
             </Stack>
           </MainCard>
         </Grid>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+        <Grid size={{ xs: 6, sm: 6, lg: 3 }}>
           <MainCard border boxShadow contentSX={{ p: 2.5 }}>
-            <Stack direction="row" spacing={2} alignItems="center">
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 1.5, sm: 2 }}
+              alignItems={{ xs: "flex-start", sm: "center" }}
+            >
               <Box sx={statCardIconSx("#EC4899")}>
                 <ChatBubbleOutline />
               </Box>
@@ -219,9 +231,13 @@ export const CreatorDashboardPage = () => {
             </Stack>
           </MainCard>
         </Grid>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+        <Grid size={{ xs: 6, sm: 6, lg: 3 }}>
           <MainCard border boxShadow contentSX={{ p: 2.5 }}>
-            <Stack direction="row" spacing={2} alignItems="center">
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 1.5, sm: 2 }}
+              alignItems={{ xs: "flex-start", sm: "center" }}
+            >
               <Box sx={statCardIconSx("#F59E0B")}>
                 <Star />
               </Box>
@@ -249,6 +265,7 @@ export const CreatorDashboardPage = () => {
               </Typography>
               <Grid container spacing={2}>
                 <Grid size={{ xs: 12, md: 4 }}>
+                  {/* Full width on mobile */}
                   <MainCard
                     border
                     boxShadow
@@ -310,7 +327,8 @@ export const CreatorDashboardPage = () => {
                     </Stack>
                   </MainCard>
                 </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
+                <Grid size={{ xs: 6, md: 4 }}>
+                  {/* Half width on mobile - side by side with Boost card */}
                   <MainCard
                     boxShadow
                     shadow
@@ -359,7 +377,8 @@ export const CreatorDashboardPage = () => {
                     </Stack>
                   </MainCard>
                 </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
+                <Grid size={{ xs: 6, md: 4 }}>
+                  {/* Half width on mobile - side by side with Profile card */}
                   <MainCard
                     boxShadow
                     shadow
@@ -403,7 +422,7 @@ export const CreatorDashboardPage = () => {
                         <Typography variant="body2" sx={{ color: "#bf82f9", opacity: 0.95 }}>
                           Промотирай
                         </Typography>
-                        <Typography variant="h4" fontWeight={700} sx={{ color: "#7e23ce" }}>
+                        <Typography variant="h4" fontWeight={700} sx={{ fontSize: { xs: "0.9rem" }, color: "#7e23ce" }}>
                           Добави Boost
                         </Typography>
                       </Box>
@@ -423,7 +442,7 @@ export const CreatorDashboardPage = () => {
                   component="a"
                   href="#"
                   variant="body2"
-                  color="primary.main"
+                  color="#2865eb"
                   sx={{ textDecoration: "none", fontWeight: 500 }}
                 >
                   Виж всички
@@ -434,7 +453,7 @@ export const CreatorDashboardPage = () => {
                   <Stack
                     key={item.title}
                     direction="row"
-                    alignItems="center"
+                    alignItems="stretch"
                     spacing={2}
                     sx={{
                       backgroundColor: "#fff",
@@ -457,23 +476,33 @@ export const CreatorDashboardPage = () => {
                         flexShrink: 0,
                       }}
                     />
-                    <Stack flex={1} minWidth={0}>
+                    <Stack flex={1} minWidth={0} spacing={0.25}>
                       <Typography variant="subtitle1" fontWeight={600} noWrap>
                         {item.title}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {item.views} • <Box component="span" sx={{ color: "#7e23ce", fontWeight: 700 }}>{item.price}</Box>
+                        {item.views}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: "#7e23ce", fontWeight: 700 }}>
+                        {item.price}
                       </Typography>
                     </Stack>
-                    <Chip
-                      label="Активна"
-                      size="small"
-                      color="success"
-                      sx={{ fontWeight: 600 }}
-                    />
-                    <IconButton size="small">
-                      <MoreVert />
-                    </IconButton>
+                    <Stack
+                      direction="column"
+                      justifyContent="space-between"
+                      alignItems="flex-end"
+                      sx={{ alignSelf: "stretch" }}
+                    >
+                      <IconButton size="small" sx={{ color: "text.secondary" }}>
+                        <MoreVert />
+                      </IconButton>
+                      <Chip
+                        label="Активна"
+                        size="small"
+                        color="success"
+                        sx={{ fontWeight: 600 }}
+                      />
+                    </Stack>
                   </Stack>
                 ))}
               </Stack>
