@@ -81,10 +81,6 @@ export const JoinCommunity: React.FC = () => {
                     py: 1.5,
                     fontWeight: 600,
                     textTransform: "none",
-                    backgroundColor: "#5b84fa",
-                    "&:hover": {
-                      backgroundColor: "#4a73e8",
-                    },
                   }}
                 >
                   Към бизнеси
@@ -154,14 +150,6 @@ export const JoinCommunity: React.FC = () => {
                     py: 1.5,
                     fontWeight: 600,
                     textTransform: "none",
-                    borderColor: "#5b84fa",
-                    color: "#5b84fa",
-                    backgroundColor: "#fff",
-                    "&:hover": {
-                      borderColor: "#4a73e8",
-                      color: "#4a73e8",
-                      backgroundColor: "#f5f9ff",
-                    },
                   }}
                 >
                   Към създатели

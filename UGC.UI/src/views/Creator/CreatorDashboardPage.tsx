@@ -25,7 +25,6 @@ import {
 // project imports
 import MainCard from "../../ui-component/cards/MainCard";
 import { getImageUrl } from "../../utils/getImageUrl";
-import StyledPage from "../../ui-component/StyledPage";
 
 const headerGradient = "linear-gradient(135deg, #6a44bf 0%, #56299b 100%)";
 
@@ -84,7 +83,7 @@ export const CreatorDashboardPage = () => {
   ];
 
   return (
-    <StyledPage>
+    <Box sx={{ py: 4 }}>
       {/* Header banner - deep purple gradient */}
       <Box
         sx={{
@@ -145,6 +144,7 @@ export const CreatorDashboardPage = () => {
               sx={{
                 bgcolor: "transparent",
                 color: "white",
+                borderColor: "rgba(255,255,255,0.3)",
                 "&:hover": {
                   bgcolor: "rgba(255,255,255,0.1)",
                 },
@@ -158,6 +158,7 @@ export const CreatorDashboardPage = () => {
               sx={{
                 bgcolor: "#fff",
                 color: "#582c9e",
+                borderColor: "rgba(255,255,255,0.3)",
                 "&:hover": {
                   bgcolor: "rgba(255,255,255,0.9)",
                 },
@@ -607,7 +608,7 @@ export const CreatorDashboardPage = () => {
           </Stack>
         </Grid>
       </Grid>
-    </StyledPage>
+    </Box>
   );
 };
 

@@ -14,7 +14,7 @@ const config = {
   fontFamily: `'Roboto', sans-serif`,
   borderRadius: 8,
   outlinedFilled: true,
-  presetColor: "default",
+  presetColor: "theme4",
   i18n: "en",
   container: "xl",
 };

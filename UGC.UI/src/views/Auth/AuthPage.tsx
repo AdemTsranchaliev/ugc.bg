@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router";
 import {
   Avatar,
-  Badge,
   Box,
   Button,
   Checkbox,
@@ -12,25 +11,19 @@ import {
   Tab,
   Tabs,
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 import {
   IconBrandGoogleFilled,
   IconBrandFacebookFilled,
   IconBrandAppleFilled,
-  IconRosetteDiscountCheck,
 } from '@tabler/icons-react';
 import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
 
 import StyledPage from "../../ui-component/StyledPage";
 
-type ProfileType = "client" | "creator";
-
 export default function AuthPage() {
   const [tabValue, setTabValue] = useState(0);
-  const [profileType, setProfileType] = useState<ProfileType>("creator");
 
   const socialProviders = useMemo(
     () => [
@@ -296,15 +289,8 @@ export default function AuthPage() {
                       borderRadius: 2,
                       textTransform: "none",
                       fontWeight: 600,
-                      // bgcolor: "grey.900",
-                      bgcolor: "#261846",
-                      "&:hover": { bgcolor: "grey.800" },
-                      // background: (theme) =>
-                      //   `linear-gradient(135deg, ${theme.palette.secondary.dark} 0%, ${theme.palette.secondary.main} 100%)`,
-                      // "&:hover": {
-                      //   background: (theme) =>
-                      //     `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
-                      // },
+                      // bgcolor: "#261846",
+                      // "&:hover": { bgcolor: "grey.800" },
                     }}
                   >
                     Вход
@@ -316,65 +302,6 @@ export default function AuthPage() {
             {tabValue === 1 && (
               <Fade in key="register" timeout={{ enter: 320, exit: 0 }}>
                 <Stack spacing={2}>
-                  <Box>
-                    <Typography variant="subtitle2" color="text.primary" fontWeight={600} sx={{ mb: 1 }}>
-                      Тип профил
-                    </Typography>
-                    <ToggleButtonGroup
-                      exclusive
-                      value={profileType}
-                      onChange={(_, value) => value != null && setProfileType(value)}
-                      fullWidth
-                      sx={{
-                        display: "flex",
-                        "& > *": { flex: 1, minWidth: 0 },
-                        "& .MuiToggleButton-root": {
-                          width: "100%",
-                          textTransform: "none",
-                          fontWeight: 600,
-                          borderRadius: 2,
-                          py: 1,
-                          mx: 1,
-                          borderColor: "grey.300",
-                          color: "text.secondary",
-                          "&.Mui-selected": {
-                            borderColor: "secondary.main",
-                            color: "secondary.main",
-                            bgcolor: "secondary.light",
-                            "&:hover": {
-                              bgcolor: "secondary.light",
-                            },
-                          },
-                        },
-                      }}
-                    >
-                      <Badge
-                        badgeContent={
-                          profileType === "client" ? (
-                            <IconRosetteDiscountCheck stroke={2} size={20} color="blue" />
-                          ) : 0
-                        }
-                        showZero={false}
-                      >
-                        <ToggleButton value="client">
-                          Клиент
-                        </ToggleButton>
-                      </Badge>
-                      <Badge
-                        badgeContent={
-                          profileType === "creator" ? (
-                            <IconRosetteDiscountCheck stroke={2} size={20} color="blue" />
-                          ) : 0
-                        }
-                        showZero={false}
-                      >
-                        <ToggleButton value="creator">
-                          Създател
-                        </ToggleButton>
-                      </Badge>
-                    </ToggleButtonGroup>
-                  </Box>
-
                   <TextField
                     label="Пълно име"
                     placeholder="Иван Иванов"
@@ -449,8 +376,8 @@ export default function AuthPage() {
                       borderRadius: 2,
                       textTransform: "none",
                       fontWeight: 600,
-                      bgcolor: "#261846",
-                      "&:hover": { bgcolor: "grey.800" },
+                      // bgcolor: "#261846",
+                      // "&:hover": { bgcolor: "grey.800" },
                     }}
                   >
                     Регистрация
