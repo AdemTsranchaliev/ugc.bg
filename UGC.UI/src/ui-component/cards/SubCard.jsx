@@ -61,7 +61,7 @@ export default function SubCard({
       )}
 
       {/* content & header divider */}
-      {title && <Divider />}
+      {/* {title && <Divider />} */}
 
       {/* card content */}
       {content && (
